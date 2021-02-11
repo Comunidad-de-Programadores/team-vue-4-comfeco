@@ -6,5 +6,5 @@
 </template>
 
 <style lang="scss">
-@import "./assets/css/reset.css";
+@import "./assets/sass/_base.scss";
 </style>
