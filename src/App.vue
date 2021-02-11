@@ -6,5 +6,5 @@
 </template>
 
 <style lang="scss">
-@import url("/src/assets/css/reset.css");
+@import "./assets/css/reset.css";
 </style>
