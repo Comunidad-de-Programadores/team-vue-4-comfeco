@@ -10,6 +10,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/SingInUp.vue"),
   },
+  {
+    path: "/register",
+    name: "Register",
+    component: () =>
+      import("../views/SignIn.vue"),
+  },
 ];
 
 const router = createRouter({
