@@ -77,6 +77,22 @@
       de COMFECO
     </p>
   </div>
+  <div class="modal" id="modalTerminoCondiciones">
+    <div class="flex" id="flex">
+      <div class="contenido-modal">
+        <div class="modal-header flex">
+          <h2>Terminos y Condiciones</h2>
+          <span class="close" id="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <p class="txtmodalbody">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dignissimos sit aperiam amet vero, dolorum fuga labore quibusdam facilis deleniti. Nemo provident commodi tempore corrupti, esse ipsa incidunt earum necessitatibus error.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#">Acepto los terminos</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -89,6 +105,7 @@ export default {
         email: "",
         password: "",
         confirm_password: "",
+        title_modal: "Terminos y Condiciones",
       },
     };
   },
@@ -133,4 +150,62 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.flex{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal{
+  //display: none;
+  position: fixed;
+  z-index: 1000;
+  overflow: auto;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+}
+.contenido-modal{
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  margin: auto;
+  width: 40%;
+  //height: 60%;
+  padding: 15px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.946);
+  animation: modal 1.2s;
+}
+@keyframes modal {
+  from{top:-500px; opacity: 0;}
+  to{top:0; opacity: 1;}
+} 
+.close{
+  background: hsl(0, 80, 45);
+  color: #f2f2f2;
+  font-size: 30px;
+  width: 5%;
+  text-align: center;
+  border-radius: 25px;
+}
+.close:hover{
+  background: red ;
+  cursor: pointer;
+}
+.modal-header, .modal-footer{
+  padding: 8px 16px;
+}
+.modal-header{
+  border-bottom:1px solid gray ;
+}
+.modal-footer{
+  text-align: center;
+}
+.txtmodalbody{
+  padding-top: 20px;
+  text-align: justify;
+}
+</style>
