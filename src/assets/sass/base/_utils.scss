@@ -1,0 +1,59 @@
+* {
+    font-size: 16px;
+}
+
+
+/* --- Titles --- */
+
+h1 {
+    font-family: 'Roboto-Bold';
+    font-size: 2.1rem;
+}
+
+h2 {
+    font-family: 'Roboto-Bold';
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--color-gray);
+}
+
+.title {
+    line-height: 20%;
+    margin: 2rem;
+}
+
+
+/* --- Forms --- */
+
+input {
+    height: 2rem;
+     ::placeholder {
+        padding: .2rem;
+    }
+}
+
+
+/* --- Buttons --- */
+
+.button {
+    font-family: "Roboto-Medium";
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.button-primary {
+    width: 150px;
+    height: 50px;
+    border-radius: 50px;
+    font-weight: 400;
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.button-fb {
+    height: 40px;
+    border-radius: 40px;
+    margin: 10px;
+}
