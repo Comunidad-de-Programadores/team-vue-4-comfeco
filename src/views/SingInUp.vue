@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div id="js_singInUp">
     <PxLogin />
   </div>
 </template>

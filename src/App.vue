@@ -1,11 +1,12 @@
 <template>
   <PxHeader />
-  <PxFooter />
   <router-view />
+  <PxFooter />
 </template>
 
 <script>
 // @ is an alias to /src
+// @ is an alias to /src import PxFooter from "@/components/PxFooter";
 import PxHeader from "@/components/PxHeader";
 import PxFooter from "@/components/PxFooter";
 
