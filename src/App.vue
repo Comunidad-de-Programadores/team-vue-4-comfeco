@@ -1,11 +1,21 @@
 <template>
-  <div id="nav">
-    <router-link to="/login">Login</router-link>
-    <router-link to="/register">Reg&iacute;strate</router-link>
-  </div>
+  <PxHeader />
+  <PxFooter />
   <router-view />
 </template>
 
+<script>
+// @ is an alias to /src
+import PxHeader from "@/components/PxHeader";
+import PxFooter from "@/components/PxFooter";
+
+export default {
+  components: {
+    PxHeader,
+    PxFooter,
+  },
+};
+</script>
 <style lang="scss">
 @import "assets/sass/_base.scss";
 </style>
