@@ -163,6 +163,7 @@ export default {
           border-radius: 55px;
           padding: 1.2rem;
 
+
           input {
             background: none;
             outline: none;
