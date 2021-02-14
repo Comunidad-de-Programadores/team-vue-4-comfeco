@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div id="js_singInUp">
     <PxLogin />
   </div>
 </template>
@@ -11,7 +11,7 @@ import PxLogin from "@/components/PxLogin";
 export default {
   name: "Home",
   components: {
-    PxLogin
+    PxLogin,
   },
 };
 </script>

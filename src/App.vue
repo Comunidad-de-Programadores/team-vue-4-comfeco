@@ -1,18 +1,18 @@
 <template>
-  <div id="nav">
-    <router-link to="/login">Login</router-link>
-    <router-link to="/register">Reg&iacute;strate</router-link>
-  </div>
+  <PxHeader />
   <router-view />
   <PxFooter />
 </template>
+
 <script>
 // @ is an alias to /src
+// @ is an alias to /src import PxFooter from "@/components/PxFooter";
+import PxHeader from "@/components/PxHeader";
 import PxFooter from "@/components/PxFooter";
 
 export default {
-  name: "app",
   components: {
+    PxHeader,
     PxFooter,
   },
 };

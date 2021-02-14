@@ -11,7 +11,7 @@ import PxRegister from "@/components/PxRegister";
 export default {
   name: "Home",
   components: {
-    PxRegister
+    PxRegister,
   },
 };
 </script>
