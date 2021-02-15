@@ -50,10 +50,10 @@ export default {
   padding: 15px 1rem;
   text-align: center;
   font-family: var(--fuente-bold);
-  border-top: 1px solid var(--color-blue);
-  background: var(--color-blue);
+  border-top: 1px solid var(--color-primary);
+  background: var(--color-primary);
   color: var(--color-white);
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.45);
+  box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.45);
   a {
     text-decoration: none;
     color: var(--color-white);

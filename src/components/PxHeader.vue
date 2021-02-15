@@ -1,10 +1,12 @@
 <template>
   <header class="header">
     <section class="header__logo">
-      <img
-        src="@/assets/images/Logo-comfeco-opción-1.png"
-        alt="Logo comfeco opcion 1"
-      />
+      <router-link to="/">
+        <img
+          src="@/assets/images/Logo-comfeco-opción-1.png"
+          alt="Logo comfeco opcion 1"
+        />
+      </router-link>
     </section>
     <!-- este nav estara por el momento para permitirnos navegar -->
     <nav>
