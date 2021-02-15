@@ -103,7 +103,7 @@ export default {
     async logInWithFacebook() {
       await this.loadFacebookSDK(document, "script", "facebook-jssdk");
       await this.initFacebook();
-      window.FB.login(function (response) {
+      window.FB.login(function(response) {
         if (response.authResponse) {
           alert("logeado");
         } else {
@@ -113,7 +113,7 @@ export default {
       return false;
     },
     async initFacebook() {
-      window.fbAsyncInit = function () {
+      window.fbAsyncInit = function() {
         window.FB.init({
           appId: "xxxxxxxxxxxxx",
           cookie: true,
@@ -146,12 +146,9 @@ export default {
   width: 100%;
   min-height: 100vh;
 
-  
   .register-auth-socials {
     p {
       margin-bottom: 1rem;
-    }
-    .auth-socials-buttons {
     }
   }
   .terms-conditions {
@@ -161,5 +158,4 @@ export default {
     margin-bottom: 10px;
   }
 }
-
 </style>

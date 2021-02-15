@@ -2,7 +2,7 @@
   <div class="login bg-primary">
     <div class="form-container glass-container">
       <form action method="post" autocomplete="on" @submit.prevent="login">
-        <h2 class="title">Ingresar</h2>
+        <h2 class="title">Iniciar Sesión</h2>
         <div class="input-group">
           <input
             type="email"
@@ -29,10 +29,7 @@
             ></span>
           </div>
         </div>
-        <div class="row login-sets">
-          <div class="col">
-            <a href="http://" target="_blank" rel="noopener noreferrer">¿Olvidaste tu contraseña?</a>
-          </div>
+        <div class="input-group">
           <div class="label-group__keep-login">
             <input
               type="checkbox"
@@ -46,11 +43,13 @@
           </div>
         </div>
         <button type="submit" class="button button-primary">
-           Ingresar
+          Ingresar
         </button>
       </form>
-      <p class="text-center">Tambien puedes iniciar con tus redes</p>
-    <div class="register-auth-socials">
+      <div class="register-auth-socials">
+        <p class="register-auth-socials-text">
+          Tambien puedes iniciar sesión con tus redes
+        </p>
         <div class="auth-socials-buttons">
           <button
             type="submit"
@@ -63,6 +62,22 @@
             <i class="fa fa-google"></i>
           </button>
         </div>
+      </div>
+      <div class="form-container-options">
+        <a
+          href="http://"
+          class="form-container-options-forgot"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ¿Olvidaste tu contraseña?
+        </a>
+        <button class="button button-secondary">
+          <router-link to="/register">
+            Reg&iacute;strate
+            <i class="fas fa-user-plus"></i>
+          </router-link>
+        </button>
       </div>
     </div>
   </div>
@@ -102,27 +117,76 @@ export default {
 .label-group__keep-login {
   display: flex;
   align-items: center;
+  .input-group__check {
+    width: 16px;
+    height: 16px;
+    margin: 0 4px 0 0;
+  }
+  .input-group__check-label {
+    font-size: 14px;
+    font-family: var(--fuente-medium);
+    letter-spacing: 0.5px;
+  }
+}
+.form-container {
+  &-options {
+    margin: 8px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    &-forgot {
+      display: inline-block;
+      text-decoration: none;
+      margin: 0 0 8px 0;
+      color: var(--color-black);
+      &:hover {
+        text-decoration: underline;
+        color: #200bdd;
+      }
+    }
+    .button.button-secondary {
+      a {
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+    }
+  }
 }
 .pass-eye__container {
   display: flex;
   align-items: center;
   position: relative;
+  width: 100%;
 }
-
 .pass-eye__container span {
   position: absolute;
   right: 20px;
 }
-.login-sets{
-  a, label{
-    font-size: 12px;
-    margin: 10px;
+
+/*Responsive Tablet*/
+@media screen and (min-width: 768px) {
+  /*Forms*/
+  .form-container {
+    &-options {
+      flex-direction: row;
+      &-forgot {
+        margin: 0;
+      }
+    }
+    .button-secondary {
+      width: 200px;
+    }
   }
-  a{
-    text-decoration: none;
-  }
-  label{
-    margin-left: 2px;
-  }
+}
+
+/*Responsive Desktop*/
+@media screen and (min-width: 1200px) {
+}
+
+/*Responsive Large Desktop*/
+@media screen and (min-width: 1400px) {
 }
 </style>

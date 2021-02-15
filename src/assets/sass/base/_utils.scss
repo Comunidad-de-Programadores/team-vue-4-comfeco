@@ -1,131 +1,195 @@
 * {
-    font-size: 16px;
+  font-size: 16px;
 }
-
 
 /* --- Titles --- */
 
 h1 {
-    font-family: "Roboto-Bold";
-    font-size: 2.1rem;
+  font-family: var(--fuente-bold);
+  font-size: 2.1rem;
 }
 
 h2 {
-    font-family: "Roboto-Bold";
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--color-gray);
+  font-family: var(--fuente-bold);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--color-white);
 }
 
 .title {
-    line-height: 20%;
-    margin: 2rem;
+  margin: 0 0 1rem 0;
+  width: 100%;
 }
-
 
 /* --- Backgrounds --- */
 
 .bg-primary {
-    background: rgb(204, 166, 242);
-    background: linear-gradient( 0deg, rgba(204, 166, 242, 1) 0%, rgba(57, 15, 100, 1) 100%);
+  background: rgb(204, 166, 242);
+  background: linear-gradient(
+    0deg,
+    rgba(204, 166, 242, 1) 0%,
+    rgba(57, 15, 100, 1) 100%
+  );
 }
-
 
 /* --- Forms --- */
 
 .form-container {
-    padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 550px;
+  width: 100%;
+  form {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        .input-group {
-            display: flex;
-            align-items: center;
-            margin: 0.2rem;
-            .input-group__input {
-                max-width: 490px;
-                width: 100%;
-                background-color: #f0f0f0;
-                margin: 7px 0;
-                border-radius: 55px;
-                padding: 1.2rem;
-                input {
-                    background: none;
-                    outline: none;
-                    border: none;
-                    line-height: 1;
-                    font-weight: 600;
-                    font-size: 1.1rem;
-                }
-            }
+    flex-direction: column;
+    width: 100%;
+    .input-group {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      width: 100%;
+      position: relative;
+      &__input {
+        width: 100%;
+        background-color: #f0f0f0;
+        // border-radius: 55px;
+        padding: 10px 1rem;
+        font-family: var(--fuente-regular);
+        letter-spacing: 0.5px;
+        &::placeholder {
+          font-size: 14px;
+          color: var(--color-gray);
         }
-        button {
-            margin: 1rem;
-            font-weight: 300;
-        }
+      }
     }
+    .button.button-primary {
+      margin: 10px 0;
+      padding: 0;
+    }
+  }
+  .register-auth-socials {
+    margin: 10px 0 0 0;
+    width: 100%;
+    &-text {
+      color: var(--color-black);
+    }
+    .button-socials {
+      width: 40px;
+      height: 40px;
+      border-radius: 200px;
+      margin: 10px;
+      transition: var(--transition);
+      &:hover {
+        background: var(--color-white);
+      }
+      i {
+        color: var(--color-white);
+        font-weight: normal;
+      }
+      &__facebook {
+        background-color: #3b5998;
+        &:hover {
+          box-shadow: 0 0 10px 1px rgba(59, 89, 152, 0.3);
+          i {
+            color: #3b5998;
+          }
+        }
+      }
+
+      &__google {
+        background-color: #c32f10;
+        &:hover {
+          box-shadow: 0 0 10px 1px rgba(195, 47, 16, 0.3);
+          i {
+            color: #c32f10;
+          }
+        }
+      }
+    }
+  }
 }
 
 input {
-    height: 40px;
-     ::placeholder {
-        padding: 0.2rem;
-    }
+  height: 40px;
+  ::placeholder {
+    padding: 0.2rem;
+  }
 }
-
 
 /* --- Buttons --- */
 
 .button {
-    font-family: "Roboto-Medium";
-    cursor: pointer;
-    text-transform: uppercase;
-}
-
-.button-primary {
-    width: 150px;
-    height: 50px;
-    border-radius: 50px;
-    font-weight: 400;
+  font-family: var(--fuente-bold);
+  cursor: pointer;
+  letter-spacing: 1px;
+  width: 100%;
+  height: 40px;
+  border-radius: 50px;
+  transition: var(--transition);
+  border: 1px solid var(--color-primary);
+  font-size: 14px;
+  &-primary {
     background-color: var(--color-primary);
     color: #ffffff;
+    &:hover {
+      background: var(--color-white);
+      color: var(--color-primary);
+    }
+  }
+  &-secondary {
+    background: var(--color-white);
+    color: var(--color-primary);
+    padding: 0 1rem;
+    a {
+      color: inherit;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    &:hover {
+      background-color: var(--color-primary);
+      color: #ffffff;
+    }
+  }
 }
-
-.button-socials {
-    width: 40px;
-    height: 40px;
-    border-radius: 200px;
-    margin: 10px;
-}
-
-.button-socials__facebook {
-    background-color: #3B5998;
-}
-
-.button-socials__google {
-    background-color: #C32F10;
-}
-
 
 /* --- Glassmhorphism --- */
 
 @at-root .glass-container {
-    background: rgba(255, 255, 255, 0.06);
-    padding: 3rem;
-    height: auto;
-    border-radius: 20px;
-    border-left: 1px solid rgba(255, 255, 255, 0.03);
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    box-shadow: 20 px 20px 40px -6px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 30px;
+  height: auto;
+  border-radius: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  @media screen and (min-width: 768px) {
+    padding: 60px;
+  }
+}
+
+/*Responsive Tablet*/
+@media screen and (min-width: 768px) {
+  /*Forms*/
+  .form-container {
+    .register-auth-socials {
+      &-text {
+        font-size: 17.5px;
+      }
+    }
+  }
+}
+
+/*Responsive Desktop*/
+@media screen and (min-width: 1200px) {
+}
+
+/*Responsive Large Desktop*/
+@media screen and (min-width: 1400px) {
 }
