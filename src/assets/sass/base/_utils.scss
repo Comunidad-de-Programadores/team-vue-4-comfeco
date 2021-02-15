@@ -2,6 +2,9 @@
   font-size: 16px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 /* --- Titles --- */
 
 h1 {
@@ -56,7 +59,7 @@ h2 {
       &__input {
         width: 100%;
         background-color: #f0f0f0;
-        // border-radius: 55px;
+        border-radius: 55px;
         padding: 10px 1rem;
         font-family: var(--fuente-regular);
         letter-spacing: 0.5px;
@@ -108,6 +111,31 @@ h2 {
             color: #c32f10;
           }
         }
+      }
+    }
+  }
+  &-options {
+    margin: 8px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    &-forgot {
+      display: inline-block;
+      text-decoration: none;
+      margin: 0 0 8px 0;
+      color: var(--color-black);
+      &:hover {
+        text-decoration: underline;
+        color: #200bdd;
+      }
+    }
+    .button.button-secondary {
+      a {
+        width: 100%;
+        display: block;
+        text-align: center;
       }
     }
   }

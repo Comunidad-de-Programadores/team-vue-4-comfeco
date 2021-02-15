@@ -9,7 +9,6 @@
             name="nick"
             id="nick"
             v-model="form.nick"
-            :aria-label="nickLabel"
             class="input-group__input"
             placeholder="Nick"
           />
@@ -49,7 +48,9 @@
         </button>
       </form>
       <div class="register-auth-socials">
-        <p>O continuar con:</p>
+        <p class="register-auth-socials-text">
+          O registrate con:
+        </p>
         <div class="auth-socials-buttons">
           <button
             type="submit"
@@ -72,6 +73,14 @@
           >
           de COMFECO
         </p>
+      </div>
+      <div class="form-container-options">
+        <button class="button button-secondary">
+          <router-link to="/login">
+            ¿Ya tienes tu cuenta?, Inicia sesión
+            <i class="fas fa-sign-in-alt"></i>
+          </router-link>
+        </button>
       </div>
     </div>
   </div>
@@ -146,13 +155,18 @@ export default {
   width: 100%;
   min-height: 100vh;
 
-  .register-auth-socials {
-    p {
-      margin-bottom: 1rem;
-    }
-  }
   .terms-conditions {
-    width: 300px;
+    max-width: 280px;
+    width: 100%;
+    line-height: 20px;
+    .link {
+      color: var(--color-primary);
+      outline: none;
+      letter-spacing: 0.5px;
+      &:hover {
+        color: var(--color-white);
+      }
+    }
   }
   .register-container > * {
     margin-bottom: 10px;

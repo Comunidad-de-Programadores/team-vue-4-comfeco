@@ -128,33 +128,6 @@ export default {
     letter-spacing: 0.5px;
   }
 }
-.form-container {
-  &-options {
-    margin: 8px 0 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    &-forgot {
-      display: inline-block;
-      text-decoration: none;
-      margin: 0 0 8px 0;
-      color: var(--color-black);
-      &:hover {
-        text-decoration: underline;
-        color: #200bdd;
-      }
-    }
-    .button.button-secondary {
-      a {
-        width: 100%;
-        display: block;
-        text-align: center;
-      }
-    }
-  }
-}
 .pass-eye__container {
   display: flex;
   align-items: center;
