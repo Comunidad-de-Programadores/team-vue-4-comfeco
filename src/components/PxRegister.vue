@@ -75,9 +75,11 @@
       </div>
     </div>
   </div>
+  <VModal :title="titlemodal"></VModal>
 </template>
 
 <script>
+import VModal from "@/components/PxModal.vue";
 export default {
   name: "PxRegister",
   data() {
@@ -87,9 +89,12 @@ export default {
         email: "",
         password: "",
         confirm_password: "",
-        title_modal: "Terminos y Condiciones",
       },
+      titlemodal: "Terminos y Condiciones",
     };
+  },
+  components: {
+    VModal,
   },
   methods: {
     registrar() {
@@ -156,68 +161,5 @@ export default {
     margin-bottom: 10px;
   }
 }
-.flex {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.modal {
-  //display: none;
-  position: fixed;
-  z-index: 1000;
-  overflow: auto;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-}
-.contenido-modal {
-  position: relative;
-  background: rgba(255, 255, 255, 0.9);
-  margin: auto;
-  width: 40%;
-  //height: 60%;
-  padding: 15px;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.946);
-  animation: modal 1.2s;
-}
-@keyframes modal {
-  from {
-    top: -500px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
-.close {
-  background: hsl(0, 80, 45);
-  color: #f2f2f2;
-  font-size: 30px;
-  width: 5%;
-  text-align: center;
-  border-radius: 25px;
-}
-.close:hover {
-  background: red;
-  cursor: pointer;
-}
-.modal-header,
-.modal-footer {
-  padding: 8px 16px;
-}
-.modal-header {
-  border-bottom: 1px solid gray;
-}
-.modal-footer {
-  text-align: center;
-}
-.txtmodalbody {
-  padding-top: 20px;
-  text-align: justify;
-}
+
 </style>
