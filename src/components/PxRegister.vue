@@ -1,6 +1,6 @@
 <template>
-  <div class="register">
-    <div class="register-container glass-container">
+  <div class="register bg-primary">
+    <div class="form-container glass-container">
       <form action method="post" autocomplete="on" @submit.prevent="registrar">
         <h2 class="title">Regístrate</h2>
         <div class="input-group">
@@ -53,12 +53,12 @@
         <div class="auth-socials-buttons">
           <button
             type="submit"
-            class="button button-fb button-primary"
+            class=" button-socials button-socials__facebook"
             @click="logInWithFacebook"
           >
             <i class="fa fa-facebook"></i>
           </button>
-          <button type="submit" class="button button-fb button-primary">
+          <button type="submit" class="button-socials button-socials__google ">
             <i class="fa fa-google"></i>
           </button>
         </div>
@@ -140,63 +140,17 @@ export default {
   padding: 30px 1rem;
   width: 100%;
   min-height: 100vh;
-  background: rgb(204, 166, 242);
-  background: linear-gradient(
-    0deg,
-    rgba(204, 166, 242, 1) 0%,
-    rgba(57, 15, 100, 1) 100%
-  );
-  .register-container {
-    padding: 1.1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
-    form {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-
-      .input-group {
-        display: flex;
-        flex-direction: column;
-        margin: 0.2rem;
-
-        .input-group__input {
-          max-width: 490px;
-          width: 100%;
-          background-color: #f0f0f0;
-          margin: 7px 0;
-          border-radius: 55px;
-          padding: 1.2rem;
-
-          input {
-            background: none;
-            outline: none;
-            border: none;
-            line-height: 1;
-            font-weight: 600;
-            font-size: 1.1rem;
-          }
-        }
-      }
-      button {
-        margin: 1rem;
-        font-weight: 300;
-      }
+  
+  .register-auth-socials {
+    p {
+      margin-bottom: 1rem;
     }
-    .register-auth-socials {
-      p {
-        margin-bottom: 1rem;
-      }
-      .auth-socials-buttons {
-      }
+    .auth-socials-buttons {
     }
-    .terms-conditions{
-      width: 300px;
-    }
+  }
+  .terms-conditions {
+    width: 300px;
   }
   .register-container > * {
     margin-bottom: 10px;
