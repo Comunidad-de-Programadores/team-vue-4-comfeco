@@ -63,6 +63,13 @@ h2 {
         padding: 10px 1rem;
         font-family: var(--fuente-regular);
         letter-spacing: 0.5px;
+        transition: all 0.2s ease-in;
+        border: 2px solid transparent;
+        &:active,
+        &:focus {
+          border: 2px solid var(--color-primary);
+          box-shadow: 0 0 8px 1px rgba(78, 23, 134, 0.5);
+        }
         &::placeholder {
           font-size: 14px;
           color: var(--color-gray);
@@ -121,6 +128,11 @@ h2 {
     align-items: center;
     flex-direction: column;
     width: 100%;
+    &-text {
+      margin: 8px 0;
+      font-family: var(--fuente-bold);
+      color: var(--color-black);
+    }
     &-forgot {
       display: inline-block;
       text-decoration: none;
@@ -134,8 +146,14 @@ h2 {
     .button.button-secondary {
       a {
         width: 100%;
-        display: block;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
+      }
+      i {
+        margin: 0 0 0 4px;
       }
     }
   }
@@ -158,7 +176,7 @@ input {
   height: 40px;
   border-radius: 50px;
   transition: var(--transition);
-  border: 1px solid var(--color-primary);
+  border: 2px solid var(--color-primary);
   font-size: 14px;
   &-primary {
     background-color: var(--color-primary);
@@ -210,6 +228,15 @@ input {
       &-text {
         font-size: 17.5px;
       }
+    }
+    &-options {
+      flex-direction: row;
+      &-forgot {
+        margin: 0;
+      }
+    }
+    .button-secondary {
+      width: 200px;
     }
   }
 }

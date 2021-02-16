@@ -8,13 +8,6 @@
         />
       </router-link>
     </section>
-    <!-- este nav estara por el momento para permitirnos navegar -->
-    <nav>
-      <router-link to="/">Home</router-link>
-      <router-link to="/login">Login</router-link>
-      <router-link to="/register">Reg&iacute;strate</router-link>
-    </nav>
-    <!-- este nav estara por el momento para permitirnos navegar -->
   </header>
 </template>
 

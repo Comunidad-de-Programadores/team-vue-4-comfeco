@@ -138,28 +138,4 @@ export default {
   position: absolute;
   right: 20px;
 }
-
-/*Responsive Tablet*/
-@media screen and (min-width: 768px) {
-  /*Forms*/
-  .form-container {
-    &-options {
-      flex-direction: row;
-      &-forgot {
-        margin: 0;
-      }
-    }
-    .button-secondary {
-      width: 200px;
-    }
-  }
-}
-
-/*Responsive Desktop*/
-@media screen and (min-width: 1200px) {
-}
-
-/*Responsive Large Desktop*/
-@media screen and (min-width: 1400px) {
-}
 </style>

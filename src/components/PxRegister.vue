@@ -75,9 +75,12 @@
         </p>
       </div>
       <div class="form-container-options">
+        <p class="form-container-options-text">
+          ¿Ya tienes tu cuenta?
+        </p>
         <button class="button button-secondary">
           <router-link to="/login">
-            ¿Ya tienes tu cuenta?, Inicia sesión
+            Iniciar sesión
             <i class="fas fa-sign-in-alt"></i>
           </router-link>
         </button>
@@ -163,6 +166,7 @@ export default {
       color: var(--color-primary);
       outline: none;
       letter-spacing: 0.5px;
+      font-weight: bold;
       &:hover {
         color: var(--color-white);
       }
