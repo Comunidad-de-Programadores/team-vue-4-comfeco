@@ -1,7 +1,12 @@
 <template>
   <div class="login bg-primary">
     <div class="form-container glass-container">
-      <form action method="post" autocomplete="on" @submit.prevent="login">
+      <form
+        action
+        method="post"
+        autocomplete="off"
+        @submit.prevent="loginWithEamil"
+      >
         <h2 class="title">Iniciar Sesión</h2>
         <div class="input-group">
           <input
@@ -54,11 +59,15 @@
           <button
             type="submit"
             class=" button-socials button-socials__facebook"
-            @click="logInWithFacebook"
+            @click="createAccountWithFacebook"
           >
             <i class="fa fa-facebook"></i>
           </button>
-          <button type="submit" class="button-socials button-socials__google ">
+          <button
+            type="submit"
+            class="button-socials button-socials__google "
+            @click="createAccountWithGoogle"
+          >
             <i class="fa fa-google"></i>
           </button>
         </div>
@@ -84,6 +93,7 @@
 </template>
 
 <script>
+import Autenticacion from "@/firebase/auth/autentication.js";
 export default {
   name: "PxLogin",
   data() {
@@ -97,8 +107,23 @@ export default {
     };
   },
   methods: {
-    login() {
-      console.log(this.form);
+    async loginWithEamil() {
+      this.authClass.autEmailPass(this.form.email, this.form.password);
+      this.$router.push("/");
+    },
+    async loginAccountWithFacebook() {
+      this.authClass.authCuentaFacebook();
+      this.$router.push("/");
+    },
+    async loginAccountWithGoogle() {
+      this.authClass.authCuentaGoogle();
+      this.$router.push("/");
+    },
+  },
+  computed: {
+    authClass() {
+      const auth = new Autenticacion();
+      return auth;
     },
   },
 };

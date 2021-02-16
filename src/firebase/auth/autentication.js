@@ -1,4 +1,6 @@
-export class Autenticacion {
+import firebase from "firebase";
+
+class Autenticacion {
   autEmailPass(email, password) {
     firebase
       .auth()
@@ -24,7 +26,7 @@ export class Autenticacion {
         });
         //Use this code for verification account user
         const configuracion = {
-          url: "http://192.168.1.12:8080/",
+          url: "http://192.168.1.12:8080/register",
         };
 
         result.user.sendEmailVerification(configuracion).catch((error) => {
@@ -37,7 +39,7 @@ export class Autenticacion {
           alert(
             `Bienvenido ${nombres}, debes realizar el proceso de verificación`
           );
-        }, 400);
+        }, 4000);
       })
       .catch((error) => {
         console.error(error);
@@ -55,7 +57,7 @@ export class Autenticacion {
       .then((result) => {
         setTimeout(() => {
           alert(`Bienvenido ${result.user.displayName} !! `);
-        }, 400);
+        }, 4000);
       })
       .catch((error) => {
         console.error(error);
@@ -83,3 +85,5 @@ export class Autenticacion {
       });
   }
 }
+
+export default Autenticacion;

@@ -16,11 +16,6 @@
           <p>COMFECO</p>
         </a>
       </section>
-      <section class="footer__copy">
-        <p>
-          Copyright © 2021
-        </p>
-      </section>
       <section class="footer__social-media">
         <div class="footer__social-media--icons">
           <a href="https://www.facebook.com/comfeco" target="_blank">
@@ -40,6 +35,11 @@
             <i class="fab fa-youtube-square"></i>
           </a>
         </div>
+      </section>
+      <section class="footer__copy">
+        <p>
+          Copyright © 2021
+        </p>
       </section>
     </div>
   </footer>
@@ -80,7 +80,7 @@ export default {
     color: var(--color-white);
     outline: none;
   }
-  &__copy,
+  &__social-media,
   &__logo {
     margin: 0 0 1.5rem 0;
   }
@@ -121,7 +121,7 @@ export default {
       justify-content: space-between;
       height: 90px;
     }
-    &__copy,
+    &__social-media,
     &__logo {
       margin: 0;
     }

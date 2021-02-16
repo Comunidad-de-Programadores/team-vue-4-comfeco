@@ -43,7 +43,11 @@
             placeholder="Confirmar Contraseña"
           />
         </div>
-        <button type="submit" class="button button-primary">
+        <button
+          type="submit"
+          @click="createAccount()"
+          class="button button-primary"
+        >
           Crear cuenta
         </button>
       </form>
@@ -55,11 +59,15 @@
           <button
             type="submit"
             class=" button-socials button-socials__facebook"
-            @click="logInWithFacebook"
+            @click="createAccountWithFacebook"
           >
             <i class="fa fa-facebook"></i>
           </button>
-          <button type="submit" class="button-socials button-socials__google ">
+          <button
+            type="submit"
+            @click="createAccountWithGoogle"
+            class="button-socials button-socials__google "
+          >
             <i class="fa fa-google"></i>
           </button>
         </div>
@@ -92,6 +100,8 @@
 
 <script>
 import VModal from "@/components/PxModal.vue";
+import Autenticacion from "@/firebase/auth/autentication.js";
+
 export default {
   name: "PxRegister",
   data() {
@@ -109,40 +119,24 @@ export default {
     VModal,
   },
   methods: {
-    registrar() {
-      console.log(this.form);
+    async createAccount() {
+      this.authClass.crearCuentaEmailPass(
+        this.form.email,
+        this.form.password,
+        this.form.nick
+      );
     },
-    async logInWithFacebook() {
-      await this.loadFacebookSDK(document, "script", "facebook-jssdk");
-      await this.initFacebook();
-      window.FB.login(function(response) {
-        if (response.authResponse) {
-          alert("logeado");
-        } else {
-          alert("el usuario cancelo el login");
-        }
-      });
-      return false;
+    async createAccountWithFacebook() {
+      this.authClass.authCuentaFacebook();
     },
-    async initFacebook() {
-      window.fbAsyncInit = function() {
-        window.FB.init({
-          appId: "xxxxxxxxxxxxx",
-          cookie: true,
-          version: "v13.0",
-        });
-      };
+    async createAccountWithGoogle() {
+      this.authClass.authCuentaGoogle();
     },
-    async loadFacebookSDK(d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementsById(id)) {
-        return;
-      }
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
+  },
+  computed: {
+    authClass() {
+      const auth = new Autenticacion();
+      return auth;
     },
   },
 };
@@ -162,6 +156,7 @@ export default {
     max-width: 280px;
     width: 100%;
     line-height: 20px;
+    margin: 10px 0;
     .link {
       color: var(--color-primary);
       outline: none;
