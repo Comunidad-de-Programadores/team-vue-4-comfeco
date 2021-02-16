@@ -84,6 +84,10 @@ class Autenticacion {
         }, 4000);
       });
   }
+
+  singOutOfAccount() {
+    firebase.auth().signOut();
+  }
 }
 
 export default Autenticacion;
