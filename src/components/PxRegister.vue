@@ -75,8 +75,8 @@
       <div class="terms-conditions">
         <p>
           Al resgistrate, estas aceptando los
-          <a href="#" class="link">T&eacute;rminos y condiciones</a>, y la
-          <a href="#" class="link"
+          <a class="link" @click="modalTerminos()">T&eacute;rminos y condiciones</a>, y la
+          <a class="link" @click="modalPoliticas()"
             >Pol&iacute;tica de privacidad y protecci&oacute;n de datos</a
           >
           de COMFECO
@@ -95,7 +95,7 @@
       </div>
     </div>
   </div>
-  <VModal :title="titlemodal"></VModal>
+  <VModal :title="titlemodal" :txtbody="parrafo" :txtbutton="txtboton" id="modal"></VModal>
 </template>
 
 <script>
@@ -112,7 +112,9 @@ export default {
         password: "",
         confirm_password: "",
       },
-      titlemodal: "Terminos y Condiciones",
+      titlemodal: "",
+      parrafo: "",
+      txtboton: "",
     };
   },
   components: {
@@ -132,6 +134,32 @@ export default {
     async createAccountWithGoogle() {
       this.authClass.authCuentaGoogle();
     },
+    modalTerminos(){
+      this.titlemodal = "Terminos y Condiciones";
+      this.txtboton= "terminos y condiciones";
+      this.parrafo = `Los presentes términos y condiciones (en lo sucesivo los "Términos y Condiciones de la Aplicación")
+                    contienen los acuerdos que rigen (i) la relación entre Time Tracker de México, S.A. de C.V., o sus filiales o
+                    subsidiarias (en lo sucesivo la “Sociedad”), con las personas (en lo sucesivo el o los “Usuario(s)”) que
+                    descarguen cualesquier aplicación desarrollada por la Sociedad (en lo sucesivo la o las “Aplicación(es)”), (ii)
+                    así como las marcas, los productos y los servicios que preste la Sociedad (en lo sucesivo los “Servicios”). Al
+                    descargar la Aplicación, el Usuario deberá manifestar su aceptación de los presentes Términos y Condiciones
+                    de la Aplicación a efecto de poder usar la Aplicación, y en caso de que no los acepte, el Usuario deberá de
+                    abstenerse de usar la Aplicación.
+                    Cualesquier término no definido en los presentes Términos y Condiciones de la Aplicación se entenderán
+                    definidos en los Términos y Condiciones del Sitio. Cualquier cuestión no prevista por los Términos y
+                    Condiciones de la Aplicación, los Términos y Condiciones del Sitio se aplicarán de forma supletoria. En caso
+                    de interpretación o controversia con entre los Términos y Condiciones de la Aplicación y los Términos y
+                    Condiciones del Sitio, prevalecerán los últimos sobre los primeros.`;
+      let abrir = document.getElementById("modal");
+      abrir.style.display = "block";
+    },
+    modalPoliticas(){
+      this.titlemodal = "Politicas de Privacidad";
+      this.txtboton= "politicas de privacidad";
+      this.parrafo = `Su registro se eliminara de los registro de COMFECO en caso de compartir información personal y sensible y la sección 4.8 del Acuerdo de distribución . Esta aplicación no estará disponible para los usuarios hasta que presente una actualización compatible. Problema de política: Google Play requiere que los desarrolladores para proporcionar una política de privacidad válida cuando las solicitudes de aplicaciones o manejo de información sensible del usuario o del dispositivo. Sus solicitudes de permisos de aplicaciones sensibles (por ejemplo, cámara, micrófono, cuentas, contactos o teléfono) o datos de usuario, pero no incluye una política de privacidad válido.`;
+      let abrir = document.getElementById("modal");
+      abrir.style.display = "block";
+    }
   },
   computed: {
     authClass() {

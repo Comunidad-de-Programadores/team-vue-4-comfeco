@@ -9,15 +9,11 @@
           ></span>
         </div>
         <div class="modal-body">
-          <p class="txtmodalbody">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-            neque natus, repellat blanditiis labore a officiis velit doloribus
-            hic recusandae eligendi, molestiae, illo ex? Porro similique fugiat
-            dicta voluptates iure?
+          <p class="txtmodalbody" v-text="txtbody">
           </p>
         </div>
         <div class="modal-element modal-footer">
-          <a href="#" @click="closeModal()">Aceptar Terminos y Condiciones</a>
+          <a href="#" @click="closeModal()">Aceptar {{txtbutton}}</a>
         </div>
       </div>
     </div>
@@ -28,6 +24,8 @@ export default {
   name: "VModal",
   props: {
     title: String,
+    txtbody: String,
+    txtbutton: String,
   },
   /*data(){
       return{
@@ -51,7 +49,7 @@ export default {
   align-items: center;
 }
 .modal {
-  //display: none;
+  display: none;
   position: fixed;
   z-index: 1000;
   overflow: auto;
