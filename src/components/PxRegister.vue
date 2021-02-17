@@ -70,6 +70,7 @@
               class="input-group__input"
               placeholder="Confirmar Contraseña"
               autocomplete="off"
+              title="La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
             />
             <span
                   :class="isPwdcon ? 'far fa-eye' : 'far fa-eye-slash'"
