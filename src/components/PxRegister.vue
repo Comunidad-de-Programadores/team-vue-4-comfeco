@@ -3,6 +3,23 @@
     <div class="form-container glass-container">
       <form action method="post" autocomplete="on" @submit.prevent="registrar">
         <h2 class="title">Regístrate</h2>
+        <section class="error__content" v-if="errors.length">
+          <b class="error__content-message">
+            Por favor, corrija el(los) siguiente(s) error(es):
+          </b>
+          <ul class="error__content-list">
+            <li
+              class="error__content-item"
+              v-for="error in errors"
+              :key="error.id"
+            >
+              <span>*</span>
+              <span>
+                {{ error }}
+              </span>
+            </li>
+          </ul>
+        </section>
         <div class="input-group">
           <input
             type="text"
@@ -26,32 +43,44 @@
           />
         </div>
         <div class="input-group">
-          <input
-            type="password"
-            name="password"
-            id="password"
-            v-model="form.password"
-            class="input-group__input"
-            placeholder="Contraseña"
-            autocomplete="off"
-          />
+          <div class="pass-eye__container">
+            <input
+              :type="isPwd ? 'password' : 'text'"
+              name="password"
+              id="password"
+              v-model="form.password"
+              class="input-group__input"
+              placeholder="Contraseña"
+              autocomplete="off"
+              title="La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
+            />
+            <span
+                :class="isPwd ? 'far fa-eye' : 'far fa-eye-slash'"
+                @click="isPwd = !isPwd"
+              ></span>
+          </div>
         </div>
         <div class="input-group">
-          <input
-            type="password"
-            name="confirm_password"
-            id="form.confirm_password"
-            v-model="form.confirm_password"
-            class="input-group__input"
-            placeholder="Confirmar Contraseña"
-            autocomplete="off"
-          />
+          <div class="pass-eye__container">
+            <input
+              :type="isPwdcon ? 'password' : 'text'"
+              name="confirm_password"
+              id="form.confirm_password"
+              v-model="form.confirm_password"
+              class="input-group__input"
+              placeholder="Confirmar Contraseña"
+              autocomplete="off"
+            />
+            <span
+                  :class="isPwdcon ? 'far fa-eye' : 'far fa-eye-slash'"
+                  @click="isPwdcon = !isPwdcon"
+                ></span>
+          </div>
         </div>
         <button
           type="submit"
           @click="createAccount()"
-          class="button button-primary"
-        >
+          class="button button-primary">
           Crear cuenta
         </button>
       </form>
@@ -61,17 +90,15 @@
         </p>
         <div class="auth-socials-buttons">
           <button
-            type="submit"
+            type="button"
             class=" button-socials button-socials__facebook"
-            @click="createAccountWithFacebook"
-          >
+            @click="createAccountWithFacebook">
             <i class="fa fa-facebook"></i>
           </button>
           <button
-            type="submit"
+            type="button"
             @click="createAccountWithGoogle"
-            class="button-socials button-socials__google "
-          >
+            class="button-socials button-socials__google ">
             <i class="fa fa-google"></i>
           </button>
         </div>
@@ -126,6 +153,9 @@ export default {
       titlemodal: "",
       parrafo: "",
       txtboton: "",
+      isPwd: true,
+      isPwdcon: true,
+      errors: [],
     };
   },
   components: {
@@ -134,28 +164,62 @@ export default {
   methods: {
     async createAccount() {
       try {
-        const informationUser = await this.authClass.crearCuentaEmailPass(
-          this.form.email,
-          this.form.password,
-          this.form.nick
-        );
+        this.errors = [];
 
-        if (informationUser.emailVerified) {
-          alert("Cuenta verificada");
-          this.$router.push("/home");
-        } else {
-          this.$router.push("/");
-          this.authClass.singOutOfAccount();
-          alert("Por favor revisar su correo, para poder verificar la cuenta");
+        if (!this.form.nick) {
+          this.errors.push("El nick es obligatorio.");
         }
-        await this.authClass.verifiedUser();
-        this.form.email = "";
-        this.form.password = "";
-        this.form.confirm_password = "";
-        this.form.nick = "";
+
+        if (!this.form.email) {
+          this.errors.push("El correo electrónico es obligatorio.");
+        } else if (!this.validEmail(this.form.email)) {
+          this.errors.push("El correo electrónico debe ser válido.");
+        }      
+        
+        if (!this.form.password) {
+          this.errors.push("El password es obligatorio.");
+        }else if(!this.validPass(this.form.password)){        
+          this.errors.push("La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos.");
+        }
+
+        if (!this.form.confirm_password) {
+          this.errors.push("Debe confirmar la contraseña.");
+        }else if(this.form.confirm_password != this.form.password){
+          this.errors.push("Las contraseñas no son iguales.");
+        }
+
+        if (!this.errors.length) {
+          const informationUser = await this.authClass.crearCuentaEmailPass(
+            this.form.email,
+            this.form.password,
+            this.form.nick
+          );
+
+          if (informationUser.emailVerified) {
+            alert("Cuenta verificada");
+            this.$router.push("/home");
+          } else {
+            this.$router.push("/");
+            this.authClass.singOutOfAccount();
+            alert("Por favor revisar su correo, para poder verificar la cuenta");
+          }
+          await this.authClass.verifiedUser();
+          this.form.email = "";
+          this.form.password = "";
+          this.form.confirm_password = "";
+          this.form.nick = "";
+        }          
       } catch (error) {
         console.log(error);
       }
+    },
+    validEmail: function(email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+    validPass: function(pass) {
+      var re = /^(?=.*[a-z]){2,}(?=.*[A-Z]){2,}(?=.*\d)(?=.*[$@$!%*?&]){2,}([A-Za-z\d$@$!%*?&]|[^ ]){8,}$/;
+      return re.test(pass);
     },
     createAccountWithFacebook() {
       this.authClass.authCuentaFacebook();
@@ -236,5 +300,15 @@ export default {
   .register-container > * {
     margin-bottom: 10px;
   }
+}
+.pass-eye__container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+.pass-eye__container span {
+  position: absolute;
+  right: 20px;
 }
 </style>

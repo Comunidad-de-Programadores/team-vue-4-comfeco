@@ -26,7 +26,7 @@
             </li>
           </ul>
         </section>
-        <div class="input-group">
+        <div class="input-group" >
           <input
             type="email"
             name="email"
@@ -34,7 +34,7 @@
             v-model="form.email"
             class="input-group__input"
             placeholder="Correo electr&oacute;nico *"
-          />
+          />          
         </div>
         <div class="input-group">
           <div class="pass-eye__container">
@@ -45,6 +45,7 @@
               v-model="form.password"
               class="input-group__input"
               placeholder="Contraseña *"
+              title="La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
             />
             <span
               :class="isPwd ? 'far fa-eye' : 'far fa-eye-slash'"
@@ -112,11 +113,9 @@
 
 <script>
 import Autenticacion from "@/firebase/auth/autentication.js";
-import { validationMixin } from "vuelidate";
-import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
-  name: "PxLogin",
+  name: "PxLogin",  
   data() {
     return {
       form: {
@@ -126,19 +125,7 @@ export default {
       remember: false,
       isPwd: true,
       errors: [],
-    };
-  },
-  validations: {
-    form: {
-      email: {
-        required,
-        email,
-      },
-      password: {
-        required,
-        minLength: minLength(8),
-      },
-    },
+    }
   },
   methods: {
     async loginWithEamil() {
@@ -148,9 +135,12 @@ export default {
         this.errors.push("El correo electrónico es obligatorio.");
       } else if (!this.validEmail(this.form.email)) {
         this.errors.push("El correo electrónico debe ser válido.");
-      }
+      }      
+      
       if (!this.form.password) {
         this.errors.push("El password es obligatorio.");
+      }else if(!this.validPass(this.form.password)){        
+        this.errors.push("La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos.");
       }
 
       if (!this.errors.length) {
@@ -158,13 +148,22 @@ export default {
           this.form.email,
           this.form.password
         );
-        this.$router.push("/dashboard");
         alert(`Bienvenido ${auhEmailPass.displayName}`);
+        if (auhEmailPass.displayName != '') {
+          this.$router.push("/dashboard");
+          alert(`Bienvenido ${auhEmailPass.displayName}`);
+        }else{
+          alert("datos incorrectos vuelva a intentarlo.");
+        }        
       }
     },
     validEmail: function(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
+    },
+    validPass: function(pass) {
+      var re = /^(?=.*[a-z]){2,}(?=.*[A-Z]){2,}(?=.*\d)(?=.*[$@$!%*?&]){2,}([A-Za-z\d$@$!%*?&]|[^ ]){8,}$/;
+      return re.test(pass);
     },
     async loginAccountWithFacebook() {
       this.authClass.authCuentaFacebook();
