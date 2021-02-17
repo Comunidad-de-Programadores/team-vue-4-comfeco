@@ -9,7 +9,7 @@
 import PxLogin from "@/components/PxLogin";
 
 export default {
-  name: "Home",
+  name: "Login",
   components: {
     PxLogin,
   },
