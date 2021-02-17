@@ -6,18 +6,22 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import Autenticacion from "@/firebase/auth/autentication.js";
+
 export default {
-  name: 'private',
+  name: "private",
   methods: {
     logOut() {
-      firebase
-        .auth()
-        .signOut()
-          .then( () => {
-            this.$router.replace('/')
-          })
-    }
-  }
-}
+      this.authClass.singOutOfAccount().then(() => {
+        this.$router.push("/");
+      });
+    },
+  },
+  computed: {
+    authClass() {
+      const auth = new Autenticacion();
+      return auth;
+    },
+  },
+};
 </script>

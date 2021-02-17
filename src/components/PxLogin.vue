@@ -9,12 +9,23 @@
         novalidate="true"
       >
         <h2 class="title">Iniciar Sesión</h2>
-        <p v-if="errors.length">
-          <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
-          <ul>
-            <li v-for="error in errors">{{ error }}</li>
+        <section class="error__content" v-if="errors.length">
+          <b class="error__content-message">
+            Por favor, corrija el(los) siguiente(s) error(es):
+          </b>
+          <ul class="error__content-list">
+            <li
+              class="error__content-item"
+              v-for="error in errors"
+              :key="error.id"
+            >
+              <span>*</span>
+              <span>
+                {{ error }}
+              </span>
+            </li>
           </ul>
-        </p>
+        </section>
         <div class="input-group">
           <input
             type="email"
@@ -22,9 +33,9 @@
             id="email"
             v-model="form.email"
             class="input-group__input"
-            placeholder="Correo electr&oacute;nico"
+            placeholder="Correo electr&oacute;nico *"
           />
-        </div>                
+        </div>
         <div class="input-group">
           <div class="pass-eye__container">
             <input
@@ -33,7 +44,7 @@
               id="password"
               v-model="form.password"
               class="input-group__input"
-              placeholder="Contraseña"
+              placeholder="Contraseña *"
             />
             <span
               :class="isPwd ? 'far fa-eye' : 'far fa-eye-slash'"
@@ -54,7 +65,7 @@
             </label>
           </div>
         </div>
-        <button type="submit" class="button button-primary" >
+        <button type="submit" class="button button-primary">
           Ingresar
         </button>
       </form>
@@ -101,8 +112,8 @@
 
 <script>
 import Autenticacion from "@/firebase/auth/autentication.js";
-import { validationMixin } from 'vuelidate';
-import { required, email, minLength } from 'vuelidate/lib/validators';
+import { validationMixin } from "vuelidate";
+import { required, email, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "PxLogin",
@@ -110,7 +121,7 @@ export default {
     return {
       form: {
         email: "",
-        password: "",        
+        password: "",
       },
       remember: false,
       isPwd: true,
@@ -121,37 +132,37 @@ export default {
     form: {
       email: {
         required,
-        email
+        email,
       },
       password: {
         required,
-        minLength: minLength(8)
-      }
-    }
+        minLength: minLength(8),
+      },
+    },
   },
   methods: {
-    loginWithEamil() {
+    async loginWithEamil() {
       this.errors = [];
 
       if (!this.form.email) {
-        this.errors.push('El correo electrónico es obligatorio.');
+        this.errors.push("El correo electrónico es obligatorio.");
       } else if (!this.validEmail(this.form.email)) {
-        this.errors.push('El correo electrónico debe ser válido.');
+        this.errors.push("El correo electrónico debe ser válido.");
       }
       if (!this.form.password) {
         this.errors.push("El password es obligatorio.");
       }
 
       if (!this.errors.length) {
-        this.authClass.autEmailPass(this.form.email, this.form.password);
-        this.$router.push("/");
-        
-      }       
-      /*
-      alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.form));
-      */
+        const auhEmailPass = await this.authClass.autEmailPass(
+          this.form.email,
+          this.form.password
+        );
+        this.$router.push("/dashboard");
+        alert(`Bienvenido ${auhEmailPass.displayName}`);
+      }
     },
-    validEmail: function (email) {
+    validEmail: function(email) {
       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },

@@ -1,8 +1,13 @@
 import firebase from "firebase";
 
 class Autenticacion {
-  autEmailPass(email, password) {
-    firebase
+  async autEmailPass(email, password) {
+    const loginEmailPass = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+    const response = await loginEmailPass.user;
+    return response;
+    /*firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -13,26 +18,19 @@ class Autenticacion {
           alert("Por favor realiza la verificación de la cuenta");
           firebase.auth().signOut();
         }
-      });
+      });*/
   }
 
-  crearCuentaEmailPass(email, password, nombres) {
-    firebase
+  async crearCuentaEmailPass(email, password, nombres) {
+    const crearCuentaFirebase = await firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        if (result.user.emailVerified) {
-          alert("Cuenta verificada");
-        } else {
-          alert("Por favor revisar su correo, para poder verificar la cuenta");
-        }
-      })
-      .then(() => {
-        this.verifiedUser();
-      })
-      .catch(({ code, message }) => {
-        alert(`${code} - ${message}`);
-      });
+      .createUserWithEmailAndPassword(email, password);
+    const response = await crearCuentaFirebase.user;
+    // Set a name for the user
+    response.updateProfile({
+      displayName: nombres,
+    });
+    return response;
   }
 
   authCuentaGoogle() {
@@ -67,14 +65,15 @@ class Autenticacion {
       });
   }
 
-  singOutOfAccount() {
-    firebase.auth().signOut();
+  async singOutOfAccount() {
+    const logOutInformation = await firebase.auth().signOut();
+    return logOutInformation;
   }
 
   verifiedUser() {
     const user = firebase.auth().currentUser;
     const configuracion = {
-      url: "http://localhost:8080/login",
+      url: "http://localhost:8080/",
     };
     user
       .sendEmailVerification(configuracion)

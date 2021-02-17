@@ -11,6 +11,7 @@
             v-model="form.nick"
             class="input-group__input"
             placeholder="Nick"
+            autocomplete="off"
           />
         </div>
         <div class="input-group">
@@ -21,6 +22,7 @@
             v-model="form.email"
             class="input-group__input"
             placeholder="Correo electr&oacute;nico"
+            autocomplete="off"
           />
         </div>
         <div class="input-group">
@@ -31,6 +33,7 @@
             v-model="form.password"
             class="input-group__input"
             placeholder="Contraseña"
+            autocomplete="off"
           />
         </div>
         <div class="input-group">
@@ -41,6 +44,7 @@
             v-model="form.confirm_password"
             class="input-group__input"
             placeholder="Confirmar Contraseña"
+            autocomplete="off"
           />
         </div>
         <button
@@ -89,7 +93,7 @@
           ¿Ya tienes tu cuenta?
         </p>
         <button class="button button-secondary">
-          <router-link to="/login">
+          <router-link to="/">
             Iniciar sesión
             <i class="fas fa-sign-in-alt"></i>
           </router-link>
@@ -129,16 +133,34 @@ export default {
   },
   methods: {
     async createAccount() {
-      this.authClass.crearCuentaEmailPass(
-        this.form.email,
-        this.form.password,
-        this.form.nick
-      );
+      try {
+        const informationUser = await this.authClass.crearCuentaEmailPass(
+          this.form.email,
+          this.form.password,
+          this.form.nick
+        );
+
+        if (informationUser.emailVerified) {
+          alert("Cuenta verificada");
+          this.$router.push("/home");
+        } else {
+          this.$router.push("/");
+          this.authClass.singOutOfAccount();
+          alert("Por favor revisar su correo, para poder verificar la cuenta");
+        }
+        await this.authClass.verifiedUser();
+        this.form.email = "";
+        this.form.password = "";
+        this.form.confirm_password = "";
+        this.form.nick = "";
+      } catch (error) {
+        console.log(error);
+      }
     },
-    async createAccountWithFacebook() {
+    createAccountWithFacebook() {
       this.authClass.authCuentaFacebook();
     },
-    async createAccountWithGoogle() {
+    createAccountWithGoogle() {
       this.authClass.authCuentaGoogle();
     },
     modalTerminos() {
