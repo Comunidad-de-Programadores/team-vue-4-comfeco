@@ -7,18 +7,6 @@ class Autenticacion {
       .signInWithEmailAndPassword(email, password);
     const response = await loginEmailPass.user;
     return response;
-    /*firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        if (result.user.emailVerified) {
-          alert("Cuenta verificada!");
-          alert(`Bienvenido ${result.user.displayName}`);
-        } else {
-          alert("Por favor realiza la verificación de la cuenta");
-          firebase.auth().signOut();
-        }
-      });*/
   }
 
   async crearCuentaEmailPass(email, password, nombres) {
@@ -53,15 +41,11 @@ class Autenticacion {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        setTimeout(() => {
-          alert(`Bienvenido ${result.user.displayName} !! `);
-        }, 4000);
+        alert(`Bienvenido ${result.user.displayName} !! `);
       })
       .catch((error) => {
         console.error(error);
-        setTimeout(() => {
-          alert(`Error autenticarse con Facebook ${error}`);
-        }, 4000);
+        alert(`Error autenticarse con Facebook ${error}`);
       });
   }
 
