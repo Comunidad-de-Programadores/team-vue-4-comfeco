@@ -6,8 +6,15 @@
         method="post"
         autocomplete="off"
         @submit.prevent="loginWithEamil"
+        novalidate="true"
       >
         <h2 class="title">Iniciar Sesión</h2>
+        <p v-if="errors.length">
+          <b>Por favor, corrija el(los) siguiente(s) error(es):</b>
+          <ul>
+            <li v-for="error in errors">{{ error }}</li>
+          </ul>
+        </p>
         <div class="input-group">
           <input
             type="email"
@@ -17,7 +24,7 @@
             class="input-group__input"
             placeholder="Correo electr&oacute;nico"
           />
-        </div>
+        </div>                
         <div class="input-group">
           <div class="pass-eye__container">
             <input
@@ -47,7 +54,7 @@
             </label>
           </div>
         </div>
-        <button type="submit" class="button button-primary">
+        <button type="submit" class="button button-primary" >
           Ingresar
         </button>
       </form>
@@ -57,14 +64,14 @@
         </p>
         <div class="auth-socials-buttons">
           <button
-            type="submit"
+            type="button"
             class=" button-socials button-socials__facebook"
             @click="createAccountWithFacebook"
           >
             <i class="fa fa-facebook"></i>
           </button>
           <button
-            type="submit"
+            type="button"
             class="button-socials button-socials__google "
             @click="createAccountWithGoogle"
           >
@@ -94,22 +101,59 @@
 
 <script>
 import Autenticacion from "@/firebase/auth/autentication.js";
+import { validationMixin } from 'vuelidate';
+import { required, email, minLength } from 'vuelidate/lib/validators';
+
 export default {
   name: "PxLogin",
   data() {
     return {
       form: {
         email: "",
-        password: "",
-        remember: false,
+        password: "",        
       },
+      remember: false,
       isPwd: true,
+      errors: [],
     };
   },
+  validations: {
+    form: {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required,
+        minLength: minLength(8)
+      }
+    }
+  },
   methods: {
-    async loginWithEamil() {
-      this.authClass.autEmailPass(this.form.email, this.form.password);
-      this.$router.push("/");
+    loginWithEamil() {
+      this.errors = [];
+
+      if (!this.form.email) {
+        this.errors.push('El correo electrónico es obligatorio.');
+      } else if (!this.validEmail(this.form.email)) {
+        this.errors.push('El correo electrónico debe ser válido.');
+      }
+      if (!this.form.password) {
+        this.errors.push("El password es obligatorio.");
+      }
+
+      if (!this.errors.length) {
+        this.authClass.autEmailPass(this.form.email, this.form.password);
+        this.$router.push("/");
+        
+      }       
+      /*
+      alert("SUCCESS!! :-)\n\n" + JSON.stringify(this.form));
+      */
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     },
     async loginAccountWithFacebook() {
       this.authClass.authCuentaFacebook();

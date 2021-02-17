@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="view-register">
     <PxRegister />
   </div>
 </template>
@@ -9,7 +9,7 @@
 import PxRegister from "@/components/PxRegister";
 
 export default {
-  name: "Home",
+  name: "Register",
   components: {
     PxRegister,
   },
