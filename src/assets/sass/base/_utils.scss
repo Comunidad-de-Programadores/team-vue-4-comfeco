@@ -231,6 +231,9 @@ input {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  &-message {
+    color: #000000;
+  }
   &-list {
     margin: 6px 0 0 0;
     text-align: left;
@@ -238,15 +241,17 @@ input {
   &-item {
     margin: 0 0 6px 0;
     span {
-      font-size: 15px;
+      font-size: 14px;
     }
     span:first-child {
       margin: 0 3px 0 0;
       color: #c72c2c;
       font-weight: bold;
+      font-size: 15px;
     }
     span:last-child {
-      color: #000000;
+      color: #ffffff;
+      letter-spacing: 0.5px;
     }
   }
 }

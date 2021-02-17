@@ -55,9 +55,9 @@
               title="La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
             />
             <span
-                :class="isPwd ? 'far fa-eye' : 'far fa-eye-slash'"
-                @click="isPwd = !isPwd"
-              ></span>
+              :class="isPwd ? 'far fa-eye' : 'far fa-eye-slash'"
+              @click="isPwd = !isPwd"
+            ></span>
           </div>
         </div>
         <div class="input-group">
@@ -73,15 +73,16 @@
               title="La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
             />
             <span
-                  :class="isPwdcon ? 'far fa-eye' : 'far fa-eye-slash'"
-                  @click="isPwdcon = !isPwdcon"
-                ></span>
+              :class="isPwdcon ? 'far fa-eye' : 'far fa-eye-slash'"
+              @click="isPwdcon = !isPwdcon"
+            ></span>
           </div>
         </div>
         <button
           type="submit"
           @click="createAccount()"
-          class="button button-primary">
+          class="button button-primary"
+        >
           Crear cuenta
         </button>
       </form>
@@ -93,13 +94,15 @@
           <button
             type="button"
             class=" button-socials button-socials__facebook"
-            @click="createAccountWithFacebook">
+            @click="createAccountWithFacebook"
+          >
             <i class="fa fa-facebook"></i>
           </button>
           <button
             type="button"
             @click="createAccountWithGoogle"
-            class="button-socials button-socials__google ">
+            class="button-socials button-socials__google "
+          >
             <i class="fa fa-google"></i>
           </button>
         </div>
@@ -175,17 +178,19 @@ export default {
           this.errors.push("El correo electrónico es obligatorio.");
         } else if (!this.validEmail(this.form.email)) {
           this.errors.push("El correo electrónico debe ser válido.");
-        }      
-        
+        }
+
         if (!this.form.password) {
           this.errors.push("El password es obligatorio.");
-        }else if(!this.validPass(this.form.password)){        
-          this.errors.push("La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos.");
+        } else if (!this.validPass(this.form.password)) {
+          this.errors.push(
+            "La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
+          );
         }
 
         if (!this.form.confirm_password) {
           this.errors.push("Debe confirmar la contraseña.");
-        }else if(this.form.confirm_password != this.form.password){
+        } else if (this.form.confirm_password != this.form.password) {
           this.errors.push("Las contraseñas no son iguales.");
         }
 
@@ -198,20 +203,56 @@ export default {
 
           if (informationUser.emailVerified) {
             alert("Cuenta verificada");
-            this.$router.push("/home");
+            this.$router.push("/dashboard");
           } else {
             this.$router.push("/");
             this.authClass.singOutOfAccount();
-            alert("Por favor revisar su correo, para poder verificar la cuenta");
+            alert(
+              "Por favor revisar su correo, para poder verificar la cuenta"
+            );
           }
+
+          // Verificar cuenta
           await this.authClass.verifiedUser();
+
           this.form.email = "";
           this.form.password = "";
           this.form.confirm_password = "";
           this.form.nick = "";
-        }          
+        }
       } catch (error) {
         console.log(error);
+      }
+    },
+    async createAccountWithFacebook() {
+      try {
+        const accountFacebookMehotd = await this.authClass.authCuentaFacebook();
+        console.log(accountFacebookMehotd);
+        if (accountFacebookMehotd.emailVerified) {
+          alert(`Bienvenido ${accountFacebookMehotd.displayName}`);
+          this.$router.push("/dashboard");
+        } else {
+          this.authClass.singOutOfAccount();
+          this.$router.push("/");
+          // Verificar cuenta al correo con el que se creo la cuenta de facebook
+          await this.authClass.verifiedUser();
+          alert("Porfavor verificar su cuenta con facebook");
+        }
+      } catch (error) {
+        alert(`Error autenticarse con Facebook ${error}`);
+        console.error(error);
+      }
+    },
+    async createAccountWithGoogle() {
+      try {
+        const accountGoogleMehotd = await this.authClass.authCuentaGoogle();
+        if (accountGoogleMehotd.emailVerified) {
+          alert(`Bienvenido ${accountGoogleMehotd.displayName}`);
+          this.$router.push("/dashboard");
+        }
+      } catch (error) {
+        alert(`Error autenticarse con Google ${error}`);
+        console.error(error);
       }
     },
     validEmail: function(email) {
@@ -221,12 +262,6 @@ export default {
     validPass: function(pass) {
       var re = /^(?=.*[a-z]){2,}(?=.*[A-Z]){2,}(?=.*\d)(?=.*[$@$!%*?&]){2,}([A-Za-z\d$@$!%*?&]|[^ ]){8,}$/;
       return re.test(pass);
-    },
-    createAccountWithFacebook() {
-      this.authClass.authCuentaFacebook();
-    },
-    createAccountWithGoogle() {
-      this.authClass.authCuentaGoogle();
     },
     modalTerminos() {
       this.titlemodal = "Terminos y Condiciones";

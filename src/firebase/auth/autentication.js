@@ -2,51 +2,55 @@ import firebase from "firebase";
 
 class Autenticacion {
   async autEmailPass(email, password) {
-    const loginEmailPass = await firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password);
-    const response = await loginEmailPass.user;
-    return response;
+    try {
+      const loginEmailPass = await firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password);
+      const response = await loginEmailPass.user;
+      return response;
+    } catch (error) {
+      const message = error.message;
+      alert(message);
+      console.error(error);
+    }
   }
 
   async crearCuentaEmailPass(email, password, nombres) {
-    const crearCuentaFirebase = await firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password);
-    const response = await crearCuentaFirebase.user;
-    // Set a name for the user
-    response.updateProfile({
-      displayName: nombres,
-    });
-    return response;
+    try {
+      const crearCuentaFirebase = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+      const response = await crearCuentaFirebase.user;
+      // Set a name for the user
+      response.updateProfile({
+        displayName: nombres,
+      });
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
-  authCuentaGoogle() {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        alert(`Bienvenido ${result.user.displayName} !! `);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert(`Error autenticarse con Google ${error}`);
-      });
+  async authCuentaGoogle() {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const singInGoogle = await firebase.auth().signInWithPopup(provider);
+      const informationUser = await singInGoogle.user;
+      return informationUser;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  authCuentaFacebook() {
-    const provider = new firebase.auth.FacebookAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        alert(`Bienvenido ${result.user.displayName} !! `);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert(`Error autenticarse con Facebook ${error}`);
-      });
+  async authCuentaFacebook() {
+    try {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      const singInFacebbok = await firebase.auth().signInWithPopup(provider);
+      const informationUser = await singInFacebbok.user;
+      return informationUser;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async singOutOfAccount() {

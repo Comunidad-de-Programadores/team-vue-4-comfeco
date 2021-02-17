@@ -26,7 +26,7 @@
             </li>
           </ul>
         </section>
-        <div class="input-group" >
+        <div class="input-group">
           <input
             type="email"
             name="email"
@@ -34,7 +34,7 @@
             v-model="form.email"
             class="input-group__input"
             placeholder="Correo electr&oacute;nico *"
-          />          
+          />
         </div>
         <div class="input-group">
           <div class="pass-eye__container">
@@ -78,14 +78,14 @@
           <button
             type="button"
             class=" button-socials button-socials__facebook"
-            @click="createAccountWithFacebook"
+            @click="loginAccountWithFacebook"
           >
             <i class="fa fa-facebook"></i>
           </button>
           <button
             type="button"
             class="button-socials button-socials__google "
-            @click="createAccountWithGoogle"
+            @click="loginAccountWithGoogle"
           >
             <i class="fa fa-google"></i>
           </button>
@@ -115,7 +115,7 @@
 import Autenticacion from "@/firebase/auth/autentication.js";
 
 export default {
-  name: "PxLogin",  
+  name: "PxLogin",
   data() {
     return {
       form: {
@@ -125,7 +125,7 @@ export default {
       remember: false,
       isPwd: true,
       errors: [],
-    }
+    };
   },
   methods: {
     async loginWithEamil() {
@@ -135,12 +135,14 @@ export default {
         this.errors.push("El correo electrónico es obligatorio.");
       } else if (!this.validEmail(this.form.email)) {
         this.errors.push("El correo electrónico debe ser válido.");
-      }      
-      
+      }
+
       if (!this.form.password) {
         this.errors.push("El password es obligatorio.");
-      }else if(!this.validPass(this.form.password)){        
-        this.errors.push("La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos.");
+      } else if (!this.validPass(this.form.password)) {
+        this.errors.push(
+          "La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
+        );
       }
 
       if (!this.errors.length) {
@@ -148,13 +150,45 @@ export default {
           this.form.email,
           this.form.password
         );
-        alert(`Bienvenido ${auhEmailPass.displayName}`);
-        if (auhEmailPass.displayName != '') {
+        if (auhEmailPass.emailVerified) {
           this.$router.push("/dashboard");
           alert(`Bienvenido ${auhEmailPass.displayName}`);
-        }else{
-          alert("datos incorrectos vuelva a intentarlo.");
-        }        
+        } else {
+          alert(
+            "Porfavor verifique la cuenta ó revise sus credenciales de acceso"
+          );
+        }
+      }
+    },
+    async loginAccountWithFacebook() {
+      try {
+        const accountFacebookMehotd = await this.authClass.authCuentaFacebook();
+        console.log(accountFacebookMehotd);
+        if (accountFacebookMehotd.emailVerified) {
+          alert(`Bienvenido ${accountFacebookMehotd.displayName}`);
+          this.$router.push("/dashboard");
+        } else {
+          this.authClass.singOutOfAccount();
+          this.$router.push("/");
+          // Verificar cuenta al correo con el que se creo la cuenta de facebook
+          await this.authClass.verifiedUser();
+          alert("Porfavor verificar su cuenta con facebook");
+        }
+      } catch (error) {
+        alert(`Error autenticarse con Facebook ${error}`);
+        console.error(error);
+      }
+    },
+    async loginAccountWithGoogle() {
+      try {
+        const accountGoogleMehotd = await this.authClass.authCuentaGoogle();
+        if (accountGoogleMehotd.emailVerified) {
+          alert(`Bienvenido ${accountGoogleMehotd.displayName}`);
+          this.$router.push("/dashboard");
+        }
+      } catch (error) {
+        alert(`Error autenticarse con Google ${error}`);
+        console.error(error);
       }
     },
     validEmail: function(email) {
@@ -164,14 +198,6 @@ export default {
     validPass: function(pass) {
       var re = /^(?=.*[a-z]){2,}(?=.*[A-Z]){2,}(?=.*\d)(?=.*[$@$!%*?&]){2,}([A-Za-z\d$@$!%*?&]|[^ ]){8,}$/;
       return re.test(pass);
-    },
-    async loginAccountWithFacebook() {
-      this.authClass.authCuentaFacebook();
-      this.$router.push("/");
-    },
-    async loginAccountWithGoogle() {
-      this.authClass.authCuentaGoogle();
-      this.$router.push("/");
     },
   },
   computed: {
