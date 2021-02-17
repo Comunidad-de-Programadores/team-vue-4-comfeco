@@ -75,7 +75,9 @@
       <div class="terms-conditions">
         <p>
           Al resgistrate, estas aceptando los
-          <a class="link" @click="modalTerminos()">T&eacute;rminos y condiciones</a>, y la
+          <a class="link" @click="modalTerminos()"
+            >T&eacute;rminos y condiciones</a
+          >, y la
           <a class="link" @click="modalPoliticas()"
             >Pol&iacute;tica de privacidad y protecci&oacute;n de datos</a
           >
@@ -95,7 +97,12 @@
       </div>
     </div>
   </div>
-  <VModal :title="titlemodal" :txtbody="parrafo" :txtbutton="txtboton" id="modal"></VModal>
+  <VModal
+    :title="titlemodal"
+    :txtbody="parrafo"
+    :txtbutton="txtboton"
+    id="modal"
+  ></VModal>
 </template>
 
 <script>
@@ -134,9 +141,9 @@ export default {
     async createAccountWithGoogle() {
       this.authClass.authCuentaGoogle();
     },
-    modalTerminos(){
+    modalTerminos() {
       this.titlemodal = "Terminos y Condiciones";
-      this.txtboton= "terminos y condiciones";
+      this.txtboton = "terminos y condiciones";
       this.parrafo = `Los presentes términos y condiciones (en lo sucesivo los "Términos y Condiciones de la Aplicación")
                     contienen los acuerdos que rigen (i) la relación entre Time Tracker de México, S.A. de C.V., o sus filiales o
                     subsidiarias (en lo sucesivo la “Sociedad”), con las personas (en lo sucesivo el o los “Usuario(s)”) que
@@ -150,16 +157,24 @@ export default {
                     Condiciones de la Aplicación, los Términos y Condiciones del Sitio se aplicarán de forma supletoria. En caso
                     de interpretación o controversia con entre los Términos y Condiciones de la Aplicación y los Términos y
                     Condiciones del Sitio, prevalecerán los últimos sobre los primeros.`;
-      let abrir = document.getElementById("modal");
-      abrir.style.display = "block";
+      let $modal = document.getElementById("modal");
+      let $contentModal = document.getElementById("js_contenido-modal");
+      $modal.classList.add("visible");
+      $contentModal.classList.remove("fadeOut");
+      $contentModal.classList.add("fadeIn");
+      document.body.classList.add("no-scroll");
     },
-    modalPoliticas(){
+    modalPoliticas() {
       this.titlemodal = "Politicas de Privacidad";
-      this.txtboton= "politicas de privacidad";
+      this.txtboton = "politicas de privacidad";
       this.parrafo = `Su registro se eliminara de los registro de COMFECO en caso de compartir información personal y sensible y la sección 4.8 del Acuerdo de distribución . Esta aplicación no estará disponible para los usuarios hasta que presente una actualización compatible. Problema de política: Google Play requiere que los desarrolladores para proporcionar una política de privacidad válida cuando las solicitudes de aplicaciones o manejo de información sensible del usuario o del dispositivo. Sus solicitudes de permisos de aplicaciones sensibles (por ejemplo, cámara, micrófono, cuentas, contactos o teléfono) o datos de usuario, pero no incluye una política de privacidad válido.`;
-      let abrir = document.getElementById("modal");
-      abrir.style.display = "block";
-    }
+      let $modal = document.getElementById("modal");
+      let $contentModal = document.getElementById("js_contenido-modal");
+      $modal.classList.add("visible");
+      $contentModal.classList.remove("fadeOut");
+      $contentModal.classList.add("fadeIn");
+      document.body.classList.add("no-scroll");
+    },
   },
   computed: {
     authClass() {
@@ -190,6 +205,7 @@ export default {
       outline: none;
       letter-spacing: 0.5px;
       font-weight: bold;
+      cursor: pointer;
       &:hover {
         color: var(--color-white);
       }
