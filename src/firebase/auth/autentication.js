@@ -6,9 +6,9 @@ class Autenticacion {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        alert(`Bienvenido ${result.user.displayName}`);
         if (result.user.emailVerified) {
           alert("Cuenta verificada!");
+          alert(`Bienvenido ${result.user.displayName}`);
         } else {
           alert("Por favor realiza la verificación de la cuenta");
           firebase.auth().signOut();
@@ -21,31 +21,17 @@ class Autenticacion {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        result.user.updateProfile({
-          displayName: nombres,
-        });
-        //Use this code for verification account user
-        const configuracion = {
-          url: "http://192.168.1.12:8080/register",
-        };
-
-        result.user.sendEmailVerification(configuracion).catch((error) => {
-          console.error(error);
-          alert(error.message, 4000);
-        });
-
-        /*firebase.auth().signOut();*/
-        setTimeout(() => {
-          alert(
-            `Bienvenido ${nombres}, debes realizar el proceso de verificación`
-          );
-        }, 4000);
+        if (result.user.emailVerified) {
+          alert("Cuenta verificada");
+        } else {
+          alert("Por favor revisar su correo, para poder verificar la cuenta");
+        }
       })
-      .catch((error) => {
-        console.error(error);
-        setTimeout(() => {
-          alert(error.message);
-        }, 4000);
+      .then(() => {
+        this.verifiedUser();
+      })
+      .catch(({ code, message }) => {
+        alert(`${code} - ${message}`);
       });
   }
 
@@ -55,15 +41,11 @@ class Autenticacion {
       .auth()
       .signInWithPopup(provider)
       .then((result) => {
-        setTimeout(() => {
-          alert(`Bienvenido ${result.user.displayName} !! `);
-        }, 4000);
+        alert(`Bienvenido ${result.user.displayName} !! `);
       })
       .catch((error) => {
         console.error(error);
-        setTimeout(() => {
-          alert(`Error autenticarse con Google ${error}`);
-        }, 4000);
+        alert(`Error autenticarse con Google ${error}`);
       });
   }
 
@@ -87,6 +69,21 @@ class Autenticacion {
 
   singOutOfAccount() {
     firebase.auth().signOut();
+  }
+
+  verifiedUser() {
+    const user = firebase.auth().currentUser;
+    const configuracion = {
+      url: "http://localhost:8080/login",
+    };
+    user
+      .sendEmailVerification(configuracion)
+      .then(() => {
+        console.log("Correo enviado... :)");
+      })
+      .catch((error) => {
+        alert(`${error.message}`);
+      });
   }
 }
 
