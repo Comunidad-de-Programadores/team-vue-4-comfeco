@@ -92,14 +92,13 @@
         </div>
       </div>
       <div class="form-container-options">
-        <a
-          href="http://"
+        <router-link
+          to="/recover-password"
           class="form-container-options-forgot"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           ¿Olvidaste tu contraseña?
-        </a>
+        </router-link>
+
         <button class="button button-secondary">
           <router-link to="/register">
             Reg&iacute;strate
@@ -113,6 +112,7 @@
 
 <script>
 import Autenticacion from "@/firebase/auth/autentication.js";
+import ValidationForms from "@/validations";
 
 export default {
   name: "PxLogin",
@@ -133,13 +133,13 @@ export default {
 
       if (!this.form.email) {
         this.errors.push("El correo electrónico es obligatorio.");
-      } else if (!this.validEmail(this.form.email)) {
+      } else if (!this.validationClass.validEmail(this.form.email)) {
         this.errors.push("El correo electrónico debe ser válido.");
       }
 
       if (!this.form.password) {
         this.errors.push("El password es obligatorio.");
-      } else if (!this.validPass(this.form.password)) {
+      } else if (!this.validationClass.validPass(this.form.password)) {
         this.errors.push(
           "La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
         );
@@ -191,19 +191,15 @@ export default {
         console.error(error);
       }
     },
-    validEmail: function(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
-    validPass: function(pass) {
-      var re = /^(?=.*[a-z]){2,}(?=.*[A-Z]){2,}(?=.*\d)(?=.*[$@$!%*?&]){2,}([A-Za-z\d$@$!%*?&]|[^ ]){8,}$/;
-      return re.test(pass);
-    },
   },
   computed: {
     authClass() {
       const auth = new Autenticacion();
       return auth;
+    },
+    validationClass() {
+      const validation = new ValidationForms();
+      return validation;
     },
   },
 };
@@ -211,14 +207,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px 1rem;
-  width: 100%;
-  min-height: 100vh;
-}
 .label-group__keep-login {
   display: flex;
   align-items: center;
@@ -242,5 +230,16 @@ export default {
 .pass-eye__container span {
   position: absolute;
   right: 20px;
+}
+.form-container-options-forgot {
+  color: var(--color-primary);
+  outline: none;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: var(--color-white);
+  }
 }
 </style>

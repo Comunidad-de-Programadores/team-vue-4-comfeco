@@ -27,6 +27,8 @@ class Autenticacion {
       });
       return response;
     } catch (error) {
+      const message = error.message;
+      alert(message);
       console.error(error);
     }
   }
@@ -38,7 +40,9 @@ class Autenticacion {
       const informationUser = await singInGoogle.user;
       return informationUser;
     } catch (error) {
-      console.log(error);
+      const message = error.message;
+      alert(message);
+      console.error(error);
     }
   }
 
@@ -49,7 +53,9 @@ class Autenticacion {
       const informationUser = await singInFacebbok.user;
       return informationUser;
     } catch (error) {
-      console.log(error);
+      const message = error.message;
+      alert(message);
+      console.error(error);
     }
   }
 
@@ -69,8 +75,14 @@ class Autenticacion {
         console.log("Correo enviado... :)");
       })
       .catch((error) => {
-        alert(`${error.message}`);
+        const message = error.message;
+        alert(message);
+        console.error(error);
       });
+  }
+
+  async recuperarContraseña(email) {
+    return await firebase.auth().sendPasswordResetEmail(email);
   }
 }
 

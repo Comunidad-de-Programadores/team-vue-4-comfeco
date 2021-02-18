@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <section class="header__logo">
-      <router-link to="/home">
+      <router-link to="/">
         <img
           src="@/assets/images/Logo-comfeco-opción-1.png"
           alt="Logo comfeco opcion 1"

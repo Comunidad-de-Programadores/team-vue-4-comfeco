@@ -31,12 +31,23 @@ h2 {
 /* --- Backgrounds --- */
 
 .bg-primary {
-  background: rgb(204, 166, 242);
   background: linear-gradient(
     0deg,
     rgba(204, 166, 242, 1) 0%,
     rgba(57, 15, 100, 1) 100%
   );
+}
+
+/* --- Contents form --- */
+.login,
+.register,
+.recover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 1rem;
+  width: 100%;
+  min-height: 100vh;
 }
 
 /* --- Forms --- */
