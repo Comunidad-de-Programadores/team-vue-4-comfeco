@@ -9,6 +9,11 @@
         novalidate="true"
       >
         <h2 class="title">Recuperar contraseña</h2>
+        <p class="recover__text">
+          Te enviaremos un correo electonico con un enlace privado para que
+          reasignes tu contraseña. Este enlace será valido por un tiempo
+          limitado.
+        </p>
         <div class="input-group">
           <input
             type="email"
@@ -67,5 +72,12 @@ export default {
 <style scoped lang="scss">
 .recover {
   align-items: flex-start;
+  &__text {
+    color: var(--color-white);
+    margin: 6px 0 10px 0;
+    text-align: justify;
+    line-height: 18px;
+    letter-spacing: 0.3px;
+  }
 }
 </style>
