@@ -141,9 +141,14 @@
 </template>
 
 <script>
-import VModal from "@/components/PxModal.vue";
+// Import toastr
+import toastr from "toastr";
+// Import class autentication
 import Autenticacion from "@/firebase/auth/autentication.js";
+// Import class validation
 import ValidationForms from "@/validations";
+// Import component modal
+import VModal from "@/components/PxModal.vue";
 
 export default {
   name: "PxRegister",
@@ -203,12 +208,12 @@ export default {
           );
 
           if (informationUser.emailVerified) {
-            alert("Cuenta verificada");
             this.$router.push("/dashboard");
+            toastr.info("Cuenta verificada");
           } else {
             this.$router.push("/");
             this.authClass.singOutOfAccount();
-            alert(
+            toastr.info(
               "Por favor revisar su correo, para poder verificar la cuenta"
             );
           }
@@ -223,6 +228,7 @@ export default {
         }
       } catch (error) {
         console.log(error);
+        toastr.error(`Error en el registro - ${error.code}`);
       }
     },
     async createAccountWithFacebook() {
@@ -230,17 +236,17 @@ export default {
         const accountFacebookMehotd = await this.authClass.authCuentaFacebook();
         console.log(accountFacebookMehotd);
         if (accountFacebookMehotd.emailVerified) {
-          alert(`Bienvenido ${accountFacebookMehotd.displayName}`);
+          toastr.success(`Bienvenido ${accountFacebookMehotd.displayName}`);
           this.$router.push("/dashboard");
         } else {
           this.authClass.singOutOfAccount();
           this.$router.push("/");
           // Verificar cuenta al correo con el que se creo la cuenta de facebook
           await this.authClass.verifiedUser();
-          alert("Porfavor verificar su cuenta con facebook");
+          toastr.info("Porfavor verificar su cuenta con facebook");
         }
       } catch (error) {
-        alert(`Error autenticarse con Facebook ${error}`);
+        toastr.error(`Error autenticarse con Facebook - ${error.code}`);
         console.error(error);
       }
     },
@@ -248,11 +254,11 @@ export default {
       try {
         const accountGoogleMehotd = await this.authClass.authCuentaGoogle();
         if (accountGoogleMehotd.emailVerified) {
-          alert(`Bienvenido ${accountGoogleMehotd.displayName}`);
+          toastr.success(`Bienvenido ${accountGoogleMehotd.displayName}`);
           this.$router.push("/dashboard");
         }
       } catch (error) {
-        alert(`Error autenticarse con Google ${error}`);
+        toastr.error(`Error autenticarse con Google ${error}`);
         console.error(error);
       }
     },

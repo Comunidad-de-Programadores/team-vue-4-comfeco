@@ -111,7 +111,11 @@
 </template>
 
 <script>
+// Import toastr
+import toastr from "toastr";
+// Import class autentication
 import Autenticacion from "@/firebase/auth/autentication.js";
+// Import class validation
 import ValidationForms from "@/validations";
 
 export default {
@@ -152,9 +156,9 @@ export default {
         );
         if (auhEmailPass.emailVerified) {
           this.$router.push("/dashboard");
-          alert(`Bienvenido ${auhEmailPass.displayName}`);
+          toastr.success(`Bienvenido ${auhEmailPass.displayName}`);
         } else {
-          alert(
+          toastr.info(
             "Porfavor verifique la cuenta ó revise sus credenciales de acceso"
           );
         }
@@ -172,10 +176,10 @@ export default {
           this.$router.push("/");
           // Verificar cuenta al correo con el que se creo la cuenta de facebook
           await this.authClass.verifiedUser();
-          alert("Porfavor verificar su cuenta con facebook");
+          toastr.info("Porfavor verificar su cuenta con facebook");
         }
       } catch (error) {
-        alert(`Error autenticarse con Facebook ${error}`);
+        toastr.error(`Error autenticarse con Facebook ${error}`);
         console.error(error);
       }
     },
@@ -183,11 +187,11 @@ export default {
       try {
         const accountGoogleMehotd = await this.authClass.authCuentaGoogle();
         if (accountGoogleMehotd.emailVerified) {
-          alert(`Bienvenido ${accountGoogleMehotd.displayName}`);
+          toastr.info(`Bienvenido ${accountGoogleMehotd.displayName}`);
           this.$router.push("/dashboard");
         }
       } catch (error) {
-        alert(`Error autenticarse con Google ${error}`);
+        toastr.error(`Error autenticarse con Google ${error}`);
         console.error(error);
       }
     },
