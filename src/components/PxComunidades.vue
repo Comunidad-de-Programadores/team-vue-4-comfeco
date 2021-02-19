@@ -1,7 +1,7 @@
 <template>
     <div class="flex comunidad">
-        <div class="comunidad__img">
-            <img :src="imagen" alt="imagen de la comunidad">
+        <div >
+            <img class="comunidad__img" :src="imagen" alt="imagen de la comunidad">
         </div>
         <div class="comunidad__name">
             <h4 v-text="titulo"></h4>
@@ -24,13 +24,14 @@ export default {
 <style lang="scss">
     .flex {
         display: flex;
-
+        margin: auto;
     }
     .comunidad{
         border-bottom: 1px solid hsl(280, 5, 30);
-        margin: auto;
-        padding: 25px;
+        padding: 15px;
         &__img{
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             margin-right: 2rem;
         }
@@ -43,7 +44,7 @@ export default {
             text-decoration: none;
             
             &:hover{
-                color: hsl(280, 70, 50);
+                color: hsl(280, 50, 30);
                 cursor: pointer;
             }
         }

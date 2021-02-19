@@ -8,7 +8,7 @@
         <h5>Comunidades</h5>
         <a href="#">Ver más</a>
     </div>
-    <VComunidad :imagen="logo" :titulo="titulo" :url="url"></VComunidad>
+    <VComunidad v-for="comunidad in comunidades" :key="comunidad" :imagen="comunidad.logo" :titulo="comunidad.titulo" :url="comunidad.url"></VComunidad>
   </div>
 </template>
 
@@ -19,9 +19,24 @@ export default {
   name: "private",
   data(){
     return{
-      logo:'https://picsum.photos/50/50',
-      titulo: 'Comunidad 1',
-      url: 'https:www.google.com'
+      comunidades:[
+        {
+          logo:'https://picsum.photos/50/50',
+          titulo: 'Comunidad 1 de progrmadores',
+          url: 'https:www.google.com'
+        },
+        {
+          logo:'https://picsum.photos/50/50',
+          titulo: 'Comunidad 2 de progrmadores',
+          url: 'https:www.google.com'
+        },
+        {
+          logo:'https://picsum.photos/50/50',
+          titulo: 'Comunidad 3 de progrmadores',
+          url: 'https:www.google.com'
+        },
+        
+      ]
     }
   },
   components:{
@@ -45,17 +60,21 @@ export default {
 <style lang="scss">
   .aside{
     width: 20%;
-    height: 40vh;
+    height: 35vh;
     margin: 1%;
     padding: 1%;
     background-color: hsl(0, 1, 70);
     color: white;
     overflow: auto;
     &__header{
+      margin-bottom: 1em;
       display: flex;
       width: 100%;
       flex-wrap: wrap;
       justify-content: space-between;
+      a{
+        text-decoration: none;
+      }
     }
   }
 </style>
