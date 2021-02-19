@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PxDashboard from "@/components/PxDashboard";
+import PxDashboard from "@/components/Home/PxDashboard";
 export default {
   name: "Dashboard",
   components: {

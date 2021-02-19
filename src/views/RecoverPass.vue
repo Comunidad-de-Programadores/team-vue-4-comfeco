@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PxRecoverPassForm from "@/components/PxRecoverPassForm";
+import PxRecoverPassForm from "@/components/Forms/PxRecoverPassForm";
 export default {
   name: "RecoverPass",
   components: {

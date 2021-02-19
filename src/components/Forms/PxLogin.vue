@@ -172,7 +172,7 @@ export default {
           this.authClass.singOutOfAccount();
           this.$router.push("/");
           // Verificar cuenta al correo con el que se creo la cuenta de facebook
-          await this.authClass.verifiedUser();
+          this.verifiedUserEmail();
           toastr.info("Porfavor verificar su cuenta con facebook");
         }
       } catch (error) {
@@ -191,6 +191,17 @@ export default {
         toastr.error(`Error autenticarse con Google ${error}`);
         console.error(error);
       }
+    },
+    async verifiedUserEmail() {
+      await this.authClass
+        .verifiedUser()
+        .then(() => {
+          toastr.success("Correo enviado satisfactoriamente");
+        })
+        .catch(({ message }) => {
+          console.log(message);
+          toastr.error("El correo no se ha enviado ☹");
+        });
     },
   },
   computed: {

@@ -41,8 +41,7 @@ class Autenticacion {
       return informationUser;
     } catch (error) {
       const message = error.message;
-      alert(message);
-      console.error(error);
+      console.error(message);
     }
   }
 
@@ -54,31 +53,21 @@ class Autenticacion {
       return informationUser;
     } catch (error) {
       const message = error.message;
-      alert(message);
-      console.error(error);
+      console.error(message);
     }
   }
 
   async singOutOfAccount() {
-    const logOutInformation = await firebase.auth().signOut();
-    return logOutInformation;
+    return await firebase.auth().signOut();
   }
 
-  verifiedUser() {
+  async verifiedUser() {
     const user = firebase.auth().currentUser;
     const configuracion = {
       url: "http://localhost:8080/",
     };
-    user
-      .sendEmailVerification(configuracion)
-      .then(() => {
-        console.log("Correo enviado... :)");
-      })
-      .catch((error) => {
-        const message = error.message;
-        alert(message);
-        console.error(error);
-      });
+    const response = await user.sendEmailVerification(configuracion);
+    return response;
   }
 
   async recuperarContraseña(email) {
