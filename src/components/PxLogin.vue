@@ -92,10 +92,7 @@
         </div>
       </div>
       <div class="form-container-options">
-        <router-link
-          to="/recover-password"
-          class="form-container-options-forgot"
-        >
+        <router-link to="/recover-password" class="link">
           ¿Olvidaste tu contraseña?
         </router-link>
 
@@ -155,7 +152,7 @@ export default {
           this.form.password
         );
         if (auhEmailPass.emailVerified) {
-          this.$router.push("/dashboard");
+          this.$router.push("/home");
           toastr.success(`Bienvenido ${auhEmailPass.displayName}`);
         } else {
           toastr.info(
@@ -170,7 +167,7 @@ export default {
         console.log(accountFacebookMehotd);
         if (accountFacebookMehotd.emailVerified) {
           alert(`Bienvenido ${accountFacebookMehotd.displayName}`);
-          this.$router.push("/dashboard");
+          this.$router.push("/home");
         } else {
           this.authClass.singOutOfAccount();
           this.$router.push("/");
@@ -188,7 +185,7 @@ export default {
         const accountGoogleMehotd = await this.authClass.authCuentaGoogle();
         if (accountGoogleMehotd.emailVerified) {
           toastr.info(`Bienvenido ${accountGoogleMehotd.displayName}`);
-          this.$router.push("/dashboard");
+          this.$router.push("/home");
         }
       } catch (error) {
         toastr.error(`Error autenticarse con Google ${error}`);
@@ -234,16 +231,5 @@ export default {
 .pass-eye__container span {
   position: absolute;
   right: 20px;
-}
-.form-container-options-forgot {
-  color: var(--color-primary);
-  outline: none;
-  letter-spacing: 0.5px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-  &:hover {
-    color: var(--color-white);
-  }
 }
 </style>

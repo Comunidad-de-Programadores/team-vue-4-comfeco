@@ -3,6 +3,8 @@
 @import "./base/_variables.scss";
 // Import toastr
 @import "~toastr/build/toastr.css";
+// Import sweetalert2
+@import "~sweetalert2/src/sweetalert2";
 @import "./base/_animation.scss";
 @import "./base/_layouts.scss";
 @import "./base/utils";

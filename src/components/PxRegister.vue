@@ -318,16 +318,6 @@ export default {
     width: 100%;
     line-height: 20px;
     margin: 10px 0;
-    .link {
-      color: var(--color-primary);
-      outline: none;
-      letter-spacing: 0.5px;
-      font-weight: bold;
-      cursor: pointer;
-      &:hover {
-        color: var(--color-white);
-      }
-    }
   }
   .register-container > * {
     margin-bottom: 10px;
