@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import PxLogin from "@/components/PxLogin";
+import PxLogin from "@/components/Forms/PxLogin";
 
 export default {
   name: "Login",

@@ -6,7 +6,7 @@
 
 <script>
 // @ is an alias to /src
-import PxRegister from "@/components/PxRegister";
+import PxRegister from "@/components/Forms/PxRegister";
 
 export default {
   name: "Register",

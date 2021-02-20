@@ -28,6 +28,20 @@ h2 {
   width: 100%;
 }
 
+/* --- links --- */
+.link {
+  color: var(--color-primary);
+  outline: none;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    color: var(--color-white);
+    text-decoration: underline;
+  }
+}
+
 /* --- Backgrounds --- */
 
 .bg-primary {
@@ -148,15 +162,10 @@ h2 {
       font-family: var(--fuente-bold);
       color: var(--color-black);
     }
-    &-forgot {
+    .link {
       display: inline-block;
       text-decoration: none;
       margin: 0 0 8px 0;
-      color: var(--color-black);
-      &:hover {
-        text-decoration: underline;
-        color: #200bdd;
-      }
     }
     .button.button-secondary {
       a {

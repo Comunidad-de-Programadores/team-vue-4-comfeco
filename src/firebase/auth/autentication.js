@@ -7,6 +7,12 @@ class Autenticacion {
         .auth()
         .signInWithEmailAndPassword(email, password);
       const response = await loginEmailPass.user;
+      const nameUser = await response.displayName;
+      const emailUser = await response.email;
+      //Add name of user in DOM -- start
+      document.getElementById("js_user-name").textContent = nameUser;
+      document.getElementById("js_user-email").textContent = emailUser;
+      //Add name of user in DOM -- end
       return response;
     } catch (error) {
       const message = error.message;
@@ -37,12 +43,19 @@ class Autenticacion {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
       const singInGoogle = await firebase.auth().signInWithPopup(provider);
-      const informationUser = await singInGoogle.user;
+      const informationUser = singInGoogle.user;
+      const nameUser = informationUser.displayName;
+      const emailUser = informationUser.email;
+      const photoUser = informationUser.photoURL;
+      //Add name of user in DOM -- start
+      document.getElementById("js_user-name").textContent = nameUser;
+      document.getElementById("js_user-email").textContent = emailUser;
+      document.getElementById("js_avatar-user").setAttribute("src", photoUser);
+      //Add name of user in DOM -- end
       return informationUser;
     } catch (error) {
       const message = error.message;
-      alert(message);
-      console.error(error);
+      console.error(message);
     }
   }
 
@@ -50,35 +63,33 @@ class Autenticacion {
     try {
       const provider = new firebase.auth.FacebookAuthProvider();
       const singInFacebbok = await firebase.auth().signInWithPopup(provider);
-      const informationUser = await singInFacebbok.user;
+      const informationUser = singInFacebbok.user;
+      const nameUser = informationUser.displayName;
+      const emailUser = informationUser.email;
+      const photoUser = informationUser.photoURL;
+      //Add name of user in DOM -- start
+      document.getElementById("js_user-name").textContent = nameUser;
+      document.getElementById("js_user-email").textContent = emailUser;
+      document.getElementById("js_avatar-user").setAttribute("src", photoUser);
+      //Add name of user in DOM -- end
       return informationUser;
     } catch (error) {
       const message = error.message;
-      alert(message);
-      console.error(error);
+      console.error(message);
     }
   }
 
   async singOutOfAccount() {
-    const logOutInformation = await firebase.auth().signOut();
-    return logOutInformation;
+    return await firebase.auth().signOut();
   }
 
-  verifiedUser() {
+  async verifiedUser() {
     const user = firebase.auth().currentUser;
     const configuracion = {
       url: "http://localhost:8080/",
     };
-    user
-      .sendEmailVerification(configuracion)
-      .then(() => {
-        console.log("Correo enviado... :)");
-      })
-      .catch((error) => {
-        const message = error.message;
-        alert(message);
-        console.error(error);
-      });
+    const response = await user.sendEmailVerification(configuracion);
+    return response;
   }
 
   async recuperarContraseña(email) {

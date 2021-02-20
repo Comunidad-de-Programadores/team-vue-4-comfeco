@@ -1,13 +1,16 @@
 <template>
-  <section id="home">
-    <h1>Home page</h1>    
+  <section class="view-dashboard">
+    <PxDashboard />
   </section>
 </template>
 
 <script>
-
+import PxDashboard from "@/components/Home/PxDashboard";
 export default {
-    name: "Home",   
+  name: "Dashboard",
+  components: {
+    PxDashboard,
+  },
 };
 </script>
 

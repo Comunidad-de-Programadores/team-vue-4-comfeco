@@ -24,15 +24,23 @@
             placeholder="Correo electr&oacute;nico *"
           />
         </div>
-        <button type="submit" class="button button-primary">
-          Recuperar contraseña
-        </button>
+        <section class="recover__actions">
+          <button type="submit" class="button button-primary">
+            Recuperar contraseña
+          </button>
+          <router-link to="/" class="link">
+            Iniciar sesión
+          </router-link>
+        </section>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+// Import toastr
+import toastr from "toastr";
+// Import class autentication
 import Autenticacion from "@/firebase/auth/autentication.js";
 
 export default {
@@ -49,13 +57,24 @@ export default {
       await this.authClass
         .recuperarContraseña(this.form.email)
         .then(() => {
-          this.$router.push("/");
+          this.$swal({
+            title: "Correo enviado satisfactoriamente! 😄",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          setTimeout(() => {
+            this.$router.push("/");
+          }, 1500);
         })
         .catch((error) => {
           const message = error.message;
-          alert(message);
-          console.error(error);
-          alert("Posiblemente el correo que ingreso no es correcto :(");
+          console.error(message);
+          this.$swal({
+            title: "Error ☹",
+            text: "Posiblemente el correo que ingreso  es incorrecto",
+            icon: "error",
+            confirmButtonText: "OK",
+          });
           this.$router.push("/recover-password");
         });
     },
@@ -78,6 +97,25 @@ export default {
     text-align: justify;
     line-height: 18px;
     letter-spacing: 0.3px;
+  }
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    .button.button-primary {
+      max-width: 230px;
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .recover {
+    &__actions {
+      flex-direction: row;
+    }
   }
 }
 </style>

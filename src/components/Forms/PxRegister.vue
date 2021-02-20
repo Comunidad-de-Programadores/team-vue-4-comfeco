@@ -148,7 +148,7 @@ import Autenticacion from "@/firebase/auth/autentication.js";
 // Import class validation
 import ValidationForms from "@/validations";
 // Import component modal
-import VModal from "@/components/PxModal.vue";
+import VModal from "@/components/Modal/PxModal.vue";
 
 export default {
   name: "PxRegister",
@@ -207,6 +207,9 @@ export default {
             this.form.nick
           );
 
+          // Verificar cuenta
+          this.verifiedUserEmail();
+
           if (informationUser.emailVerified) {
             this.$router.push("/dashboard");
             toastr.info("Cuenta verificada");
@@ -217,9 +220,6 @@ export default {
               "Por favor revisar su correo, para poder verificar la cuenta"
             );
           }
-
-          // Verificar cuenta
-          await this.authClass.verifiedUser();
 
           this.form.email = "";
           this.form.password = "";
@@ -239,10 +239,10 @@ export default {
           toastr.success(`Bienvenido ${accountFacebookMehotd.displayName}`);
           this.$router.push("/dashboard");
         } else {
-          this.authClass.singOutOfAccount();
           this.$router.push("/");
           // Verificar cuenta al correo con el que se creo la cuenta de facebook
-          await this.authClass.verifiedUser();
+          this.verifiedUserEmail();
+          this.authClass.singOutOfAccount();
           toastr.info("Porfavor verificar su cuenta con facebook");
         }
       } catch (error) {
@@ -256,11 +256,25 @@ export default {
         if (accountGoogleMehotd.emailVerified) {
           toastr.success(`Bienvenido ${accountGoogleMehotd.displayName}`);
           this.$router.push("/dashboard");
+        } else {
+          this.authClass.singOutOfAccount();
+          toastr.error("Algo salio mal!");
         }
       } catch (error) {
         toastr.error(`Error autenticarse con Google ${error}`);
         console.error(error);
       }
+    },
+    async verifiedUserEmail() {
+      await this.authClass
+        .verifiedUser()
+        .then(() => {
+          toastr.success("Correo enviado satisfactoriamente");
+        })
+        .catch(({ message }) => {
+          console.log(message);
+          toastr.error("El correo no se ha enviado ☹");
+        });
     },
     modalTerminos() {
       this.titlemodal = "Terminos y Condiciones";
@@ -318,16 +332,6 @@ export default {
     width: 100%;
     line-height: 20px;
     margin: 10px 0;
-    .link {
-      color: var(--color-primary);
-      outline: none;
-      letter-spacing: 0.5px;
-      font-weight: bold;
-      cursor: pointer;
-      &:hover {
-        color: var(--color-white);
-      }
-    }
   }
   .register-container > * {
     margin-bottom: 10px;
