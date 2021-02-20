@@ -1,6 +1,6 @@
 <template>
   <section class="contador">
-    <h4>{{title}}</h4>
+    <h4 class="contador__title">{{title}}</h4>
     <div class="contador__container">
         <div class="contador__dias">
             <div class="contador__dias-dia">{{dias}}</div>
