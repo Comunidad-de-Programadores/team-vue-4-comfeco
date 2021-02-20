@@ -1,8 +1,4 @@
 <template>
-  <div class="private">
-    <h1>This is a private page</h1>
-    <button @click="logOut">LogOut</button>
-  </div>
   <div class="aside">
     <div class="aside__header">
       <h5>Comunidades</h5>
@@ -19,7 +15,6 @@
 </template>
 
 <script>
-import Autenticacion from "@/firebase/auth/autentication.js";
 import VComunidad from "@/components/Home/PxComunidades";
 export default {
   name: "private",
@@ -46,19 +41,6 @@ export default {
   },
   components: {
     VComunidad,
-  },
-  methods: {
-    logOut() {
-      this.authClass.singOutOfAccount().then(() => {
-        this.$router.push("/");
-      });
-    },
-  },
-  computed: {
-    authClass() {
-      const auth = new Autenticacion();
-      return auth;
-    },
   },
 };
 </script>

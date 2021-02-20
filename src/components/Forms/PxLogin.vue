@@ -166,7 +166,7 @@ export default {
         const accountFacebookMehotd = await this.authClass.authCuentaFacebook();
         console.log(accountFacebookMehotd);
         if (accountFacebookMehotd.emailVerified) {
-          alert(`Bienvenido ${accountFacebookMehotd.displayName}`);
+          toastr.success(`Bienvenido ${accountFacebookMehotd.displayName}`);
           this.$router.push("/home");
         } else {
           this.authClass.singOutOfAccount();

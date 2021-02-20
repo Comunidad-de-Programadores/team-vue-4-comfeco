@@ -11,10 +11,14 @@ import PxHeader from "@/components/PxHeader";
 import PxFooter from "@/components/PxFooter";
 
 export default {
+  data() {
+    return {};
+  },
   components: {
     PxHeader,
     PxFooter,
   },
+  computed: {},
 };
 </script>
 <style lang="scss">
