@@ -57,7 +57,7 @@
       padding: 0 16px;
       transition: var(--transition);
       i {
-        color: #3ec2ff;
+        color: var(--color-icons);
         margin: 0 4px 0 0;
         font-size: 19px;
       }
@@ -82,7 +82,7 @@
         justify-content: flex-start;
         font-size: 15px;
         i {
-          color: #3ec2ff;
+          color: var(--color-icons);
           margin: 0 4px 0 0;
           font-size: 19px;
         }
@@ -94,6 +94,9 @@
   }
   /*User styles*/
   .user {
+    &__open--logOut {
+      display: none;
+    }
     &__information {
       padding: 20px 1rem;
       display: flex;
@@ -121,7 +124,7 @@
       }
     }
     &__email {
-      color: #8cdbff;
+      color: var(--color-icons);
       span {
         font-size: 14px;
       }
@@ -144,7 +147,7 @@
         padding: 0 16px;
       }
       i {
-        color: #3ec2ff;
+        color: var(--color-icons);
         margin: 0 4px 0 0;
         font-size: 19px;
       }
@@ -162,4 +165,141 @@
       }
     }
   }
+}
+
+@media screen and(min-width: 992px) {
+  .header {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    .burgerButton {
+      display: none;
+    }
+    .menu {
+      position: relative;
+      top: unset;
+      left: unset;
+      width: 100%;
+      height: auto;
+      opacity: 1;
+      pointer-events: auto;
+      box-shadow: none;
+      display: flex;
+      flex-direction: row-reverse;
+      transform: unset;
+      padding: 0 16px;
+      &-list {
+        display: flex;
+        align-items: center;
+      }
+      &-link {
+        position: relative;
+        overflow: hidden;
+        &::after {
+          content: "";
+          width: 100%;
+          height: 3px;
+          background: var(--color-icons);
+          position: absolute;
+          bottom: 0;
+          left: -1px;
+          transform: translateX(-100%);
+          transition: var(--transition);
+        }
+        &:hover {
+          background: unset;
+        }
+      }
+      &-item {
+        margin: 0;
+        &:hover {
+          .menu-link::after {
+            transform: translateX(0%);
+            left: initial;
+          }
+        }
+      }
+      .user__options {
+        transform: rotate(-90deg);
+        opacity: 0;
+        pointer-events: none;
+        position: absolute;
+        right: 19px;
+        bottom: -50px;
+        width: auto;
+        background: var(--color-white);
+        border: 1px solid #ddd;
+        z-index: 10;
+        &:hover {
+          background: unset;
+        }
+        &::before {
+          z-index: 1;
+          content: "";
+          width: 12px;
+          height: 12px;
+          background: var(--color-white);
+          border-right: 1px solid #ddd;
+          border-top: 1px solid #ddd;
+          transform: rotate(-45deg);
+          position: absolute;
+          top: -7px;
+          right: 12px;
+        }
+        &.active {
+          transform: rotate(0deg);
+          opacity: 1;
+          pointer-events: auto;
+        }
+      }
+      .user {
+        display: flex;
+        align-items: center;
+        &__open--logOut {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: auto;
+          height: 36px;
+          cursor: pointer;
+          margin: 0 0 0 4px;
+          i {
+            font-size: 17px;
+          }
+        }
+        &__information {
+          border: 0;
+          margin: 0;
+          padding: 0 16px;
+        }
+        &__notification {
+          margin: 0;
+          display: inline-flex;
+          position: absolute;
+          right: 0;
+          top: 0;
+          &:hover {
+            background: unset;
+          }
+          &--icon {
+            width: auto;
+            height: auto;
+            position: relative;
+            padding: 0;
+          }
+          &--count {
+            right: -5px;
+            top: -8px;
+            padding: 4px;
+          }
+          &--text-mobile {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and(min-width: 1200px) {
 }

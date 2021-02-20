@@ -30,6 +30,13 @@
                 <span id="js_user-email"></span>
               </div>
             </div>
+            <div
+              class="user__open--logOut"
+              id="js_open-logOut"
+              @click="openOptionUser()"
+            >
+              <i class="fas fa-chevron-down"></i>
+            </div>
           </section>
           <section class="user__notification">
             <div class="user__notification--icon">
@@ -67,7 +74,7 @@
             </a>
           </li>
         </ul>
-        <section class="user__options">
+        <section class="user__options" id="js_user-options">
           <button @click="logOut()">
             <i class="fas fa-sign-out-alt"></i>
             Cerrar sesion
@@ -93,13 +100,21 @@ export default {
     async logOut() {
       this.authClass.singOutOfAccount().then(() => {
         const $menu = document.getElementById("js_menu");
+        const $optionUser = document.getElementById("js_user-options");
+        // Reset class active for this components
         $menu.classList.remove("active");
+        $optionUser.classList.toggle("active");
+
         this.$router.push("/");
       });
     },
     toggleMenu() {
       const $menu = document.getElementById("js_menu");
       $menu.classList.toggle("active");
+    },
+    openOptionUser() {
+      const $optionUser = document.getElementById("js_user-options");
+      $optionUser.classList.toggle("active");
     },
   },
   computed: {
