@@ -2,7 +2,9 @@
   <div class="aside">
     <div class="aside__header">
       <h5>Comunidades</h5>
-      <a href="#">Ver más</a>
+      <router-link to="/comunidad">
+        Ver más
+      </router-link>
     </div>
     <VComunidad
       v-for="comunidad in comunidades"
@@ -23,18 +25,18 @@ export default {
       comunidades: [
         {
           logo: "https://picsum.photos/50/50",
-          titulo: "Comunidad 1 de progrmadores",
-          url: "https:www.google.com",
+          titulo: "VueJS en Español",
+          url: "https://www.facebook.com/groups/vue.es",
         },
         {
           logo: "https://picsum.photos/50/50",
-          titulo: "Comunidad 2 de progrmadores",
-          url: "https:www.google.com",
+          titulo: "angular español",
+          url: "https://www.facebook.com/groups/dev.angular",
         },
         {
           logo: "https://picsum.photos/50/50",
-          titulo: "Comunidad 3 de progrmadores",
-          url: "https:www.google.com",
+          titulo: "React Js Español Latino",
+          url: "https://www.facebook.com/groups/reactjslatino",
         },
       ],
     };

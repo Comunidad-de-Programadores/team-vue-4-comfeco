@@ -34,6 +34,13 @@ const routes = [
       import(/* webpackChunkName: "Error" */ "../views/404NotFount.vue"),
     meta: { isPublc: true },
   },
+  {
+    path: "/comunidad",
+    name: "Comunidad",
+    component: () =>
+      import(/* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
+    meta: { isPublc: true },
+  },
 ];
 
 const router = createRouter({

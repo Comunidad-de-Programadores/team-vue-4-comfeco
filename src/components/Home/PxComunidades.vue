@@ -1,13 +1,13 @@
 <template>
   <div class="flex comunidad">
     <div>
-      <img class="comunidad__img" :src="imagen" alt="imagen de la comunidad" />
+      <img class="comunidad__img" :src="imagen" :alt="titulo" />
     </div>
     <div class="comunidad__name">
       <h4 v-text="titulo"></h4>
     </div>
     <div>
-      <a class="comunidad__btn" :href="url">Unirme</a>
+      <a class="comunidad__btn" href="#" @click="openUrl(url)">Unirme</a>
     </div>
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
     titulo: String,
     url: String,
   },
+  methods:{
+    openUrl(url){
+      window.open(url);
+    }
+  }
 };
 </script>
 <style lang="scss">
