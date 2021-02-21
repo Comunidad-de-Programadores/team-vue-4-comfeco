@@ -21,6 +21,32 @@ class Autenticacion {
     }
   }
 
+  async autRemember(email, password) {    
+    const loginRemember = await firebase
+      .auth()
+      .setPersistence(firebase.auth.Auth.Persistence.SESSION)
+      .then(() => {
+        // Existing and future Auth states are now persisted in the current
+        // session only. Closing the window would clear any existing state even
+        // if a user forgets to sign out.
+        // ...
+        // New sign-in will be persisted with session persistence.
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.error(error);
+      });
+    return loginRemember;
+  }
+
+  async autUser() {    
+    var user = await firebase.auth().currentUser;
+    return user;  
+  }
+
   async crearCuentaEmailPass(email, password, nombres) {
     try {
       const crearCuentaFirebase = await firebase

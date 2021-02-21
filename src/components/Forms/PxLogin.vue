@@ -152,6 +152,12 @@ export default {
           this.form.password
         );
         if (auhEmailPass.emailVerified) {
+          if (!remember) {
+            const authRemember = await this.authClass.autRemember(
+              this.form.email,
+              this.form.password
+            );
+          }
           this.$router.push("/home");
           toastr.success(`Bienvenido ${auhEmailPass.displayName}`);
         } else {
@@ -203,6 +209,17 @@ export default {
           toastr.error("El correo no se ha enviado ☹");
         });
     },
+    async verifiedUser() {
+      await this.authClass.autUser().then((user) => {
+        if (user != null) {
+          this.$router.push("/home");
+          toastr.success(`Bienvenido ${user.displayName}`);
+        }        
+      })
+      .catch(({ message }) => {
+        console.log(message);
+      });
+    },
   },
   computed: {
     authClass() {
@@ -214,6 +231,9 @@ export default {
       return validation;
     },
   },
+  mounted(){
+    this.verifiedUser();    
+  }
 };
 </script>
 
