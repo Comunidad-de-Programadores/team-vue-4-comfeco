@@ -1,5 +1,11 @@
 <template>
   <div class="flex comunidad">
+    <div class="aside__header">
+      <h5>Comunidades</h5>
+      <router-link to="/comunidad">
+        Ver más
+      </router-link>
+    </div>
     <div>
       <img class="comunidad__img" :src="imagen" :alt="titulo" />
     </div>
@@ -19,14 +25,33 @@ export default {
     titulo: String,
     url: String,
   },
-  methods:{
-    openUrl(url){
+  methods: {
+    openUrl(url) {
       window.open(url);
-    }
-  }
+    },
+  },
 };
 </script>
-<style lang="scss">
+<style scoped lang="scss">
+.aside {
+  width: 20%;
+  height: 35vh;
+  margin: 1%;
+  padding: 1%;
+  background-color: hsl(0, 1, 70);
+  color: white;
+  overflow: auto;
+  &__header {
+    margin-bottom: 1em;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    a {
+      text-decoration: none;
+    }
+  }
+}
 .flex {
   display: flex;
   margin: auto;

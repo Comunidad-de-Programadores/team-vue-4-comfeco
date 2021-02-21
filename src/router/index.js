@@ -39,7 +39,6 @@ const routes = [
     name: "Comunidad",
     component: () =>
       import(/* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
-    meta: { isPublc: true },
   },
 ];
 
