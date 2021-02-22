@@ -210,15 +210,17 @@ export default {
         });
     },
     async verifiedUser() {
-      await this.authClass.autUser().then((user) => {
-        if (user != null) {
-          this.$router.push("/home");
-          toastr.success(`Bienvenido ${user.displayName}`);
-        }        
-      })
-      .catch(({ message }) => {
-        console.log(message);
-      });
+      await this.authClass
+        .authUser()
+        .then((user) => {
+          if (user != null) {
+            this.$router.push("/home");
+            toastr.success(`Bienvenido ${user.displayName}`);
+          }
+        })
+        .catch(({ message }) => {
+          console.log(message);
+        });
     },
   },
   computed: {
@@ -231,9 +233,9 @@ export default {
       return validation;
     },
   },
-  mounted(){
-    this.verifiedUser();    
-  }
+  mounted() {
+    this.verifiedUser();
+  },
 };
 </script>
 

@@ -167,6 +167,13 @@
   }
 }
 
+/*This header show when the login is succes*/
+#js_isLogedOptions {
+  display: none;
+}
+#js_isLogedOptions.isLogged {
+  display: block;
+}
 @media screen and(min-width: 992px) {
   .header {
     max-width: 1200px;
@@ -250,6 +257,7 @@
           transform: rotate(0deg);
           opacity: 1;
           pointer-events: auto;
+          background: var(--color-white);
         }
       }
       .user {

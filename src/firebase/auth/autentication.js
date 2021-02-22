@@ -13,6 +13,9 @@ class Autenticacion {
       document.getElementById("js_user-name").textContent = nameUser;
       document.getElementById("js_user-email").textContent = emailUser;
       //Add name of user in DOM -- end
+      // Add class for user login succes -- start
+      document.getElementById("js_isLogedOptions").className = "isLogged";
+      // Add class for user login succes -- end
       return response;
     } catch (error) {
       const message = error.message;
@@ -21,16 +24,11 @@ class Autenticacion {
     }
   }
 
-  async autRemember(email, password) {    
+  async autRemember(email, password) {
     const loginRemember = await firebase
       .auth()
       .setPersistence(firebase.auth.Auth.Persistence.SESSION)
       .then(() => {
-        // Existing and future Auth states are now persisted in the current
-        // session only. Closing the window would clear any existing state even
-        // if a user forgets to sign out.
-        // ...
-        // New sign-in will be persisted with session persistence.
         return firebase.auth().signInWithEmailAndPassword(email, password);
       })
       .catch((error) => {
@@ -42,9 +40,9 @@ class Autenticacion {
     return loginRemember;
   }
 
-  async autUser() {    
-    var user = await firebase.auth().currentUser;
-    return user;  
+  async authUser() {
+    const user = firebase.auth().currentUser;
+    return user;
   }
 
   async crearCuentaEmailPass(email, password, nombres) {
@@ -78,6 +76,9 @@ class Autenticacion {
       document.getElementById("js_user-email").textContent = emailUser;
       document.getElementById("js_avatar-user").setAttribute("src", photoUser);
       //Add name of user in DOM -- end
+      // Add class for user login succes -- start
+      document.getElementById("js_isLogedOptions").className = "isLogged";
+      // Add class for user login succes -- end
       return informationUser;
     } catch (error) {
       const message = error.message;
@@ -98,6 +99,9 @@ class Autenticacion {
       document.getElementById("js_user-email").textContent = emailUser;
       document.getElementById("js_avatar-user").setAttribute("src", photoUser);
       //Add name of user in DOM -- end
+      // Add class for user login succes -- start
+      document.getElementById("js_isLogedOptions").className = "isLogged";
+      // Add class for user login succes -- end
       return informationUser;
     } catch (error) {
       const message = error.message;
@@ -106,6 +110,9 @@ class Autenticacion {
   }
 
   async singOutOfAccount() {
+    // Add class for user login succes -- start
+    document.getElementById("js_isLogedOptions").classList.remove("isLogged");
+    // Add class for user login succes -- end
     return await firebase.auth().signOut();
   }
 

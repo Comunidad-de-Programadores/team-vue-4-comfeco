@@ -8,7 +8,7 @@
         />
       </router-link>
     </section>
-    <section v-show="isLogged" id="js_isLogedOptions">
+    <section id="js_isLogedOptions">
       <div class="burgerButton" id="js_burgerButton" @click="toggleMenu()">
         <i class="fas fa-bars"></i>
       </div>
@@ -92,9 +92,7 @@ import firebase from "firebase";
 export default {
   name: "PxHeader",
   data() {
-    return {
-      isLogged: false,
-    };
+    return {};
   },
   methods: {
     async logOut() {
@@ -122,21 +120,10 @@ export default {
       const auth = new Autenticacion();
       return auth;
     },
-    loggedComprobation() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          console.log("Usuario logueado");
-          this.isLogged = true;
-        } else {
-          console.log("Usuario NO logueado");
-          this.isLogged = false;
-        }
-      });
-    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import "../assets/sass/component/_header.scss";
+@import "../assets/sass/components/_header.scss";
 </style>
