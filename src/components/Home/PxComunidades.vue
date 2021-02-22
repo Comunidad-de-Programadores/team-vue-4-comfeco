@@ -1,21 +1,20 @@
 <template>
-  <div class="flex comunidad">
-    <div class="aside__header">
-      <h5>Comunidades</h5>
-      <router-link to="/comunidad">
-        Ver más
-      </router-link>
+  <section class="comunity">
+    <div class="comunity__img">
+      <img :src="imagen" :alt="titulo" />
     </div>
-    <div>
-      <img class="comunidad__img" :src="imagen" :alt="titulo" />
+    <div class="comunity__info">
+      <div class="comunity__name">
+        <h4 v-text="titulo"></h4>
+      </div>
+      <div class="comunity__btn">
+        <a href="#" class="link" @click="openUrl(url)">
+          Unirme
+          <i class="fas fa-sign-in-alt"></i>
+        </a>
+      </div>
     </div>
-    <div class="comunidad__name">
-      <h4 v-text="titulo"></h4>
-    </div>
-    <div>
-      <a class="comunidad__btn" href="#" @click="openUrl(url)">Unirme</a>
-    </div>
-  </div>
+  </section>
 </template>
 <script>
 export default {
@@ -33,49 +32,32 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.aside {
-  width: 20%;
-  height: 35vh;
-  margin: 1%;
-  padding: 1%;
-  background-color: hsl(0, 1, 70);
-  color: white;
-  overflow: auto;
-  &__header {
-    margin-bottom: 1em;
-    display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    a {
-      text-decoration: none;
+.comunity {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 0;
+  margin: 0 0 10px 0;
+  position: relative;
+  border-bottom: 1px solid #ffffff;
+  &__info {
+    .link {
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      i {
+        font-size: 14px;
+      }
     }
   }
-}
-.flex {
-  display: flex;
-  margin: auto;
-}
-.comunidad {
-  border-bottom: 1px solid hsl(280, 5, 30);
-  padding: 15px;
   &__img {
-    width: 50px;
-    height: 50px;
+    margin: 0 8px 0 0;
+    overflow: hidden;
     border-radius: 50%;
-    margin-right: 2rem;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
   }
   &__name {
-    font-weight: 800;
-    margin-right: 2rem;
-  }
-  &__btn {
-    color: hsl(280, 50, 50);
-    text-decoration: none;
-
-    &:hover {
-      color: hsl(280, 50, 30);
-      cursor: pointer;
+    h4 {
+      font-size: 18px;
     }
   }
 }

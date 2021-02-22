@@ -36,6 +36,7 @@ h2 {
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
+  transition: var(--transition);
   &:hover {
     color: var(--color-white);
     text-decoration: underline;

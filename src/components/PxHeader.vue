@@ -40,7 +40,7 @@
           </section>
           <section class="user__notification">
             <div class="user__notification--icon">
-              <i class="fas fa-bell"></i>
+              <i class="fas fa-bell animation-bell"></i>
               <span class="user__notification--text-mobile">
                 Notificaciones
               </span>
