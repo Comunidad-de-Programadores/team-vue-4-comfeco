@@ -66,7 +66,14 @@ export default {
 }
 .comunity {
   &__card {
-    background: var(--color-icons);
+    background-image: linear-gradient(
+      to left bottom,
+      #b43ed5,
+      #b148db,
+      #ad52e1,
+      #aa5ae6,
+      #a662eb
+    );
     padding: 1rem 1.8rem;
     border-radius: 4px;
   }
@@ -83,13 +90,14 @@ export default {
 }
 @media screen and (min-width: 992px) {
   .home {
+    padding: 0;
     display: grid;
-    grid-template-columns: 400px 1fr 400px;
+    grid-template-columns: 375px 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-      "comunity principal ."
-      "comunity principal ."
-      ". principal .";
+      "comunity principal "
+      "comunity principal "
+      ". principal ";
   }
 }
 </style>
