@@ -9,8 +9,15 @@
       </router-link>
     </section>
     <section id="js_isLogedOptions">
-      <div class="burgerButton" id="js_burgerButton" @click="toggleMenu()">
-        <i class="fas fa-bars"></i>
+      <div class="overlay" id="js_overlay"></div>
+      <div
+        class="burgerButton"
+        id="js_burgerButton"
+        @click="toggleMenu($event)"
+      >
+        <span class="barras-menu" id="js_barras-menu">
+          <span></span>
+        </span>
       </div>
       <nav class="menu" id="js_menu">
         <section class="user">
@@ -50,10 +57,10 @@
         </section>
         <ul class="menu-list">
           <li class="menu-item">
-            <a href="#" class="menu-link">
+            <router-link to="/home" class="menu-link">
               <i class="fas fa-home"></i>
               Inicio
-            </a>
+            </router-link>
           </li>
           <li class="menu-item">
             <a href="#" class="menu-link">
@@ -99,16 +106,21 @@ export default {
       this.authClass.singOutOfAccount().then(() => {
         const $menu = document.getElementById("js_menu");
         const $optionUser = document.getElementById("js_user-options");
+        const $overlay = document.getElementById("js_overlay");
         // Reset class active for this components
         $menu.classList.remove("active");
-        $optionUser.classList.toggle("active");
-
+        $optionUser.classList.remove("active");
+        $overlay.classList.remove("active");
         this.$router.push("/");
       });
     },
-    toggleMenu() {
+    toggleMenu(event) {
       const $menu = document.getElementById("js_menu");
+      const $burguerButton = document.getElementById("js_barras-menu");
+      const $overlay = document.getElementById("js_overlay");
+      $overlay.classList.toggle("active");
       $menu.classList.toggle("active");
+      $burguerButton.classList.toggle("active");
     },
     openOptionUser() {
       const $optionUser = document.getElementById("js_user-options");
