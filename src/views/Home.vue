@@ -10,7 +10,7 @@
       </div>
       <VComunidad
         v-for="comunidad in comunidades"
-        :key="comunidad"
+        :key="comunidad.id"
         :imagen="comunidad.logo"
         :titulo="comunidad.titulo"
         :url="comunidad.url"
@@ -33,16 +33,19 @@ export default {
     return {
       comunidades: [
         {
+          id: 1,
           logo: "https://picsum.photos/50/50",
           titulo: "VueJS en Español",
           url: "https://www.facebook.com/groups/vue.es",
         },
         {
+          id: 2,
           logo: "https://picsum.photos/50/50",
           titulo: "Angular español",
           url: "https://www.facebook.com/groups/dev.angular",
         },
         {
+          id: 3,
           logo: "https://picsum.photos/50/50",
           titulo: "React Js Español Latino",
           url: "https://www.facebook.com/groups/reactjslatino",
