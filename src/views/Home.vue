@@ -16,6 +16,9 @@
         :url="comunidad.url"
       ></VComunidad>
     </section>
+
+    <PxCarouselSponsors />
+
     <AppCountdown
       title="Preparate lo bueno esta por venir"
       diaevento="12 24 2021 23:59:59"
@@ -26,6 +29,7 @@
 <script>
 import VComunidad from "@/components/Home/PxComunidades";
 import AppCountdown from "@/components/Home/AppCountdown";
+import PxCarouselSponsors from "@/components/Home/PxCarouselSponsors";
 
 export default {
   name: "Home",
@@ -53,6 +57,7 @@ export default {
   components: {
     VComunidad,
     AppCountdown,
+    PxCarouselSponsors,
   },
 };
 </script>
@@ -95,9 +100,8 @@ export default {
     grid-template-columns: 375px 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-      "comunity principal "
-      "comunity principal "
-      ". principal ";
+      "comunity principal"
+      "comunity sponsors";
   }
 }
 </style>

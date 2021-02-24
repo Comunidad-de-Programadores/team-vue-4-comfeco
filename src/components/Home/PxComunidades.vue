@@ -39,6 +39,7 @@ export default {
   margin: 0 0 10px 0;
   position: relative;
   border-bottom: 1px solid #ffffff;
+  grid-area: comunity;
   &__info {
     .link {
       position: absolute;

@@ -1,14 +1,12 @@
 <template>
-    <h2 class="margin">Mas Comunidades</h2>
+  <h2 class="margin">Mas Comunidades</h2>
 </template>
 <script>
-export default {
-    
-}
+export default {};
 </script>
 <style lang="scss" scoped>
-    .margin{
-        margin: 5px;
-        color: black;
-    }
+.margin {
+  margin: 5px;
+  color: black;
+}
 </style>
