@@ -1,28 +1,61 @@
 <template>
-  <section class="comunity">
-    <div class="comunity__img">
-      <img :src="imagen" :alt="titulo" />
+  <section class="comunity__card">
+    <div class="comunity__aside">
+      <h5 class="comunity__title">Comunidades</h5>
+      <router-link to="/comunidad" class="link">
+        Ver más
+        <i class="fas fa-chevron-right"></i>
+      </router-link>
     </div>
-    <div class="comunity__info">
-      <div class="comunity__name">
-        <h4 v-text="titulo"></h4>
+    <section
+      v-for="comunity in comunidades"
+      :key="comunity.id"
+      class="comunity"
+    >
+      <div
+        class="comunity__img"
+        :style="{ backgroundImage: 'url(' + comunity.logo + ')' }"
+      ></div>
+      <div class="comunity__info">
+        <div class="comunity__name">
+          <h4>{{ comunity.titulo }}</h4>
+        </div>
+        <div class="comunity__btn">
+          <a href="#" class="link" @click="openUrl(comunity.url)">
+            Unirme
+            <i class="fas fa-sign-in-alt"></i>
+          </a>
+        </div>
       </div>
-      <div class="comunity__btn">
-        <a href="#" class="link" @click="openUrl(url)">
-          Unirme
-          <i class="fas fa-sign-in-alt"></i>
-        </a>
-      </div>
-    </div>
+    </section>
   </section>
 </template>
 <script>
 export default {
-  name: "VComunidad",
-  props: {
-    imagen: String,
-    titulo: String,
-    url: String,
+  name: "PxComunidad",
+  data() {
+    return {
+      comunidades: [
+        {
+          id: 1,
+          logo: "./assets/images/vuejslogo.jpg",
+          titulo: "VueJS en Español",
+          url: "https://www.facebook.com/groups/vue.es",
+        },
+        {
+          id: 2,
+          logo: "./assets/images/reactLogo.png",
+          titulo: "Angular español",
+          url: "https://www.facebook.com/groups/dev.angular",
+        },
+        {
+          id: 3,
+          logo: "./assets/images/angularLogo.jpeg",
+          titulo: "React Js Español Latino",
+          url: "https://www.facebook.com/groups/reactjslatino",
+        },
+      ],
+    };
   },
   methods: {
     openUrl(url) {
@@ -40,6 +73,30 @@ export default {
   position: relative;
   border-bottom: 1px solid #ffffff;
   grid-area: comunity;
+  &__card {
+    margin: 0 0 3rem 0;
+    background-image: linear-gradient(
+      to left bottom,
+      #b43ed5,
+      #b148db,
+      #ad52e1,
+      #aa5ae6,
+      #a662eb
+    );
+    padding: 1rem 1.8rem;
+    border-radius: 4px;
+  }
+  &__aside {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+    margin: 0 0 1rem 0;
+  }
+  &__title {
+    color: var(--color-white);
+    font-size: 1.2rem;
+  }
   &__info {
     .link {
       position: absolute;
@@ -51,10 +108,15 @@ export default {
     }
   }
   &__img {
-    margin: 0 8px 0 0;
+    margin: 0 16px 0 0;
     overflow: hidden;
     border-radius: 50%;
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
+    width: 50px;
+    height: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   &__name {
     h4 {

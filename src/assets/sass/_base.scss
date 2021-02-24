@@ -1,10 +1,12 @@
 @import "./base/_reset.scss";
 @import "./base/_fonts.scss";
 @import "./base/_variables.scss";
-// Import toastr
+// Import toastr ~ styles
 @import "~toastr/build/toastr.css";
-// Import sweetalert2
+// Import sweetalert2 ~ styles
 @import "~sweetalert2/src/sweetalert2";
+// Import vue3-carousel ~ styles
+@import "~vue3-carousel/dist/carousel.css";
 @import "./base/_animation.scss";
 @import "./base/_layouts.scss";
 @import "./base/utils";
