@@ -12,6 +12,9 @@ class Autenticacion {
       //Add name of user in DOM -- start
       document.getElementById("js_user-name").textContent = nameUser;
       document.getElementById("js_user-email").textContent = emailUser;
+      document
+        .getElementById("js_avatar-user")
+        .setAttribute("src", "./assets/images/userDefaultImage.png");
       //Add name of user in DOM -- end
       // Add class for user login succes -- start
       document.getElementById("js_isLogedOptions").className = "isLogged";
