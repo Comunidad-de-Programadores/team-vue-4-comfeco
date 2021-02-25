@@ -81,7 +81,7 @@ export default {
 <style scoped lang="scss">
 .countDown {
   margin: 2rem 0;
-  grid-area: principal;
+  grid-area: countDown;
   &__title {
     text-align: center;
     font-size: 1.5rem;
@@ -140,7 +140,7 @@ export default {
 
 @media screen and (min-width: 992px) {
   .countDown {
-    margin: 2rem 1.5rem;
+    margin: 2rem 0;
   }
 }
 </style>

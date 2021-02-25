@@ -4,21 +4,54 @@
       <h2 class="carosuel-sponsor-title">Sponsors</h2>
       <button class="button button-primary">Apoyar iniciativa</button>
     </section>
-    <carousel :settings="settings" :breakpoints="breakpoints">
-      <slide v-for="sponsor in sponsors" :key="sponsor.key">
-        <img :src="sponsor.url" :alt="sponsor.alt" />
-      </slide>
-
-      <template #addons>
-        <navigation />
-        <pagination />
-      </template>
-    </carousel>
+    <swiper
+      :pagination="{ clickable: true }"
+      navigation
+      :breakpoints="{
+        1200: {
+          slidesPerView: 4,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        420: {
+          slidesPerView: 2,
+        },
+        320: {
+          slidesPerView: 1,
+        },
+      }"
+    >
+      <swiper-slide
+        class="teamLeader__swipper-slide"
+        v-for="sponsor in sponsors"
+        :key="sponsor.key"
+      >
+        <img
+          class="teamLeader__swipper-image"
+          :src="sponsor.url"
+          :alt="sponsor.alt"
+        />
+      </swiper-slide>
+    </swiper>
   </section>
 </template>
 
 <script>
-import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
+// import Swiper core and required modules
+import SwiperCore, {
+  Pagination,
+  EffectFade,
+  Navigation,
+  Autoplay,
+  A11y,
+} from "swiper";
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+// install Swiper modules
+SwiperCore.use([Pagination, EffectFade, Autoplay, A11y, Navigation]);
+
 export default {
   name: "PxCarouselSponsors",
   data() {
@@ -59,11 +92,11 @@ export default {
           url: "./assets/images/sponsors/JoseDimasLujan.jpg",
           alt: "Jose Dimas Lujan",
         },
-        {
+        /*{
           key: 8,
           url: "./assets/images/sponsors/latamDev.jpg",
           alt: "Latam Dev",
-        },
+        },*/
         {
           key: 9,
           url: "./assets/images/sponsors/LeonidasEsteban.jpg",
@@ -80,41 +113,19 @@ export default {
           alt: "Codelu TV",
         },
       ],
-      settings: {
-        itemsToShow: 1,
-        snapAlign: "center",
-        wrapAround: true,
-        transition: 500,
-      },
-      breakpoints: {
-        420: {
-          itemsToShow: 1,
-        },
-        768: {
-          itemsToShow: 2,
-        },
-        992: {
-          itemsToShow: 3,
-        },
-        1200: {
-          itemsToShow: 5,
-        },
-      },
     };
   },
   components: {
-    Carousel,
-    Slide,
-    Pagination,
-    Navigation,
+    Swiper,
+    SwiperSlide,
   },
 };
 </script>
 
 <style scoped lang="scss">
 .carosuel-sponsor {
-  grid-area: sponsors;
   margin: 2rem 0;
+  grid-area: sponsors;
   &-head {
     display: flex;
     align-items: center;
@@ -127,17 +138,26 @@ export default {
   &-title {
     color: var(--color-black-2);
     font-size: 1.5rem;
+    padding: 0 8px 0 0;
   }
-  .carousel {
+  .teamLeader__swipper-slide {
     img {
-      width: 100%;
+      object-fit: cover;
+      width: 180px;
+      height: 180px;
+      margin: auto;
       display: block;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.5);
+    }
+    &__slide {
+      padding: 10px 1rem;
     }
   }
 }
 @media screen and (min-width: 992px) {
   .carosuel-sponsor {
-    margin: 2rem 1.5rem;
+    margin: 2rem 0;
   }
 }
 </style>

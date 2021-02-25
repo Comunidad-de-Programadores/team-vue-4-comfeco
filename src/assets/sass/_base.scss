@@ -1,12 +1,18 @@
 @import "./base/_reset.scss";
 @import "./base/_fonts.scss";
 @import "./base/_variables.scss";
+
 // Import toastr ~ styles
 @import "~toastr/build/toastr.css";
 // Import sweetalert2 ~ styles
 @import "~sweetalert2/src/sweetalert2";
-// Import vue3-carousel ~ styles
-@import "~vue3-carousel/dist/carousel.css";
+// Import Swiper styles
+@import "~swiper/swiper.scss";
+@import "~swiper/components/navigation/navigation.scss";
+@import "~swiper/components/pagination/pagination.scss";
+@import "~swiper/components/scrollbar/scrollbar.scss";
+
+@import "./base/_carousel.scss";
 @import "./base/_animation.scss";
 @import "./base/_layouts.scss";
 @import "./base/utils";

@@ -190,7 +190,7 @@ export default {
       try {
         const accountGoogleMehotd = await this.authClass.authCuentaGoogle();
         if (accountGoogleMehotd.emailVerified) {
-          toastr.info(`Bienvenido ${accountGoogleMehotd.displayName}`);
+          toastr.success(`Bienvenido ${accountGoogleMehotd.displayName}`);
           this.$router.push("/home");
         }
       } catch (error) {

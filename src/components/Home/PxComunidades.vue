@@ -1,5 +1,5 @@
 <template>
-  <section class="comunity__card">
+  <section class="comunity">
     <div class="comunity__aside">
       <h5 class="comunity__title">Comunidades</h5>
       <router-link to="/comunidad" class="link">
@@ -10,7 +10,7 @@
     <section
       v-for="comunity in comunidades"
       :key="comunity.id"
-      class="comunity"
+      class="comunity__card"
     >
       <div
         class="comunity__img"
@@ -66,25 +66,26 @@ export default {
 </script>
 <style scoped lang="scss">
 .comunity {
-  display: flex;
-  align-items: flex-start;
-  padding: 10px 0;
-  margin: 0 0 10px 0;
-  position: relative;
-  border-bottom: 1px solid #ffffff;
+  margin: 0 0 3rem 0;
+  background-image: linear-gradient(
+    to left bottom,
+    #b43ed5,
+    #b148db,
+    #ad52e1,
+    #aa5ae6,
+    #a662eb
+  );
+  padding: 1rem 1.8rem;
+  border-radius: 4px;
   grid-area: comunity;
+  transition: var(--transition);
   &__card {
-    margin: 0 0 3rem 0;
-    background-image: linear-gradient(
-      to left bottom,
-      #b43ed5,
-      #b148db,
-      #ad52e1,
-      #aa5ae6,
-      #a662eb
-    );
-    padding: 1rem 1.8rem;
-    border-radius: 4px;
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+    margin: 0 0 10px 0;
+    position: relative;
+    border-bottom: 1px solid #ffffff;
   }
   &__aside {
     display: flex;
@@ -122,6 +123,15 @@ export default {
     h4 {
       font-size: 18px;
     }
+  }
+}
+@media screen and (min-width: 992px) {
+  .comunity {
+    margin: 14rem 0 0 0;
+    position: sticky;
+    top: 60px;
+    max-height: 410px;
+    overflow: auto;
   }
 }
 </style>
