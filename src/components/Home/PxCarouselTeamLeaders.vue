@@ -252,7 +252,7 @@ export default {
     background-size: cover;
   }
   &-name {
-    font-size: 15px;
+    font-size: 18px;
     font-family: var(--fuente-bold);
     letter-spacing: 0.5px;
     color: #000;

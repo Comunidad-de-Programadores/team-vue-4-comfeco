@@ -140,7 +140,7 @@ export default {
 
 @media screen and (min-width: 992px) {
   .countDown {
-    margin: 2rem 0;
+    margin: 2rem 0 0 0;
   }
 }
 </style>
