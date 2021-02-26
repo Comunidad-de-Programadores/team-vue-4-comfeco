@@ -259,4 +259,12 @@ export default {
     text-align: center;
   }
 }
+
+@media screen and (min-width: 992px) {
+  .teamLeader__swipper {
+    &-name {
+      font-size: 20px;
+    }
+  }
+}
 </style>

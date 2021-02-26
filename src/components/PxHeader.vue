@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" id="js_header">
     <section class="header__logo">
       <router-link to="/">
         <img
