@@ -21,7 +21,11 @@
       </div>
       <nav class="menu" id="js_menu">
         <section class="user">
-          <section class="user__information">
+          <section
+            class="user__information"
+            id="js_open-logOut"
+            @click="openOptionUser()"
+          >
             <div class="user__avatar">
               <img
                 src="@/assets/images/userDefaultImage.png"
@@ -37,11 +41,7 @@
                 <span id="js_user-email"></span>
               </div>
             </div>
-            <div
-              class="user__open--logOut"
-              id="js_open-logOut"
-              @click="openOptionUser()"
-            >
+            <div class="user__open--logOut">
               <i class="fas fa-chevron-down"></i>
             </div>
           </section>

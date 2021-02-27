@@ -18,6 +18,7 @@ class Autenticacion {
       //Add name of user in DOM -- end
       // Add class for user login succes -- start
       document.getElementById("js_isLogedOptions").className = "isLogged";
+      document.getElementById("js_header").classList.add("bgColor");
       // Add class for user login succes -- end
       console.log(response);
       return response;
@@ -82,6 +83,7 @@ class Autenticacion {
       //Add name of user in DOM -- end
       // Add class for user login succes -- start
       document.getElementById("js_isLogedOptions").className = "isLogged";
+      document.getElementById("js_header").classList.add("bgColor");
       // Add class for user login succes -- end
       return informationUser;
     } catch (error) {
@@ -105,6 +107,7 @@ class Autenticacion {
       //Add name of user in DOM -- end
       // Add class for user login succes -- start
       document.getElementById("js_isLogedOptions").className = "isLogged";
+      document.getElementById("js_header").classList.add("bgColor");
       // Add class for user login succes -- end
       return informationUser;
     } catch (error) {

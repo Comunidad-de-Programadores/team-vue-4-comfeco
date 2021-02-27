@@ -17,4 +17,12 @@
   --transition: 0.3s ease all;
   //Color hover
   --color-primary-hover: #4e1786;
+  --color-gradient: linear-gradient(
+    to left bottom,
+    #b43ed5,
+    #b148db,
+    #ad52e1,
+    #aa5ae6,
+    #a662eb
+  );
 }

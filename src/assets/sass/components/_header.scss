@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 1rem;
+  transition: var(--transition);
   &__logo {
     img {
       display: inline-block;
@@ -87,6 +88,7 @@
       transform: translateX(0);
       opacity: 1;
       pointer-events: auto;
+      background: var(--color-gradient);
     }
     /*Item menu*/
     &-item {
@@ -107,8 +109,8 @@
       padding: 0 16px;
       transition: var(--transition);
       i {
-        color: var(--color-icons);
-        margin: 0 4px 0 0;
+        color: var(--color-white);
+        margin: 0 6px 0 0;
         font-size: 19px;
       }
       &:hover {
@@ -135,8 +137,8 @@
         padding: 0 16px;
         margin: 0 0 1rem 0;
         i {
-          color: var(--color-icons);
-          margin: 0 4px 0 0;
+          color: var(--color-white);
+          margin: 0 6px 0 0;
           font-size: 19px;
         }
         &:hover {
@@ -161,26 +163,33 @@
       margin: 0 0 16px 0;
     }
     &__avatar {
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       border: 1px solid #000000;
       overflow: hidden;
       margin: 0 6px 0 0;
       img {
         width: 100%;
+        height: 100%;
+        display: block;
         object-fit: cover;
       }
     }
     &__name {
       color: #000000;
       margin: 0 0 4px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100px;
+      text-overflow: ellipsis;
       span {
         font-family: var(--fuente-bold);
       }
     }
     &__email {
-      color: var(--color-icons);
+      color: var(--color-white);
+      padding: 4px 0;
       span {
         font-size: 14px;
       }
@@ -203,8 +212,8 @@
         padding: 0 16px;
       }
       i {
-        color: var(--color-icons);
-        margin: 0 4px 0 0;
+        color: var(--color-white);
+        margin: 0 6px 0 0;
         font-size: 19px;
       }
       &--count {
@@ -255,6 +264,9 @@
 }
 @media screen and(min-width: 992px) {
   .header {
+    &.bgColor {
+      background: var(--color-icons);
+    }
     .burgerButton {
       display: none;
     }
@@ -271,6 +283,7 @@
       flex-direction: row-reverse;
       transform: unset;
       padding: 0 16px;
+      background: transparent;
       &-list {
         display: flex;
         align-items: center;
@@ -282,7 +295,7 @@
           content: "";
           width: 100%;
           height: 3px;
-          background: var(--color-icons);
+          background: var(--color-white);
           position: absolute;
           bottom: 0;
           left: -1px;
@@ -303,16 +316,17 @@
         }
       }
       .user__options {
-        transform: translateY(-45px);
+        transform: translateY(30px);
         opacity: 0;
         pointer-events: none;
         position: absolute;
-        right: 19px;
+        right: 32px;
         bottom: -95px;
         width: auto;
         background: var(--color-white);
         border: 1px solid #ddd;
         z-index: 10;
+        width: 180px;
         &:hover {
           background: unset;
         }
@@ -337,11 +351,15 @@
         }
         button {
           margin: 0;
+          i {
+            color: var(--color-icons);
+          }
         }
       }
       .user {
         display: flex;
         align-items: center;
+        padding: 0 12px 0 0;
         &__open--logOut {
           display: flex;
           align-items: center;
@@ -351,13 +369,23 @@
           cursor: pointer;
           margin: 0 0 0 4px;
           i {
+            transition: var(--transition);
             font-size: 17px;
           }
         }
         &__information {
           border: 0;
           margin: 0;
-          padding: 0 16px;
+          padding: 6px 16px;
+          border-radius: 30px;
+          transition: var(--transition);
+          cursor: pointer;
+          &:hover {
+            background: rgba(255, 255, 255, 0.2);
+            .user__open--logOut i {
+              color: var(--color-white);
+            }
+          }
         }
         &__notification {
           margin: 0;
