@@ -19,6 +19,7 @@ class Autenticacion {
       // Add class for user login succes -- start
       document.getElementById("js_isLogedOptions").className = "isLogged";
       // Add class for user login succes -- end
+      console.log(response);
       return response;
     } catch (error) {
       const message = error.message;
