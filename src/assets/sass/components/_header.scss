@@ -120,25 +120,31 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      flex-direction: column;
       width: 100%;
-      padding: 0 16px;
+      height: auto;
       transition: var(--transition);
       button {
-        width: inherit;
-        height: 100%;
-        padding: 0;
+        width: 100%;
+        height: 45px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         font-size: 15px;
+        transition: var(--transition);
+        padding: 0 16px;
+        margin: 0 0 1rem 0;
         i {
           color: var(--color-icons);
           margin: 0 4px 0 0;
           font-size: 19px;
         }
-      }
-      &:hover {
-        background: rgba(0, 0, 0, 0.2);
+        &:hover {
+          background: rgba(0, 0, 0, 0.2);
+        }
+        &:last-child {
+          margin: 0;
+        }
       }
     }
   }
@@ -297,12 +303,12 @@
         }
       }
       .user__options {
-        transform: rotate(-90deg);
+        transform: translateY(-45px);
         opacity: 0;
         pointer-events: none;
         position: absolute;
         right: 19px;
-        bottom: -50px;
+        bottom: -95px;
         width: auto;
         background: var(--color-white);
         border: 1px solid #ddd;
@@ -311,7 +317,7 @@
           background: unset;
         }
         &::before {
-          z-index: 1;
+          z-index: -1;
           content: "";
           width: 12px;
           height: 12px;
@@ -324,10 +330,13 @@
           right: 12px;
         }
         &.active {
-          transform: rotate(0deg);
+          transform: translateY(0);
           opacity: 1;
           pointer-events: auto;
           background: var(--color-white);
+        }
+        button {
+          margin: 0;
         }
       }
       .user {
