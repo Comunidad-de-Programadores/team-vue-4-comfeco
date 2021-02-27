@@ -122,7 +122,7 @@ export default {
           key: 8,
           imageLeader:
             "./assets/images/teamLeaders/React/LinaMaríaMontañoRamírez.jpg",
-          name: "Lina María Montaño Ramírez",
+          name: "Lina Montaño",
           imageFramework: "./assets/images/reactLogo.png",
           title: "LinaMaríaMontañoRamírez",
         },

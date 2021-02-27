@@ -34,8 +34,12 @@ export default {
 .home {
   padding: 0 16px;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+}
+
+@media screen and (min-width: 992px) {
+  .home {
+    padding: 0 6%;
+  }
 }
 
 @media screen and (min-width: 992px) {

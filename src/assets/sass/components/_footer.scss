@@ -3,9 +3,7 @@
   background: var(--color-primary);
   box-shadow: 0px 0px 20px 3px rgba(0, 0, 0, 0.45);
   &-wraper {
-    max-width: 1200px;
     width: 100%;
-    margin: 0 auto;
   }
   &__goUp {
     width: 100%;
@@ -82,6 +80,7 @@
       align-items: center;
       justify-content: space-between;
       height: 90px;
+      padding: 0 6%;
     }
     &__social-media,
     &__logo {
