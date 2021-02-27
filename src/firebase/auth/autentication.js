@@ -119,6 +119,7 @@ class Autenticacion {
   async singOutOfAccount() {
     // Add class for user login succes -- start
     document.getElementById("js_isLogedOptions").classList.remove("isLogged");
+    document.getElementById("js_header").classList.remove("bgColor");
     // Add class for user login succes -- end
     return await firebase.auth().signOut();
   }

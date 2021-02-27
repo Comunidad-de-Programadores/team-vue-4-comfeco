@@ -38,6 +38,7 @@ export default {
 
 @media screen and (min-width: 992px) {
   .home {
+    margin-top: 96px;
     padding: 0 6%;
   }
 }

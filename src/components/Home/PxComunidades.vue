@@ -127,9 +127,7 @@ export default {
 }
 @media screen and (min-width: 992px) {
   .comunity {
-    margin: 14rem 0 0rem 0;
-    position: sticky;
-    top: 73px;
+    margin: 14rem 0;
     max-height: 410px;
     overflow: auto;
   }
