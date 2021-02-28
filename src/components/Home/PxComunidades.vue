@@ -66,7 +66,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .comunity {
-  margin: 0 0 3rem 0;
   background-image: linear-gradient(
     to left bottom,
     #b43ed5,
@@ -127,7 +126,6 @@ export default {
 }
 @media screen and (min-width: 992px) {
   .comunity {
-    margin: 14rem 0;
     max-height: 410px;
     overflow: auto;
   }

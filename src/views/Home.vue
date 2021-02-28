@@ -53,6 +53,7 @@ export default {
       ". sponsors"
       ". countDown";
     grid-column-gap: 1.5rem;
+    align-items: center;
   }
 }
 </style>
