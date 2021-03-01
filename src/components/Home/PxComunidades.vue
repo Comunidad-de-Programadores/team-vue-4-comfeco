@@ -78,6 +78,7 @@ export default {
   border-radius: 4px;
   grid-area: comunity;
   transition: var(--transition);
+  margin: 0 0 3rem 0;
   &__card {
     display: flex;
     align-items: flex-start;
@@ -128,6 +129,7 @@ export default {
   .comunity {
     max-height: 410px;
     overflow: auto;
+    margin: 0;
   }
 }
 </style>

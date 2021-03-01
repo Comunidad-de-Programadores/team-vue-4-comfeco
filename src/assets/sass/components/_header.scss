@@ -316,7 +316,7 @@
         &:hover {
           .menu-link::after {
             transform: translateX(0%);
-            left: initial;
+            left: 0;
           }
         }
       }

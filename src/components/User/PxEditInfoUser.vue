@@ -22,13 +22,25 @@
             <label for="nick">
               Nick:
             </label>
-            <input type="text" id="nick" placeholder="Tu nick" />
+            <input
+              type="text"
+              id="nick"
+              autocomplete="off"
+              placeholder="Tu nick"
+            />
+            <span class="edit__user--information-input-animation"></span>
           </div>
           <div class="edit__user--information-input">
             <label for="Correo">
               Correo:
             </label>
-            <input type="text" id="Correo" placeholder="Tu correo" />
+            <input
+              type="text"
+              id="Correo"
+              autocomplete="off"
+              placeholder="Tu correo"
+            />
+            <span class="edit__user--information-input-animation"></span>
           </div>
         </div>
         <div class="edit__user--information-group-input three">
@@ -70,8 +82,10 @@
             <input
               type="password"
               id="js_password"
+              autocomplete="off"
               placeholder="Contraseña nueva"
             />
+            <span class="edit__user--information-input-animation"></span>
           </div>
           <div class="edit__user--information-input">
             <label for="js_password-repeat">
@@ -80,8 +94,10 @@
             <input
               type="password"
               id="js_password-repeat"
+              autocomplete="off"
               placeholder="Repetir contraseña nueva"
             />
+            <span class="edit__user--information-input-animation"></span>
           </div>
         </div>
 
@@ -95,8 +111,10 @@
             <input
               type="text"
               id="js_social_facebook"
+              autocomplete="off"
               placeholder="Url de facebook"
             />
+            <span class="edit__user--information-input-animation-sc"></span>
           </div>
           <div class="edit__user--information-input">
             <label for="js_social_linkedin">
@@ -106,8 +124,10 @@
             <input
               type="text"
               id="js_social_linkedin"
+              autocomplete="off"
               placeholder="Url de linkedin"
             />
+            <span class="edit__user--information-input-animation-sc"></span>
           </div>
           <div class="edit__user--information-input">
             <label for="js_social_github">
@@ -117,8 +137,10 @@
             <input
               type="text"
               id="js_social_github"
+              autocomplete="off"
               placeholder="Url de github"
             />
+            <span class="edit__user--information-input-animation-sc"></span>
           </div>
           <div class="edit__user--information-input">
             <label for="js_social_twitter">
@@ -128,8 +150,10 @@
             <input
               type="text"
               id="js_social_twitter"
+              autocomplete="off"
               placeholder="Url de twitter"
             />
+            <span class="edit__user--information-input-animation-sc"></span>
           </div>
         </div>
 
@@ -160,7 +184,7 @@ export default {
 
 <style scoped lang="scss">
 .edit__user {
-  display: none !important;
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -169,6 +193,9 @@ export default {
   background: var(--color-white);
   z-index: 80;
   padding: 1rem;
+  &.active {
+    display: block;
+  }
   &--close-button {
     i {
       font-size: 1.5rem;
@@ -189,7 +216,7 @@ export default {
     &-photo {
       max-width: 100px;
       height: 100px;
-      margin: 0 auto;
+      margin: 0 auto 2rem;
       border: 4px solid var(--color-icons);
       border-radius: 50%;
       overflow: hidden;
@@ -250,7 +277,7 @@ export default {
             margin: 0;
           }
           input {
-            width: auto;
+            width: 50%;
           }
         }
       }
@@ -258,24 +285,68 @@ export default {
     &-input {
       width: 100%;
       margin: 0 0 12px 0;
+      position: relative;
+      overflow: hidden;
       textarea {
         display: block;
         width: 100%;
         resize: none;
+        height: 100px;
       }
       label {
         margin: 0 0 6px 0;
         display: inline-block;
+        font-family: var(--fuente-bold);
+      }
+      &-animation {
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          height: 3px;
+          background: var(--color-primary);
+          opacity: 0;
+          transition: var(--transition);
+        }
+      }
+      &-animation {
+        &::after {
+          left: -100%;
+          width: 100%;
+        }
+      }
+      &-animation-sc {
+        height: 3px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: var(--color-primary);
+        opacity: 0;
+        transition: var(--transition);
+        width: 50%;
       }
       input,
       select,
       textarea {
         border: 1px solid var(--color-icons);
-        padding: 0;
         margin: 0;
         width: 100%;
         padding: 0.5rem;
         font-family: var(--fuente-regular);
+      }
+      input[type="text"],
+      input[type="password"] {
+        border-top: 0;
+        border-right: 0;
+        border-left: 0;
+        &:focus ~ .edit__user--information-input-animation::after {
+          left: 0;
+          opacity: 1;
+        }
+        &:focus ~ .edit__user--information-input-animation-sc {
+          left: 50%;
+          opacity: 1;
+        }
       }
     }
   }
@@ -287,6 +358,48 @@ export default {
     &--information {
       overflow-y: unset;
       max-height: unset;
+      &-group-input {
+        &.three {
+          .edit__user--information-input {
+            width: 31%;
+          }
+        }
+        &.social-media {
+          .edit__user--information-input {
+            width: 48%;
+            input {
+              width: 60%;
+            }
+          }
+        }
+        .button.button-primary {
+          width: 250px;
+          align-self: flex-end;
+        }
+        &:last-child {
+          justify-content: flex-end;
+        }
+      }
+      &-input {
+        textarea {
+          height: 200px;
+        }
+        label {
+          i {
+            font-size: 20px;
+            margin: 0 3px 0 0;
+          }
+        }
+        &-animation-sc {
+          width: 40%;
+        }
+        input[type="text"] {
+          &:focus ~ .edit__user--information-input-animation-sc {
+            left: 40%;
+            width: 60%;
+          }
+        }
+      }
     }
   }
 }

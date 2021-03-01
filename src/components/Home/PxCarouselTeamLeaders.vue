@@ -263,7 +263,7 @@ export default {
 @media screen and (min-width: 992px) {
   .teamLeader__swipper {
     &-name {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
 }
