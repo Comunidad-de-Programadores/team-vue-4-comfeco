@@ -1,5 +1,5 @@
 <template>
-  <section class="teamLeader__swipper">
+  <section class="teamLeader__swipper" id="js_teamLeader__swipper">
     <PxDescription />
     <h2 class="teamLeader__swipper-title">Ellos ya creen en esta iniciativa</h2>
     <swiper

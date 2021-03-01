@@ -1,5 +1,5 @@
 <template>
-  <section class="carosuel-sponsor">
+  <section class="carosuel-sponsor" id="js_carosuel-sponsor">
     <section class="carosuel-sponsor-head">
       <h2 class="carosuel-sponsor-title">Sponsors</h2>
       <button class="button button-primary">Apoyar iniciativa</button>

@@ -1,5 +1,5 @@
 <template>
-  <section class="countDown">
+  <section class="countDown" id="js_countDown">
     <h4 class="countDown__title">{{ title }}</h4>
     <div class="countDown__container">
       <div class="countDown__dias">

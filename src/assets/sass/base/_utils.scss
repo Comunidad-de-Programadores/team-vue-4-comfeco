@@ -28,6 +28,11 @@ h2 {
   width: 100%;
 }
 
+/* Use this clase for desapear a component*/
+.hidden {
+  display: none;
+}
+
 /* --- links --- */
 .link {
   color: var(--color-primary);

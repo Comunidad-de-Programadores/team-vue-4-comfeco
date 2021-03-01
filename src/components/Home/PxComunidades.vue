@@ -1,5 +1,5 @@
 <template>
-  <section class="comunity">
+  <section class="comunity" id="js_comunity">
     <div class="comunity__aside">
       <h5 class="comunity__title">Comunidades</h5>
       <router-link to="/comunidad" class="link">

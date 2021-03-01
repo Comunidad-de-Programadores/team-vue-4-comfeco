@@ -10,6 +10,8 @@
     />
 
     <PxComunidad />
+
+    <PxEditInfoUser />
   </main>
 </template>
 
@@ -19,6 +21,8 @@ import AppCountdown from "@/components/Home/AppCountdown";
 import PxCarouselSponsors from "@/components/Home/PxCarouselSponsors";
 import PxCarouselTeamLeaders from "@/components/Home/PxCarouselTeamLeaders";
 
+import PxEditInfoUser from "@/components/User/PxEditInfoUser";
+
 export default {
   name: "Home",
   components: {
@@ -26,6 +30,8 @@ export default {
     PxCarouselTeamLeaders,
     AppCountdown,
     PxComunidad,
+
+    PxEditInfoUser,
   },
 };
 </script>
@@ -54,6 +60,10 @@ export default {
       ". countDown";
     grid-column-gap: 1.5rem;
     align-items: center;
+
+    &.account-mode {
+      display: block;
+    }
   }
 }
 </style>
