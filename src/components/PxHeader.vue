@@ -82,9 +82,11 @@
           </li>
         </ul>
         <section class="user__options" id="js_user-options">
-          <button class="user__acount">
-            <i class="fas fa-user-circle"></i>
-            Mi perfil
+          <button class="user__account">
+            <router-link to="/my-account">
+              <i class="fas fa-user-circle"></i>
+              Mi perfil
+            </router-link>
           </button>
           <button @click="logOut()">
             <i class="fas fa-sign-out-alt"></i>
