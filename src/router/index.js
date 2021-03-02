@@ -46,6 +46,14 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
   },
+  {
+    path: "/my-account",
+    name: "Perfil",
+    component: () => import(/* webpackChunkName: "Perfil" */ "../views/MyAccount.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = createRouter({

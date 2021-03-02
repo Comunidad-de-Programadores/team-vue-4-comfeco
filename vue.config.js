@@ -1,5 +1,3 @@
 /*module.exports = {
-   devServer: {     
-       https: true   
-   } 
-} */
+   mode: 'development' 
+}*/
