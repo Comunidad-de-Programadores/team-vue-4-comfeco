@@ -1,6 +1,8 @@
 <template>
   <section class="my-account">
     <PxInsignia />
+
+    <PxEditInfoUser />
   </section>
 </template>
 
@@ -8,10 +10,13 @@
 import Autenticacion from "@/firebase/auth/autentication.js";
 import firebase from "firebase";
 import PxInsignia from "@/components/User/PxInsignia";
+import PxEditInfoUser from "@/components/User/PxEditInfoUser";
+
 export default {
   name: "MyAccount",
   components: {
     PxInsignia,
+    PxEditInfoUser,
   },
   methods: {    
     async verifiedUser() {

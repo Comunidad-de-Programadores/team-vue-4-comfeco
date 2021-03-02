@@ -10,8 +10,6 @@
     />
 
     <PxComunidad />
-
-    <PxEditInfoUser />
   </main>
 </template>
 
@@ -23,8 +21,6 @@ import PxCarouselTeamLeaders from "@/components/Home/PxCarouselTeamLeaders";
 import Autenticacion from "@/firebase/auth/autentication.js";
 import firebase from "firebase";
 
-import PxEditInfoUser from "@/components/User/PxEditInfoUser";
-
 export default {
   name: "Home",
   components: {
@@ -32,8 +28,6 @@ export default {
     PxCarouselTeamLeaders,
     AppCountdown,
     PxComunidad,
-
-    PxEditInfoUser,
   },
   methods: {    
     async verifiedUser() {

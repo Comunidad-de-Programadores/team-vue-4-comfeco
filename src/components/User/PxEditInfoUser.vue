@@ -170,6 +170,7 @@
           <button class="button button-primary">
             Guardar cambios
           </button>
+          <Multiselect v-model="value" :options="options" />
         </div>
       </form>
     </section>
@@ -177,8 +178,19 @@
 </template>
 
 <script>
+import Multiselect from "@vueform/multiselect";
+import "@vueform/multiselect/themes/default.css";
 export default {
   name: "PxEditInfoUser",
+  data() {
+    return {
+      value: "Prueba",
+      options: ["Batman", "Robin", "Joker"],
+    };
+  },
+  components: {
+    Multiselect,
+  },
 };
 </script>
 
