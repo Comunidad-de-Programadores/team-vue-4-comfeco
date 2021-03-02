@@ -47,6 +47,12 @@ class Autenticacion {
 
   async authUser() {
     const user = await firebase.auth().currentUser;
+    if (user != null) {
+      document.getElementById("js_isLogedOptions").className = "isLogged";
+      document.getElementById("js_header").classList.add("bgColor");
+      document.getElementById("js_user-name").textContent = user.displayName;
+      document.getElementById("js_user-email").textContent = user.email;
+    }
     return user;
   }
 

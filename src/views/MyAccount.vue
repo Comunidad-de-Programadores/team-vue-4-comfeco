@@ -20,27 +20,17 @@ export default {
   },
   methods: {    
     async verifiedUser() {
-      await this.authClass
-        .authUser()
-        .then((user) => {
-          if (user != null) {
-            document.getElementById("js_isLogedOptions").className = "isLogged";
-            document.getElementById("js_header").classList.add("bgColor");
-          }
-        })
-        .catch(({ message }) => {
-          console.log(message);
-        });
+      await this.authClass.authUser();
     },
   },
   computed: {
     authClass() {
       const auth = new Autenticacion();
       return auth;
-    },
+    },    
   },
   mounted() {
-    this.verifiedUser();    
+    this.verifiedUser();
   },
 };
 </script>
