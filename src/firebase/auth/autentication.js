@@ -46,7 +46,7 @@ class Autenticacion {
   }
 
   async authUser() {
-    const user = firebase.auth().currentUser;
+    const user = await firebase.auth().currentUser;
     return user;
   }
 

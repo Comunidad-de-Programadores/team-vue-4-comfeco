@@ -18,6 +18,8 @@ import PxComunidad from "@/components/Home/PxComunidades";
 import AppCountdown from "@/components/Home/AppCountdown";
 import PxCarouselSponsors from "@/components/Home/PxCarouselSponsors";
 import PxCarouselTeamLeaders from "@/components/Home/PxCarouselTeamLeaders";
+import Autenticacion from "@/firebase/auth/autentication.js";
+import firebase from "firebase";
 
 export default {
   name: "Home",
@@ -26,6 +28,30 @@ export default {
     PxCarouselTeamLeaders,
     AppCountdown,
     PxComunidad,
+  },
+  methods: {    
+    async verifiedUser() {
+      await this.authClass
+        .authUser()
+        .then((user) => {
+          if (user != null) {
+            document.getElementById("js_isLogedOptions").className = "isLogged";
+            document.getElementById("js_header").classList.add("bgColor");
+          }
+        })
+        .catch(({ message }) => {
+          console.log(message);
+        });
+    },
+  },
+  computed: {
+    authClass() {
+      const auth = new Autenticacion();
+      return auth;
+    },
+  },
+  mounted() {
+    this.verifiedUser();    
   },
 };
 </script>
