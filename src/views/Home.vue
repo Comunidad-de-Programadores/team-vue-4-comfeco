@@ -70,10 +70,6 @@ export default {
       ". countDown";
     grid-column-gap: 1.5rem;
     align-items: center;
-
-    &.account-mode {
-      display: block;
-    }
   }
 }
 </style>

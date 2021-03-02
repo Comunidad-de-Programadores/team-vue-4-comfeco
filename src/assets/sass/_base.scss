@@ -11,8 +11,10 @@
 @import "~swiper/components/navigation/navigation.scss";
 @import "~swiper/components/pagination/pagination.scss";
 @import "~swiper/components/scrollbar/scrollbar.scss";
+// Vue form~  styles
+@import "~@vueform/multiselect/themes/default.scss";
 
 @import "./base/_carousel.scss";
 @import "./base/_animation.scss";
 @import "./base/_layouts.scss";
-@import "./base/utils";
+@import "./base/_utils.scss";
