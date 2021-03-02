@@ -44,16 +44,14 @@
           </div>
         </div>
         <div class="edit__user--information-group-input three">
-          <div class="edit__user--information-input">
+          <div class="edit__user--information-input select">
             <label>
               Genero:
             </label>
-            <select id="js_select-gender">
-              <option value="0">Elige tu género</option>
-              <option value="M">Masculino</option>
-              <option value="F">Femenino</option>
-              <option value="NA">No quiero especificar</option>
-            </select>
+            <Multiselect
+              v-model="optionsGender.value"
+              v-bind="optionsGender"
+            ></Multiselect>
           </div>
           <div class="edit__user--information-input">
             <label for="js_select-born">
@@ -65,11 +63,10 @@
             <label for="js_select-born">
               País:
             </label>
-            <select id="js_select-country">
-              <option value="0">Elije tu país</option>
-              <option value="0">Perú</option>
-              <option value="0">Costa Rica</option>
-            </select>
+            <Multiselect
+              v-model="optionsCountry.value"
+              v-bind="optionsCountry"
+            ></Multiselect>
           </div>
         </div>
 
@@ -170,7 +167,6 @@
           <button class="button button-primary">
             Guardar cambios
           </button>
-          <Multiselect v-model="value" :options="options" />
         </div>
       </form>
     </section>
@@ -179,13 +175,24 @@
 
 <script>
 import Multiselect from "@vueform/multiselect";
-import "@vueform/multiselect/themes/default.css";
 export default {
   name: "PxEditInfoUser",
   data() {
     return {
       value: "Prueba",
-      options: ["Batman", "Robin", "Joker"],
+      optionsGender: {
+        value: 0,
+        options: [
+          "Elige tu género",
+          "Masculino",
+          "Femenino",
+          "No quiero especificar",
+        ],
+      },
+      optionsCountry: {
+        value: 0,
+        options: ["Elige tu país"],
+      },
     };
   },
   components: {
@@ -196,4 +203,5 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/sass/components/_edit-account.scss";
+/*Styles for multiselect*/
 </style>
