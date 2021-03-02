@@ -18,7 +18,7 @@ export default {
     PxInsignia,
     PxEditInfoUser,
   },
-  methods: {    
+  methods: {
     async verifiedUser() {
       await this.authClass
         .authUser()
@@ -40,16 +40,16 @@ export default {
     },
   },
   mounted() {
-    this.verifiedUser();    
+    this.verifiedUser();
   },
 };
 </script>
 
 <style scoped lang="scss">
-    .my-account {
-      padding: 0 16px;
-      width: 100%;
-    }
+.my-account {
+  padding: 0 16px;
+  width: 100%;
+}
 
 @media screen and (min-width: 992px) {
   .my-account {
