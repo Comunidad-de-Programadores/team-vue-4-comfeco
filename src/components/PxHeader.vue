@@ -82,7 +82,7 @@
           </li>
         </ul>
         <section class="user__options" id="js_user-options">
-          <button class="user__account">
+          <button class="user__account" @click="openOptionUser()">
             <router-link to="/my-account">
               <i class="fas fa-user-circle"></i>
               Mi perfil
