@@ -2,7 +2,9 @@
   <section class="edit__user">
     <section class="edit__user--information">
       <button class="edit__user--close-button">
-        <i class="fas fa-arrow-left"></i>
+        <router-link to="/my-account">
+          <i class="fas fa-arrow-left"></i>
+        </router-link>
       </button>
       <h2>
         Editar perfil
