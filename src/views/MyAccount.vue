@@ -2,8 +2,7 @@
   <section class="my-account">
     <PxInsignia />
 
-    <PxEditInfoUser />
-    <PxEvent/>
+    <PxEvent />
   </section>
 </template>
 
@@ -11,14 +10,12 @@
 import Autenticacion from "@/firebase/auth/autentication.js";
 import firebase from "firebase";
 import PxInsignia from "@/components/User/PxInsignia";
-import PxEditInfoUser from "@/components/User/PxEditInfoUser";
 import PxEvent from "@/components/User/PXEvent";
 
 export default {
   name: "MyAccount",
   components: {
     PxInsignia,
-    PxEditInfoUser,
     PxEvent,
   },
   methods: {
@@ -30,7 +27,7 @@ export default {
     authClass() {
       const auth = new Autenticacion();
       return auth;
-    },    
+    },
   },
   mounted() {
     this.verifiedUser();

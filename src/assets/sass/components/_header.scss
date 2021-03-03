@@ -141,6 +141,15 @@
           margin: 0 6px 0 0;
           font-size: 19px;
         }
+        a {
+          text-decoration: none;
+          color: inherit;
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 100%;
+          justify-content: flex-start;
+        }
         &:hover {
           background: rgba(0, 0, 0, 0.2);
         }
@@ -356,15 +365,6 @@
         }
         button {
           margin: 0;
-          a {
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            justify-content: flex-start;
-          }
           i {
             color: var(--color-icons);
           }

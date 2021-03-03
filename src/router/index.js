@@ -49,7 +49,17 @@ const routes = [
   {
     path: "/my-account",
     name: "Perfil",
-    component: () => import(/* webpackChunkName: "Perfil" */ "../views/MyAccount.vue"),
+    component: () =>
+      import(/* webpackChunkName: "Perfil" */ "../views/MyAccount.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/edit-my-account",
+    name: "PxEditInfoUser",
+    component: () =>
+      import(/* webpackChunkName: "edit" */ "../views/EditUserAccount.vue"),
     meta: {
       requiresAuth: true,
     },
