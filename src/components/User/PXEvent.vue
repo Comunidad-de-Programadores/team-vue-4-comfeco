@@ -2,7 +2,9 @@
     <div class="evento">
         <div class="evento__header">
             <p class="evento__title">Eventos de tu Interes</p>
-            <a href="#" class="evento-link">Ver más</a>
+            <router-link to="/eventos" class="evento-link">
+                Ver más
+            </router-link>
         </div>
         <div class="evento__body">
             <img class="evento__body__img" src="@/assets/images/Logo-comfeco-opción-1.png" alt="Logo del Evento">

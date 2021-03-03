@@ -1,9 +1,6 @@
 .edit__user {
-  position: fixed;
-  left: 0;
-  top: 0;
   width: 100%;
-  height: 100vh;
+  height: auto;
   background: var(--color-white);
   z-index: 80;
   padding: 1rem;
@@ -16,8 +13,6 @@
     }
   }
   &--information {
-    overflow-y: auto;
-    max-height: 95vh;
     width: 100%;
     max-width: 768px;
     margin: 0 auto;

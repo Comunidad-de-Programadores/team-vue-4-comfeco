@@ -20,7 +20,6 @@ class Autenticacion {
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");
       // Add class for user login succes -- end
-      console.log(response);
       return response;
     } catch (error) {
       const message = error.message;

@@ -1,5 +1,7 @@
 <template>
   <section class="my-account">
+  <PxSubMenu/>
+    <PxEditInfoUser />
     <div class="body">
       <PxInfoUser />
       <div class="mainbody">
@@ -16,6 +18,7 @@ import firebase from "firebase";
 import PxInsignia from "@/components/User/PxInsignia";
 import PxEvent from "@/components/User/PXEvent";
 import PxInfoUser from "@/components/User/PxInfoUser";
+import PxSubMenu from "@/components/User/PxSubMenu";
 
 export default {
   name: "MyAccount",
@@ -23,6 +26,7 @@ export default {
     PxInsignia,
     PxEvent,
     PxInfoUser,
+    PxSubMenu,
   },
   methods: {
     async verifiedUser() {
@@ -43,9 +47,8 @@ export default {
 
 <style scoped lang="scss">
 .my-account {
-  //padding: 0 16px;
+  padding: 0 0px;
   width: 100%;
-  padding-top: 125px;
 }
 .body {
   display: grid;
