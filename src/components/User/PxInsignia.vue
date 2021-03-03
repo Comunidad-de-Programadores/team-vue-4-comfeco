@@ -1,16 +1,20 @@
 <template>
   <section class="insignias">
-    Insignias
-    <section
-      v-for="insignia in insignias"
-      :key="insignia.id"
-      class="insignias__content"
-      >
-      <div
-        class="insignias__img"
-        :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
-      ></div>      
-    </section>
+    <div>
+      <h6 class="insignias__title">Insignias</h6>
+    </div>
+    <div class="insignias__body">
+      <section
+        v-for="insignia in insignias"
+        :key="insignia.id"
+        class="insignias__content"
+        >
+        <div
+          class="insignias__img"
+          :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
+        ></div>      
+      </section>
+    </div>
   </section>
 </template>
 
@@ -45,6 +49,11 @@ export default {
 .insignias{
   background:#cfc4db;
   padding: 2% 6%;
+  &__title{
+    display: flex;
+    justify-content: start;
+  }
+  &__body{text-align: center;}
   &__content{display: inline-block}
   &__img {
     margin: 0 16px 0 0;
