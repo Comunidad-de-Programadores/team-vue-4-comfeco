@@ -1,10 +1,7 @@
 <template>
-  <PxSubMenu/>
   <section class="my-account">
-<<<<<<< HEAD
+  <PxSubMenu/>
     <PxEditInfoUser />
-=======
->>>>>>> 31045d32459bf993891b0742bd8a4b0eb0685abd
     <div class="body">
       <PxInfoUser />
       <div class="mainbody">

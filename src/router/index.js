@@ -10,38 +10,37 @@ const routes = [{
             import ( /* webpackChunkName: "login" */ "../views/SingInUp.vue"),
         meta: { isPublc: true },
     },
-<<<<<<< HEAD
     {
         path: "/register",
         name: "Register",
         component: () =>
             import ( /* webpackChunkName: "register" */ "../views/SignIn.vue"),
         meta: { isPublc: true },
-=======
-  },
-  {
-    path: "/comunidad",
-    name: "Comunidad",
-    component: () =>
-      import(/* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
-  },
-  {
-    path: "/my-account",
-    name: "Perfil",
-    component: () =>
-      import(/* webpackChunkName: "Perfil" */ "../views/MyAccount.vue"),
-    meta: {
-      requiresAuth: true,
+
     },
-  },
-  {
-    path: "/edit-my-account",
-    name: "PxEditInfoUser",
-    component: () =>
-      import(/* webpackChunkName: "edit" */ "../views/EditUserAccount.vue"),
-    meta: {
-      requiresAuth: true,
->>>>>>> 31045d32459bf993891b0742bd8a4b0eb0685abd
+    {
+        path: "/comunidad",
+        name: "Comunidad",
+        component: () =>
+            import ( /* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
+    },
+    {
+        path: "/my-account",
+        name: "Perfil",
+        component: () =>
+            import ( /* webpackChunkName: "Perfil" */ "../views/MyAccount.vue"),
+        meta: {
+            requiresAuth: true,
+        },
+    },
+    {
+        path: "/edit-my-account",
+        name: "PxEditInfoUser",
+        component: () =>
+            import ( /* webpackChunkName: "edit" */ "../views/EditUserAccount.vue"),
+        meta: {
+            requiresAuth: true,
+        },
     },
     {
         path: "/recover-password",
