@@ -1,21 +1,21 @@
 <template>
     <div class="evento">
         <div class="evento__header">
-            <h5 class="evento__title">Evento de tu Interes</h5>
+            <p class="evento__title">Eventos de tu Interes</p>
             <a href="#" class="evento-link">Ver más</a>
         </div>
         <div class="evento__body">
             <img class="evento__body__img" src="@/assets/images/Logo-comfeco-opción-1.png" alt="Logo del Evento">
             <h5 class="evento__title evento__title-ml1">Comunidad Fest and Code</h5>
             <div class="center-btn">
-                <button class="evento__body__btn">Mas Información</button>
+                <button class="evento__body__btn">Más Información</button>
             </div>
         </div>
         <div class="evento__body">
             <img class="evento__body__img" src="@/assets/images/Logo-comfeco-opción-1.png" alt="Logo del Evento">
             <h5 class="evento__title evento__title-ml1">Comunidad Fest and Code</h5>
             <div class="center-btn">
-                <button class="evento__body__btn">Mas Información</button>
+                <button class="evento__body__btn">Más Información</button>
             </div>
         </div>
     </div>
@@ -35,13 +35,14 @@ export default {
 </script>
 <style lang="scss" scoped>
     .evento{
-        width: 25%;
+        //width: 25%;
         height: 60vh;
         padding: 1rem;
         background: hsl(0, 1, 80);
         overflow: auto;
         &__title{
             color: #ffffff;
+            font-size: 16px;
             &-ml1{
                 margin-left: 0.5rem;
             }
@@ -50,6 +51,10 @@ export default {
             display: flex;
             justify-content: space-between;
             margin-bottom: 3rem;
+        }
+        &-link{
+            text-decoration: none;
+            font-size: 14px;
         }
         &__body{
             width: 100%;
