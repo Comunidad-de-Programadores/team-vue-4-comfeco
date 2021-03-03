@@ -1,12 +1,11 @@
 <template>
+  <PxSubMenu/>
   <section class="my-account">
-
     <PxEditInfoUser />
     <div class="body">
       <PxInfoUser/>
       <div class="mainbody">
         <PxInsignia />
-
       </div>
       <PxEvent/>
     </div>
@@ -20,6 +19,7 @@ import PxInsignia from "@/components/User/PxInsignia";
 import PxEditInfoUser from "@/components/User/PxEditInfoUser";
 import PxEvent from "@/components/User/PXEvent";
 import PxInfoUser from "@/components/User/PxInfoUser";
+import PxSubMenu from "@/components/User/PxSubMenu";
 
 export default {
   name: "MyAccount",
@@ -28,6 +28,7 @@ export default {
     PxEditInfoUser,
     PxEvent,
     PxInfoUser,
+    PxSubMenu,
   },
   methods: {
     async verifiedUser() {
@@ -48,9 +49,8 @@ export default {
 
 <style scoped lang="scss">
 .my-account {
-  //padding: 0 16px;
+  padding: 0 0px;
   width: 100%;
-  padding-top: 125px;
 }
 .body{
   display: grid;
