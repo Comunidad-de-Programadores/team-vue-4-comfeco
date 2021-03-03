@@ -1,13 +1,16 @@
 <template>
   <PxSubMenu/>
   <section class="my-account">
+<<<<<<< HEAD
     <PxEditInfoUser />
+=======
+>>>>>>> 31045d32459bf993891b0742bd8a4b0eb0685abd
     <div class="body">
-      <PxInfoUser/>
+      <PxInfoUser />
       <div class="mainbody">
         <PxInsignia />
       </div>
-      <PxEvent/>
+      <PxEvent />
     </div>
   </section>
 </template>
@@ -16,7 +19,6 @@
 import Autenticacion from "@/firebase/auth/autentication.js";
 import firebase from "firebase";
 import PxInsignia from "@/components/User/PxInsignia";
-import PxEditInfoUser from "@/components/User/PxEditInfoUser";
 import PxEvent from "@/components/User/PXEvent";
 import PxInfoUser from "@/components/User/PxInfoUser";
 import PxSubMenu from "@/components/User/PxSubMenu";
@@ -25,7 +27,6 @@ export default {
   name: "MyAccount",
   components: {
     PxInsignia,
-    PxEditInfoUser,
     PxEvent,
     PxInfoUser,
     PxSubMenu,
@@ -39,7 +40,7 @@ export default {
     authClass() {
       const auth = new Autenticacion();
       return auth;
-    },    
+    },
   },
   mounted() {
     this.verifiedUser();
@@ -52,7 +53,7 @@ export default {
   padding: 0 0px;
   width: 100%;
 }
-.body{
+.body {
   display: grid;
   grid-template-columns: 22% 56% 22%;
   grid-template-rows: auto;

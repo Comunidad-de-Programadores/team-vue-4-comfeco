@@ -8,11 +8,11 @@
         v-for="insignia in insignias"
         :key="insignia.id"
         class="insignias__content"
-        >
+      >
         <div
           class="insignias__img"
           :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
-        ></div>      
+        ></div>
       </section>
     </div>
   </section>
@@ -21,9 +21,9 @@
 <script>
 export default {
   name: "PxInsignia",
-  data(){
-    return{
-      insignias:[
+  data() {
+    return {
+      insignias: [
         {
           id: 1,
           logo: "./assets/images/vuejslogo.jpg",
@@ -39,22 +39,26 @@ export default {
           logo: "./assets/images/angularLogo.jpeg",
           titulo: "React Js Español Latino",
         },
-      ],      
+      ],
     };
-  }
+  },
 };
 </script>
 
 <style scoped lang="scss">
-.insignias{
-  background:#cfc4db;
+.insignias {
+  background: #cfc4db;
   padding: 2% 6%;
-  &__title{
+  &__title {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
   }
-  &__body{text-align: center;}
-  &__content{display: inline-block}
+  &__body {
+    text-align: center;
+  }
+  &__content {
+    display: inline-block;
+  }
   &__img {
     margin: 0 16px 0 0;
     overflow: hidden;

@@ -38,15 +38,15 @@ class Autenticacion {
       })
       .catch((error) => {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        console.error(error);
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorMessage);
       });
     return loginRemember;
   }
 
   async authUser() {
-    const user = await firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
     if (user != null) {
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");

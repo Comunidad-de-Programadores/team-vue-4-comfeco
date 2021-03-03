@@ -59,7 +59,7 @@
             </label>
             <input type="date" id="js_select-born" />
           </div>
-          <div class="edit__user--information-input">
+          <div class="edit__user--information-input select">
             <label for="js_select-born">
               País:
             </label>
@@ -191,12 +191,28 @@ export default {
       },
       optionsCountry: {
         value: 0,
-        options: ["Elige tu país"],
+        options: ["Elije un país"],
       },
     };
   },
   components: {
     Multiselect,
+  },
+  computed: {
+    async getDataCountry() {
+      const API_COUNTRY = "https://restcountries.eu/rest/v2/all";
+      const data = await fetch(API_COUNTRY);
+      const response = await data.json();
+      return response;
+    },
+  },
+  async created() {
+    this.getDataCountry.then((data) => {
+      data.forEach((element) => {
+        console.log(element.name);
+        this.optionsCountry.options.push(element.name);
+      });
+    });
   },
 };
 </script>
