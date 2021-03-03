@@ -1,21 +1,32 @@
 <template>
-  <section class="insignias">
-    <div>
-      <h6 class="insignias__title">Insignias</h6>
-    </div>
-    <div class="insignias__body">
-      <section
-        v-for="insignia in insignias"
-        :key="insignia.id"
-        class="insignias__content"
-      >
-        <div
-          class="insignias__img"
-          :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
-        ></div>
-      </section>
-    </div>
-  </section>
+  <div>
+    <section class="insignias">
+      <div>
+        <h6 class="insignias__title">Insignias</h6>
+      </div>
+      <div class="insignias__body">
+        <section
+          v-for="insignia in insignias"
+          :key="insignia.id"
+          class="insignias__content"
+          >
+          <div
+            class="insignias__img"
+            :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
+          ></div>
+        </section>        
+      </div>
+    </section>
+    <section class="actividades">
+      <h6 class="actividades__title">Actividad reciente</h6>
+      <div class="actividades__body">
+        <div class="actividades__content">
+          <span class="actividades__evento">Te has unido al evento Comunity Fest and Code</span>
+          <span class="actividades__icon"><i class="far fa-calendar-check" style="font-size: 48px;"></i></span>
+        </div>
+      </div>     
+    </section>
+  </div>    
 </template>
 
 <script>
@@ -48,7 +59,7 @@ export default {
 <style scoped lang="scss">
 .insignias {
   background: #cfc4db;
-  padding: 2% 6%;
+  padding: 2% 3%;
   &__title {
     display: flex;
     justify-content: flex-start;
@@ -69,6 +80,30 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+}
+.actividades{
+  margin-top: 4rem;
+  &__title {    
+    padding-left: 3%
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: 50% 48%;
+    grid-template-rows: auto;
+    grid-column-gap: 1rem;
+    box-shadow: 0 7px 10px 0 #999;
+    margin-top: 1rem;
+    padding: 1rem 3%;
+  }
+  &__evento {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 1rem;
+  }
+  &__icon {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 </style>
