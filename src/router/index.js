@@ -57,7 +57,7 @@ const routes = [
   },
   {
     path: "/edit-my-account",
-    name: "PxEditInfoUser",
+    name: "EditUserAccount",
     component: () =>
       import(/* webpackChunkName: "edit" */ "../views/EditUserAccount.vue"),
     meta: {
