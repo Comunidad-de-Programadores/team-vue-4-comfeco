@@ -49,12 +49,23 @@ const routes = [{
             import ( /* webpackChunkName: "recoverPass" */ "../views/RecoverPass.vue"),
         meta: { isPublc: true },
     },
+
     {
         path: "/:catchAll(.*)",
         name: "Error",
         component: () =>
             import ( /* webpackChunkName: "Error" */ "../views/404NotFount.vue"),
         meta: { isPublc: true },
+
+    },
+    {
+        path: "/edit-my-account",
+        name: "EditUserAccount",
+        component: () =>
+            import ( /* webpackChunkName: "edit" */ "../views/EditUserAccount.vue"),
+        meta: {
+            requiresAuth: true,
+        },
     },
     {
         path: "/home",

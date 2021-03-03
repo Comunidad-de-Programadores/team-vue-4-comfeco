@@ -158,7 +158,7 @@ export default {
               this.form.password
             );
           }
-          this.$router.push("/home");
+          this.$router.push("/my-account");
           toastr.success(`Bienvenido ${auhEmailPass.displayName}`);
         } else {
           toastr.info(
@@ -173,7 +173,7 @@ export default {
         console.log(accountFacebookMehotd);
         if (accountFacebookMehotd.emailVerified) {
           toastr.success(`Bienvenido ${accountFacebookMehotd.displayName}`);
-          this.$router.push("/home");
+          this.$router.push("/my-account");
         } else {
           this.authClass.singOutOfAccount();
           this.$router.push("/");
@@ -191,7 +191,7 @@ export default {
         const accountGoogleMehotd = await this.authClass.authCuentaGoogle();
         if (accountGoogleMehotd.emailVerified) {
           toastr.success(`Bienvenido ${accountGoogleMehotd.displayName}`);
-          this.$router.push("/home");
+          this.$router.push("/my-account");
         }
       } catch (error) {
         toastr.error(`Error autenticarse con Google ${error}`);
@@ -214,7 +214,7 @@ export default {
         .authUser()
         .then((user) => {
           if (user != null) {
-            this.$router.push("/home");
+            this.$router.push("/my-account");
             toastr.success(`Bienvenido ${user.displayName}`);
           }
         })
