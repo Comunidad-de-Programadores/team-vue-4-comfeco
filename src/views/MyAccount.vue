@@ -1,21 +1,11 @@
 <template>
-  <section class="my-account">    
-    <div class="submenu">
-      <button
-        v-for="tab in tabs"
-        :key="tab"
-        :class="['submenu__btn tab-button', { active: currentTab === tab.tag }]"
-        @click="currentTab = tab.tag"
-        >
-        <i :class="['fa', tab.icon]"></i> 
-         {{ tab.title }}
-      </button>      
-    </div>
+  <section class="my-account">
+  <PxSubMenu/>
     <PxEditInfoUser />
     <div class="body">
       <PxInfoUser />
       <div class="mainbody">
-        <component :is="currentTabComponent"></component>        
+        <PxInsignia />
       </div>
       <PxEvent />
     </div>
@@ -32,33 +22,6 @@ import PxSubMenu from "@/components/User/PxSubMenu";
 
 export default {
   name: "MyAccount",
-  data() {
-    return {
-      currentTab: 'PxInsignia',
-      tabs: [
-        {
-          tag: 'PxInfoUser',
-          icon: 'fa-user',
-          title:'Mi Perfil'
-        },
-        {
-          tag: 'PxInsignia',
-          icon: 'fa-star',
-          title:'Insignias'
-        },
-        {
-          tag: 'PxSubMenu',
-          icon: 'fa-users',
-          title:'Grupos'
-        },
-        {
-          tag: 'PxEvent',
-          icon: 'fa-calendar',
-          title:'Eventos'
-        }
-      ]
-    }
-  },
   components: {
     PxInsignia,
     PxEvent,
@@ -75,9 +38,6 @@ export default {
       const auth = new Autenticacion();
       return auth;
     },
-    currentTabComponent() {
-      return this.currentTab
-    }
   },
   mounted() {
     this.verifiedUser();
@@ -102,24 +62,5 @@ export default {
     margin-top: 96px;
     padding: 0 6%;
   }
-}
-.submenu{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background: linear-gradient(hsl(285, 50, 70), hsl(285, 50, 80), hsl(285, 50, 85));
-    width: 100%;
-    height: 100px;
-    margin: 0 0 50px 0;
-    &__btn{
-        height: 50px;
-        width: 200px;
-        border: 1px solid;
-        border-radius: 3%;
-        &.active{
-          background: #390f64;
-          color: #fff;
-        }
-    }
 }
 </style>

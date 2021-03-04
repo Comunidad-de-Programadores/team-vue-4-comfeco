@@ -186,6 +186,11 @@
             }
           }
         }
+        &.knowledge {
+          .edit__user--information-input {
+            width: 100%;
+          }
+        }
         .button.button-primary {
           width: 250px;
           align-self: flex-end;

@@ -13,23 +13,28 @@ class User {
   createUser(nick, email, description) {}
 
   // Traer la informacion del usuario actual
-  getInfoUser(uid) {}
+  async getInfoUser(docrefId) {
+    const docRef = await this.db
+      .collection("userPersonalInformation")
+      .doc(docrefId);
+    const data = await docRef.get();
+    console.log(data);
+  }
 
   // Guardar la nueva informacion del usuario cuando se edite sus datos
   // Nota: la descripcion que se editara al final sera la biografia entonces ese sera lo que se debe actualizar
-  saveNewInfoUser(
-    uid,
-    areaKnoledge,
-    country,
-    dateBorn,
-    email,
-    gender,
-    biography,
-    urlSMFB,
-    urlSMGitHub,
-    urlSMSTwitter,
-    urlSMYT
-  ) {}
+  async saveNewInfoUser(userInformation) {
+    try {
+      const dbCollection = await this.db
+        .collection("userPersonalInformation")
+        .add(userInformation);
+      const idDocument = dbCollection.id;
+      console.log("Document written with ID: ", idDocument);
+      return idDocument;
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  }
 }
 
 export default User;
