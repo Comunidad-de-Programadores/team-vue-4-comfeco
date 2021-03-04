@@ -15,7 +15,7 @@
       >
         <div class="edit__user--information-photo">
           <img
-            :src="formEdit.photoURL"
+            :src="formEdit.uPhoto"
             :alt="'Foto de perfil del usuairo: ' + formEdit.nick"
           />
           <div class="edit__user--information-photo-change">
@@ -33,7 +33,7 @@
             <input
               type="text"
               id="nick"
-              v-model="formEdit.nick"
+              v-model="formEdit.uNick"
               autocomplete="off"
               placeholder="Tu nick"
             />
@@ -46,7 +46,7 @@
             <input
               type="text"
               id="Correo"
-              v-model="formEdit.email"
+              v-model="formEdit.uEmail"
               autocomplete="off"
               placeholder="Tu correo"
             />
@@ -56,12 +56,18 @@
         <div class="edit__user--information-group-input three">
           <div class="edit__user--information-input select">
             <label>
-              Genero:
+              Género:
             </label>
-            <Multiselect
-              v-model="formEdit.optionsGender.value"
-              v-bind="formEdit.optionsGender"
-            ></Multiselect>
+            <select v-model="formEdit.uGender">
+              <option disabled value="">Elije tu género</option>
+              <option
+                v-for="gender in uGender"
+                :value="gender.option"
+                :key="gender.id"
+              >
+                {{ gender.option }}
+              </option>
+            </select>
           </div>
           <div class="edit__user--information-input">
             <label for="js_select-born">
@@ -69,7 +75,7 @@
             </label>
             <input
               type="date"
-              v-model="formEdit.dateBorn"
+              v-model="formEdit.uDateBorn"
               id="js_select-born"
             />
           </div>
@@ -77,10 +83,35 @@
             <label for="js_select-born">
               País:
             </label>
-            <Multiselect
-              v-model="formEdit.optionsCountry.value"
-              v-bind="formEdit.optionsCountry"
-            ></Multiselect>
+            <select v-model="formEdit.uCountry">
+              <option disabled value="">Elije tu especialidad</option>
+              <option
+                v-for="country in uCountry"
+                :value="country.option"
+                :key="country.id"
+              >
+                {{ country.option }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <h2>Mi especialidad:</h2>
+        <div class="edit__user--information-group-input knowledge">
+          <div class="edit__user--information-input select">
+            <label>
+              Área de conocimiento:
+            </label>
+            <select v-model="formEdit.uAreaknowledge">
+              <option disabled value="">Elije tu especialidad</option>
+              <option
+                v-for="knowledge in uAreaknowledge"
+                :value="knowledge.option"
+                :key="knowledge.id"
+              >
+                {{ knowledge.option }}
+              </option>
+            </select>
           </div>
         </div>
 
@@ -93,7 +124,7 @@
             <input
               type="password"
               id="js_password"
-              v-model="formEdit.newPass"
+              v-model="formEdit.uNewPass"
               autocomplete="off"
               placeholder="Contraseña nueva"
             />
@@ -106,7 +137,7 @@
             <input
               type="password"
               id="js_password-repeat"
-              v-model="formEdit.confirmNewPass"
+              v-model="formEdit.uConfirmNewPass"
               autocomplete="off"
               placeholder="Repetir contraseña nueva"
             />
@@ -124,7 +155,7 @@
             <input
               type="text"
               id="js_social_facebook"
-              v-model="formEdit.url_facebook"
+              v-model="formEdit.uSocialMediaFacebook"
               autocomplete="off"
               placeholder="Url de facebook"
             />
@@ -138,7 +169,7 @@
             <input
               type="text"
               id="js_social_linkedin"
-              v-model="formEdit.url_linkedin"
+              v-model="formEdit.uSocialMediaLinkedin"
               autocomplete="off"
               placeholder="Url de linkedin"
             />
@@ -152,7 +183,7 @@
             <input
               type="text"
               id="js_social_github"
-              v-model="formEdit.ulr_github"
+              v-model="formEdit.uSocialMediaGitHub"
               autocomplete="off"
               placeholder="Url de github"
             />
@@ -166,7 +197,7 @@
             <input
               type="text"
               id="js_social_twitter"
-              v-model="formEdit.url_twitter"
+              v-model="formEdit.uSocialMediaTwitter"
               autocomplete="off"
               placeholder="Url de twitter"
             />
@@ -182,7 +213,7 @@
             </label>
             <textarea
               id="js_biography"
-              v-model="formEdit.biography"
+              v-model="formEdit.uBiography"
               cols="30"
               rows="2"
             ></textarea>
@@ -199,48 +230,95 @@
 </template>
 
 <script>
-import Multiselect from "@vueform/multiselect";
+import firebase from "firebase";
 // Import class autentication
 import Autenticacion from "@/firebase/auth/autentication.js";
-
+// Import class User
+import User from "@/firebase/user/user.js";
+//Inicializando Firestore
+const db = firebase.firestore();
 export default {
   name: "PxEditInfoUser",
   data() {
     return {
+      uAreaknowledge: [
+        {
+          id: 0,
+          option: "Frontend",
+        },
+        {
+          id: 1,
+          option: "Backend",
+        },
+        {
+          id: 2,
+          option: "DevOps",
+        },
+        {
+          id: 3,
+          option: "Video Game Developers",
+        },
+        {
+          id: 4,
+          option: "UI/UX",
+        },
+        {
+          id: 5,
+          option: "Database Developer",
+        },
+        {
+          id: 6,
+          option: "Cloud Computing",
+        },
+      ],
+      uGender: [
+        {
+          id: 0,
+          option: "Masculino",
+        },
+        {
+          id: 1,
+          option: "Femenino",
+        },
+        {
+          id: 2,
+          option: "No quiero especificar",
+        },
+      ],
+      uCountry: [],
       formEdit: {
-        nick: "",
-        email: "",
-        photoURL: "",
-        optionsGender: {
-          value: 0,
-          options: [
-            "Elige tu género",
-            "Masculino",
-            "Femenino",
-            "No quiero especificar",
-          ],
-        },
-        dateBorn: "",
-        optionsCountry: {
-          value: 0,
-          options: ["Elije un país"],
-        },
-        url_facebook: "",
-        url_linkedin: "",
-        ulr_github: "",
-        url_twitter: "",
-        biography: "",
-
-        newPass: "",
-        confirmNewPass: "",
+        uAreaknowledge: "",
+        uBiography: "",
+        uCountry: "",
+        uDateBorn: "",
+        uEmail: "",
+        uGender: "",
+        uNick: "",
+        uPhoto: "",
+        uSocialMediaFacebook: "",
+        uSocialMediaGitHub: "",
+        uSocialMediaTwitter: "",
+        uSocialMediaLinkedin: "",
+        uid: "",
+        uNewPass: "",
+        uConfirmNewPass: "",
       },
+      idDoc: "",
     };
   },
   components: {
     Multiselect,
   },
   methods: {
-    saveInformationEditUser() {},
+    async saveInformationEditUser() {
+      const currentUser = await this.authClass.authUser();
+      const uid = currentUser.uid;
+      this.formEdit.uid = uid;
+      const informationForm = this.formEdit;
+      this.userClass.saveNewInfoUser(informationForm).then((response) => {
+        this.idDoc = response;
+      });
+    },
   },
   computed: {
     async getDataCountry() {
@@ -253,26 +331,41 @@ export default {
       const auth = new Autenticacion();
       return auth;
     },
+    userClass() {
+      const user = new User();
+      return user;
+    },
   },
   async created() {
     this.getDataCountry.then((data) => {
-      data.forEach((element) =>
-        this.formEdit.optionsCountry.options.push(element.name)
-      );
+      data.forEach((element) => {
+        const numericCode = element.numericCode;
+        const name = element.name;
+        let objCountry = {
+          id: numericCode,
+          option: name,
+        };
+        this.uCountry.push(objCountry);
+      });
     });
+
     const currentUser = await this.authClass.authUser();
     console.log(currentUser);
+
+    const uid = currentUser.uid;
+    this.formEdit.uid = uid;
+
     if (
       currentUser.providerData[0].providerId === "google.com" ||
       currentUser.providerData[0].providerId === "facebook.com"
     ) {
-      this.formEdit.nick = currentUser.displayName;
-      this.formEdit.email = currentUser.email;
-      this.formEdit.photoURL = currentUser.photoURL;
+      this.formEdit.uNick = currentUser.displayName;
+      this.formEdit.uEmail = currentUser.email;
+      this.formEdit.uPhoto = currentUser.photoURL;
     } else {
-      this.formEdit.nick = currentUser.displayName;
-      this.formEdit.email = currentUser.email;
-      this.formEdit.photoURL = "../../assets/images/userDefaultImage.png";
+      this.formEdit.uNick = currentUser.displayName;
+      this.formEdit.uEmail = currentUser.email;
+      this.formEdit.uPhoto = "../../assets/images/userDefaultImage.png";
     }
   },
 };
@@ -280,5 +373,4 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/sass/components/_edit-account.scss";
-/*Styles for multiselect*/
 </style>

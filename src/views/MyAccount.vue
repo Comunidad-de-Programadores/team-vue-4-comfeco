@@ -1,7 +1,6 @@
 <template>
   <section class="my-account">
-  <PxSubMenu/>
-    <PxEditInfoUser />
+    <PxSubMenu />
     <div class="body">
       <PxInfoUser />
       <div class="mainbody">

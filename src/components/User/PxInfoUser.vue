@@ -1,6 +1,8 @@
 <template>
   <div class="infouser">
-    <a href="#" class="infouser__edit">Editar Perfil</a>
+    <router-link to="/edit-my-account" class="infouser__edit">
+      Editar Perfil
+    </router-link>
     <div class="infouser__details">
       <img
         class="infouser__img"
