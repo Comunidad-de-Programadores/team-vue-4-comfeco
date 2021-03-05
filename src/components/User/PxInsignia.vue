@@ -9,24 +9,28 @@
           v-for="insignia in insignias"
           :key="insignia.id"
           class="insignias__content"
-          >
+        >
           <div
             class="insignias__img"
             :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
           ></div>
-        </section>        
+        </section>
       </div>
     </section>
     <section class="actividades">
       <h6 class="actividades__title">Actividad reciente</h6>
       <div class="actividades__body">
         <div class="actividades__content">
-          <span class="actividades__evento">Te has unido al evento Comunity Fest and Code</span>
-          <span class="actividades__icon"><i class="far fa-calendar-check" style="font-size: 48px;"></i></span>
+          <span class="actividades__evento"
+            >Te has unido al evento Comunity Fest and Code</span
+          >
+          <span class="actividades__icon"
+            ><i class="far fa-calendar-check" style="font-size: 48px;"></i
+          ></span>
         </div>
-      </div>     
+      </div>
     </section>
-  </div>    
+  </div>
 </template>
 
 <script>
@@ -58,7 +62,14 @@ export default {
 
 <style scoped lang="scss">
 .insignias {
-  background: #cfc4db;
+  background-image: linear-gradient(
+    to left bottom,
+    #b43ed5,
+    #b148db,
+    #ad52e1,
+    #aa5ae6,
+    #a662eb
+  );
   padding: 2% 3%;
   &__title {
     display: flex;
@@ -82,10 +93,10 @@ export default {
     background-size: cover;
   }
 }
-.actividades{
+.actividades {
   margin-top: 4rem;
-  &__title {    
-    padding-left: 3%
+  &__title {
+    padding-left: 3%;
   }
   &__content {
     display: grid;
@@ -93,6 +104,7 @@ export default {
     grid-template-rows: auto;
     grid-column-gap: 1rem;
     box-shadow: 0 7px 10px 0 #999;
+    border: 1px solid #cccccc;
     margin-top: 1rem;
     padding: 1rem 3%;
   }
