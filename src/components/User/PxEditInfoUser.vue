@@ -84,7 +84,7 @@
               País:
             </label>
             <select v-model="formEdit.uCountry">
-              <option disabled value="">Elije tu especialidad</option>
+              <option disabled value="">Elije tu país</option>
               <option
                 v-for="country in uCountry"
                 :value="country.option"
@@ -235,8 +235,6 @@ import firebase from "firebase";
 import Autenticacion from "@/firebase/auth/autentication.js";
 // Import class User
 import User from "@/firebase/user/user.js";
-//Inicializando Firestore
-const db = firebase.firestore();
 export default {
   name: "PxEditInfoUser",
   data() {
@@ -303,21 +301,17 @@ export default {
         uNewPass: "",
         uConfirmNewPass: "",
       },
-      idDoc: "",
     };
-  },
-  components: {
-    Multiselect,
   },
   methods: {
     async saveInformationEditUser() {
       const currentUser = await this.authClass.authUser();
-      const uid = currentUser.uid;
-      this.formEdit.uid = uid;
-      const informationForm = this.formEdit;
-      this.userClass.saveNewInfoUser(informationForm).then((response) => {
-        this.idDoc = response;
-      });
+      const uId = currentUser.uid;
+      console.log("Actualizando informacion");
+      setTimeout(() => {
+        this.userClass.updateInformationUser(uId, this.formEdit);
+        console.log("Informacion actualizada");
+      }, 1500);
     },
   },
   computed: {
@@ -348,23 +342,33 @@ export default {
         this.uCountry.push(objCountry);
       });
     });
-
     const currentUser = await this.authClass.authUser();
-    console.log(currentUser);
-
     const uid = currentUser.uid;
-    this.formEdit.uid = uid;
+
+    this.userClass.getInfoUser(uid).then((data) => {
+      this.formEdit.uAreaknowledge = data.uAreaknowledge;
+      this.formEdit.uBiography = data.uBiography;
+      this.formEdit.uCountry = data.uCountry;
+      this.formEdit.uDateBorn = data.uDateBorn;
+      this.formEdit.uEmail = data.uEmail;
+      this.formEdit.uGender = data.uGender;
+      this.formEdit.uNick = data.uNick;
+      this.formEdit.uPhoto = this.formEdit.uPhoto;
+      this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
+      this.formEdit.uSocialMediaGitHub = data.uSocialMediaGitHub;
+      this.formEdit.uSocialMediaTwitter = data.uSocialMediaTwitter;
+      this.formEdit.uSocialMediaLinkedin = data.uSocialMediaLinkedin;
+      this.formEdit.uid = data.uid;
+      this.formEdit.uNewPass = data.uNewPass;
+      this.formEdit.uConfirmNewPass = data.uConfirmNewPass;
+    });
 
     if (
       currentUser.providerData[0].providerId === "google.com" ||
       currentUser.providerData[0].providerId === "facebook.com"
     ) {
-      this.formEdit.uNick = currentUser.displayName;
-      this.formEdit.uEmail = currentUser.email;
       this.formEdit.uPhoto = currentUser.photoURL;
     } else {
-      this.formEdit.uNick = currentUser.displayName;
-      this.formEdit.uEmail = currentUser.email;
       this.formEdit.uPhoto = "../../assets/images/userDefaultImage.png";
     }
   },
