@@ -30,7 +30,14 @@ export default {
   //width: 25%;
   height: 60vh;
   padding: 1rem;
-  background: hsl(0, 1, 80);
+  background-image: linear-gradient(
+    to left bottom,
+    #b43ed5,
+    #b148db,
+    #ad52e1,
+    #aa5ae6,
+    #a662eb
+  );
   overflow: auto;
 
   &__edit {
