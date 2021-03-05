@@ -235,6 +235,8 @@ import firebase from "firebase";
 import Autenticacion from "@/firebase/auth/autentication.js";
 // Import class User
 import User from "@/firebase/user/user.js";
+
+const db = firebase.firestore();
 export default {
   name: "PxEditInfoUser",
   data() {
@@ -306,12 +308,10 @@ export default {
   methods: {
     async saveInformationEditUser() {
       const currentUser = await this.authClass.authUser();
-      const uId = currentUser.uid;
-      console.log("Actualizando informacion");
-      setTimeout(() => {
-        this.userClass.updateInformationUser(uId, this.formEdit);
-        console.log("Informacion actualizada");
-      }, 1500);
+      const userId = currentUser.uid;
+
+      // Guardar los datos actuales ingresados en el formulario
+      this.userClass.saveInformationUser(userId, this.formEdit);
     },
   },
   computed: {
@@ -331,6 +331,55 @@ export default {
     },
   },
   async created() {
+    const currentUser = await this.authClass.authUser();
+    const userId = currentUser.uid;
+    const docRef = db.collection("userPersonalInformation").doc(userId);
+
+    // Traer la informacion del usuario
+    docRef
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          console.log("informacion encontrada ->", doc.data());
+          const data = doc.data();
+          this.formEdit.uAreaknowledge = data.uAreaknowledge;
+          this.formEdit.uBiography = data.uBiography;
+          this.formEdit.uCountry = data.uCountry;
+          this.formEdit.uDateBorn = data.uDateBorn;
+          this.formEdit.uEmail = data.uEmail;
+          this.formEdit.uGender = data.uGender;
+          this.formEdit.uNick = data.uNick;
+          this.formEdit.uPhoto = this.formEdit.uPhoto;
+          this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
+          this.formEdit.uSocialMediaGitHub = data.uSocialMediaGitHub;
+          this.formEdit.uSocialMediaTwitter = data.uSocialMediaTwitter;
+          this.formEdit.uSocialMediaLinkedin = data.uSocialMediaLinkedin;
+          this.formEdit.uid = data.uid;
+          this.formEdit.uNewPass = data.uNewPass;
+          this.formEdit.uConfirmNewPass = data.uConfirmNewPass;
+        } else {
+          console.warn("No se encontro el documento!");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al traer la informacion del documento:", error);
+      });
+
+    // LLenar campos de foto de perfil, nick y email en el formulario
+    if (
+      currentUser.providerData[0].providerId === "google.com" ||
+      currentUser.providerData[0].providerId === "facebook.com"
+    ) {
+      this.formEdit.uPhoto = currentUser.photoURL;
+      this.formEdit.uNick = currentUser.displayName;
+      this.formEdit.uEmail = currentUser.email;
+    } else {
+      this.formEdit.uPhoto = "../../assets/images/userDefaultImage.png";
+      this.formEdit.uNick = currentUser.displayName;
+      this.formEdit.uEmail = currentUser.email;
+    }
+
+    // Llenar select of country
     this.getDataCountry.then((data) => {
       data.forEach((element) => {
         const numericCode = element.numericCode;
@@ -342,35 +391,6 @@ export default {
         this.uCountry.push(objCountry);
       });
     });
-    const currentUser = await this.authClass.authUser();
-    const uid = currentUser.uid;
-
-    this.userClass.getInfoUser(uid).then((data) => {
-      this.formEdit.uAreaknowledge = data.uAreaknowledge;
-      this.formEdit.uBiography = data.uBiography;
-      this.formEdit.uCountry = data.uCountry;
-      this.formEdit.uDateBorn = data.uDateBorn;
-      this.formEdit.uEmail = data.uEmail;
-      this.formEdit.uGender = data.uGender;
-      this.formEdit.uNick = data.uNick;
-      this.formEdit.uPhoto = this.formEdit.uPhoto;
-      this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
-      this.formEdit.uSocialMediaGitHub = data.uSocialMediaGitHub;
-      this.formEdit.uSocialMediaTwitter = data.uSocialMediaTwitter;
-      this.formEdit.uSocialMediaLinkedin = data.uSocialMediaLinkedin;
-      this.formEdit.uid = data.uid;
-      this.formEdit.uNewPass = data.uNewPass;
-      this.formEdit.uConfirmNewPass = data.uConfirmNewPass;
-    });
-
-    if (
-      currentUser.providerData[0].providerId === "google.com" ||
-      currentUser.providerData[0].providerId === "facebook.com"
-    ) {
-      this.formEdit.uPhoto = currentUser.photoURL;
-    } else {
-      this.formEdit.uPhoto = "../../assets/images/userDefaultImage.png";
-    }
   },
 };
 </script>
