@@ -42,6 +42,8 @@
 import toastr from "toastr";
 // Import class autentication
 import Autenticacion from "@/firebase/auth/autentication.js";
+// Import class validation
+import ValidationForms from "@/validations";
 
 export default {
   name: "PxRecoverPassForm",
@@ -54,35 +56,43 @@ export default {
   },
   methods: {
     async recoverPassword() {
-      await this.authClass
-        .recuperarContraseña(this.form.email)
-        .then(() => {
-          this.$swal({
-            title: "Correo enviado satisfactoriamente! 😄",
-            icon: "success",
-            confirmButtonText: "OK",
+      if (this.validationClass.validInput('email', this.form.email)) {
+        await this.authClass
+          .recuperarContraseña(this.form.email)
+          .then(() => {
+            this.$swal({
+              title: "Correo enviado satisfactoriamente! 😄",
+              icon: "success",
+              confirmButtonText: "OK",
+            });
+            setTimeout(() => {
+              this.$router.push("/");
+            }, 1500);
+          })
+          .catch((error) => {
+            const message = error.message;
+            console.error(message);
+            this.$swal({
+              title: "Error ☹",
+              text: "Posiblemente el correo que ingreso  es incorrecto",
+              icon: "error",
+              confirmButtonText: "OK",
+            });
+            this.$router.push("/recover-password");
           });
-          setTimeout(() => {
-            this.$router.push("/");
-          }, 1500);
-        })
-        .catch((error) => {
-          const message = error.message;
-          console.error(message);
-          this.$swal({
-            title: "Error ☹",
-            text: "Posiblemente el correo que ingreso  es incorrecto",
-            icon: "error",
-            confirmButtonText: "OK",
-          });
-          this.$router.push("/recover-password");
-        });
+      }else{
+        alert('El correo electrónico debe ser válido.')
+      }      
     },
   },
   computed: {
     authClass() {
       const auth = new Autenticacion();
       return auth;
+    },
+     validationClass() {
+      const validation = new ValidationForms();
+      return validation;
     },
   },
 };
