@@ -235,7 +235,7 @@ import firebase from "firebase";
 import Autenticacion from "@/firebase/auth/autentication.js";
 // Import class User
 import User from "@/firebase/user/user.js";
-
+// Inicializando firestore
 const db = firebase.firestore();
 export default {
   name: "PxEditInfoUser",
