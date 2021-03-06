@@ -312,6 +312,11 @@ export default {
 
       // Guardar los datos actuales ingresados en el formulario
       this.userClass.saveInformationUser(userId, this.formEdit);
+      this.$swal({
+        title: "Informacion actualizada satisfactoriamente! 😄",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
     },
   },
   computed: {

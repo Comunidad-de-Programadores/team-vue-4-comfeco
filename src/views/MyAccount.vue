@@ -175,6 +175,7 @@ export default {
     grid-template-columns: calc(25% - 16px) 50% calc(25% - 16px);
     grid-template-rows: auto;
     grid-column-gap: 1rem;
+    align-items: flex-start;
   }
 }
 </style>

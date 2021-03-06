@@ -50,11 +50,19 @@ class Autenticacion {
 
   async authUser() {
     const user = firebase.auth().currentUser;
+    console.log(user);
     if (user != null) {
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");
       document.getElementById("js_user-name").textContent = user.displayName;
       document.getElementById("js_user-email").textContent = user.email;
+      document
+        .getElementById("js_avatar-user")
+        .setAttribute("src", user.photoURL);
+    } else {
+      document
+        .getElementById("js_avatar-user")
+        .setAttribute("src", "./assets/images/userDefaultImage.png");
     }
     return user;
   }
