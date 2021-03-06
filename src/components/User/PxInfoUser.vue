@@ -34,8 +34,14 @@
       </div>
       <div class="information" v-else>
         <p class="infouser__info-edit">
-          Edita tu información para poder actualizar tu carta de presentación
+          Edita tu información para poder actualizar tu carta de presentación:
         </p>
+        <p class="infouser__pre-title">Agregar información sobre ti:</p>
+        <ul class="infouser__pre">
+          <li>Especialidad</li>
+          <li>Todas las redes sociales</li>
+          <li>Biografía</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -57,7 +63,7 @@ export default {
       uNick: "",
       uAreaknowledge: "",
       uBiography: "",
-      uPhoto: "",
+      uPhoto: "../../assets/images/userDefaultImage.png",
       uSocialMediaFacebook: "",
       uSocialMediaGitHub: "",
       uSocialMediaLinkedin: "",
@@ -97,18 +103,20 @@ export default {
           this.uSocialMediaLinkedin = `https://www.linkedin.com/in/${data.uSocialMediaLinkedin}`;
           this.uSocialMediaTwitter = `https://twitter.com/${data.uSocialMediaTwitter}`;
         } else {
-          console.warn("No se encontro el documento!");
+          console.log("No se encontro el documento!");
         }
 
-        if (
-          data.uAreaknowledge === "" ||
-          data.uBiography === "" ||
-          data.uSocialMediaFacebook === "" ||
-          data.uSocialMediaGitHub === "" ||
-          data.uSocialMediaLinkedin === "" ||
-          data.uSocialMediaTwitter === ""
-        ) {
-          this.information = false;
+        if (doc.exists) {
+          if (
+            data.uAreaknowledge === "" ||
+            data.uBiography === "" ||
+            data.uSocialMediaFacebook === "" ||
+            data.uSocialMediaGitHub === "" ||
+            data.uSocialMediaLinkedin === "" ||
+            data.uSocialMediaTwitter === ""
+          ) {
+            this.information = false;
+          }
         }
       })
       .catch((error) => {
@@ -128,6 +136,24 @@ export default {
     #aa5ae6,
     #a662eb
   );
+  &__pre {
+    list-style: initial;
+    padding: 0 10px 0 20px;
+    text-align: left;
+    li {
+      font-family: var(--fuente-medium);
+      letter-spacing: 0.5px;
+      color: var(--color-black);
+      font-size: 16px;
+      margin: 0 0 6px 0;
+    }
+  }
+  &__pre-title {
+    text-align: left;
+    margin: 5px 0 10px 0;
+    font-size: 18px;
+    font-family: var(--fuente-bold);
+  }
   &__edit {
     text-decoration: none;
     display: flex;
