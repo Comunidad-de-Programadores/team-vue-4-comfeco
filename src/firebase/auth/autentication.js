@@ -50,7 +50,6 @@ class Autenticacion {
 
   async authUser() {
     const user = firebase.auth().currentUser;
-    console.log(user);
     if (user != null) {
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");
