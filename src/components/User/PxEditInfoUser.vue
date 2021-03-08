@@ -386,9 +386,9 @@ export default {
 
     // Llenar select of country
     this.getDataCountry.then((data) => {
-      data.forEach((element) => {
-        const numericCode = element.numericCode;
-        const name = element.name;
+      data.forEach((dataCountry) => {
+        const numericCode = dataCountry.numericCode;
+        const name = dataCountry.name;
         let objCountry = {
           id: numericCode,
           option: name,

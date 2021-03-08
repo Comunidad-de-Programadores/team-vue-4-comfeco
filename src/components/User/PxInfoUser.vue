@@ -136,6 +136,7 @@ export default {
     #aa5ae6,
     #a662eb
   );
+  border-radius: 20px;
   &__pre {
     list-style: initial;
     padding: 0 10px 0 20px;

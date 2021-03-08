@@ -68,7 +68,8 @@ export default {
     #aa5ae6,
     #a662eb
   );
-  padding: 16px;
+  padding: 1rem;
+  border-radius: 20px;
   &__title {
     margin: 0 0 10px 0;
     font-size: 24px;

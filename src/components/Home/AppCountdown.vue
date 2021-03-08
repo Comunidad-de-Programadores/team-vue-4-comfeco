@@ -98,7 +98,7 @@ export default {
       #aa5ae6,
       #a662eb
     );
-    border-radius: 4px;
+    border-radius: 20px;
     padding: 60px 30px;
     display: flex;
     justify-content: space-between;

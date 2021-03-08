@@ -75,7 +75,7 @@ export default {
     #a662eb
   );
   padding: 1rem 1.8rem;
-  border-radius: 4px;
+  border-radius: 20px;
   grid-area: comunity;
   transition: var(--transition);
   margin: 0 0 3rem 0;
