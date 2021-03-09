@@ -24,26 +24,6 @@ class Autenticacion {
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");
       // Add class for user login succes -- end
-      this.db
-        .collection("userPersonalInformation")
-        .doc(response.uid)
-        .set({
-          uAreaknowledge: "",
-          uBiography: "",
-          uCountry: "",
-          uDateBorn: "",
-          uEmail: response.email,
-          uGender: "",
-          uNick: response.displayName,
-          uPhoto: "",
-          uSocialMediaFacebook: "",
-          uSocialMediaGitHub: "",
-          uSocialMediaTwitter: "",
-          uSocialMediaLinkedin: "",
-          uid: response.uid,
-          uNewPass: "",
-          uConfirmNewPass: "",
-        });
       return response;
     } catch (error) {
       const message = error.message;
@@ -113,26 +93,6 @@ class Autenticacion {
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");
       // Add class for user login succes -- end
-      this.db
-        .collection("userPersonalInformation")
-        .doc(informationUser.uid)
-        .set({
-          uAreaknowledge: "",
-          uBiography: "",
-          uCountry: "",
-          uDateBorn: "",
-          uEmail: informationUser.email,
-          uGender: "",
-          uNick: informationUser.displayName,
-          uPhoto: "",
-          uSocialMediaFacebook: "",
-          uSocialMediaGitHub: "",
-          uSocialMediaTwitter: "",
-          uSocialMediaLinkedin: "",
-          uid: informationUser.uid,
-          uNewPass: "",
-          uConfirmNewPass: "",
-        });
       return informationUser;
     } catch (error) {
       const message = error.message;
@@ -157,26 +117,6 @@ class Autenticacion {
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");
       // Add class for user login succes -- end
-      this.db
-        .collection("userPersonalInformation")
-        .doc(informationUser.uid)
-        .set({
-          uAreaknowledge: "",
-          uBiography: "",
-          uCountry: "",
-          uDateBorn: "",
-          uEmail: informationUser.email,
-          uGender: "",
-          uNick: informationUser.displayName,
-          uPhoto: "",
-          uSocialMediaFacebook: "",
-          uSocialMediaGitHub: "",
-          uSocialMediaTwitter: "",
-          uSocialMediaLinkedin: "",
-          uid: informationUser.uid,
-          uNewPass: "",
-          uConfirmNewPass: "",
-        });
       return informationUser;
     } catch (error) {
       const message = error.message;

@@ -13,6 +13,7 @@ class User {
         .doc(docrefId);
       const data = await docRef.get();
       const response = data.data();
+      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -20,16 +21,15 @@ class User {
   }
 
   // Guardar la nueva informacion del usuario cuando se edite sus datos
-  // Nota: la descripcion que se editara al final sera la biografia entonces ese sera lo que se debe actualizar
-  async updateInformationUser(uId, userInformation) {
+  async saveInformationUser(userId, userInformation) {
     try {
-      const dbCollection = await this.db
+      this.db
         .collection("userPersonalInformation")
-        .doc(uId)
-        .update(userInformation);
-      return dbCollection;
+        .doc(userId)
+        .set(userInformation);
+      console.log("Informacion guardada");
     } catch (error) {
-      console.error("Error updating document: ", error);
+      console.error("Error al guardar la informacion: ", error);
     }
   }
 }

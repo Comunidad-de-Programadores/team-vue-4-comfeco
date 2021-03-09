@@ -19,12 +19,6 @@ const routes = [
     meta: { isPublc: true },
   },
   {
-    path: "/comunidad",
-    name: "Comunidad",
-    component: () =>
-      import(/* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
-  },
-  {
     path: "/my-account",
     name: "Perfil",
     component: () =>
@@ -34,27 +28,10 @@ const routes = [
     },
   },
   {
-    path: "/edit-my-account",
-    name: "PxEditInfoUser",
-    component: () =>
-      import(/* webpackChunkName: "edit" */ "../views/EditUserAccount.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: "/recover-password",
     name: "RecoverPass",
     component: () =>
       import(/* webpackChunkName: "recoverPass" */ "../views/RecoverPass.vue"),
-    meta: { isPublc: true },
-  },
-
-  {
-    path: "/:catchAll(.*)",
-    name: "Error",
-    component: () =>
-      import(/* webpackChunkName: "Error" */ "../views/404NotFount.vue"),
     meta: { isPublc: true },
   },
   {
@@ -75,7 +52,7 @@ const routes = [
     },
   },
   {
-    path: "/comunidad",
+    path: "/comunity",
     name: "Comunidad",
     component: () =>
       import(/* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
@@ -93,12 +70,19 @@ const routes = [
     },
   },
   {
-    path: "/eventos",
+    path: "/events",
     name: "Eventos",
     component: () => import(/* webpackChunkName: "Eventos"*/ "../views/Events"),
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "Error",
+    component: () =>
+      import(/* webpackChunkName: "Error" */ "../views/404NotFount.vue"),
+    meta: { isPublc: true },
   },
 ];
 

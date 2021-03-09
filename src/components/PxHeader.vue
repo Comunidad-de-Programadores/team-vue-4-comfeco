@@ -63,10 +63,10 @@
             </router-link>
           </li>
           <li class="menu-item">
-            <a href="#" class="menu-link">
+            <router-link to="/comunity" class="menu-link">
               <i class="fas fa-users"></i>
               Comunidades
-            </a>
+            </router-link>
           </li>
           <li class="menu-item">
             <a href="#" class="menu-link">

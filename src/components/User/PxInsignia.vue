@@ -1,9 +1,7 @@
 <template>
   <div>
     <section class="insignias">
-      <div>
-        <h6 class="insignias__title">Insignias</h6>
-      </div>
+      <h3 class="insignias__title">Insignias</h3>
       <div class="insignias__body">
         <section
           v-for="insignia in insignias"
@@ -70,19 +68,25 @@ export default {
     #aa5ae6,
     #a662eb
   );
-  padding: 2% 3%;
+  padding: 16px;
   &__title {
-    display: flex;
-    justify-content: flex-start;
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    color: var(--color-white);
+    font-family: var(--fuente-bold);
+    letter-spacing: 0.5px;
   }
   &__body {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
   }
   &__content {
     display: inline-block;
   }
   &__img {
-    margin: 0 16px 0 0;
+    margin: 0 16px 6px 0;
     overflow: hidden;
     border-radius: 50%;
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
@@ -94,9 +98,12 @@ export default {
   }
 }
 .actividades {
-  margin-top: 4rem;
+  margin: 30px 0 0 0;
   &__title {
-    padding-left: 3%;
+    font-size: 24px;
+    margin: 0 0 10px 0;
+    font-family: var(--fuente-bold);
+    color: var(--color-black);
   }
   &__content {
     display: grid;
@@ -104,14 +111,17 @@ export default {
     grid-template-rows: auto;
     grid-column-gap: 1rem;
     box-shadow: 0 7px 10px 0 #999;
-    border: 1px solid #cccccc;
-    margin-top: 1rem;
-    padding: 1rem 3%;
+    border: 1px solid #222222;
+    padding: 1rem;
+    background: var(--color-secondary);
   }
   &__evento {
     display: flex;
     justify-content: flex-start;
     padding-top: 1rem;
+    font-size: 17px;
+    font-family: var(--fuente-regular);
+    color: var(--color-black);
   }
   &__icon {
     display: flex;
