@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import PxEditInfoUser from "@/components/User/PxEditInfoUser";
+import PxEditInfoUser from "@/components/UserShow/PxEditInfoUser";
 
 export default {
   name: "EditUserAccount",

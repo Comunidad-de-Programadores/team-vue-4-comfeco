@@ -16,13 +16,8 @@
         </button>
       </div>
     </div>
-
-    <div class="my-account__user">
-      <PxInfoUser />
-      <div class="my-account__user-main">
-        <component :is="currentTabComponent"></component>
-      </div>
-      <PxEvent />
+    <div>
+      <component :is="currentTabComponent"></component>
     </div>
   </section>
 </template>
@@ -30,33 +25,35 @@
 <script>
 import Autenticacion from "@/firebase/auth/autentication.js";
 import firebase from "firebase";
-import PxInsignia from "@/components/User/PxInsignia";
-import PxEvent from "@/components/User/PXEvent";
-import PxInfoUser from "@/components/User/PxInfoUser";
+
+import PxMyProfile from "@/components/User/PxMyProfile";
+import PxGroups from "@/components/User/PxGroups";
+import PxIsignias from "@/components/User/PxIsignias";
+import PxEvents from "@/components/User/PxEvents";
 
 export default {
   name: "MyAccount",
   data() {
     return {
-      currentTab: "PxInsignia",
+      currentTab: "PxMyProfile",
       tabs: [
         {
-          tag: "PxInfoUser",
+          tag: "PxMyProfile",
           icon: "fa-user",
           title: "Mi Perfil",
         },
         {
-          tag: "PxInsignia",
+          tag: "PxIsignias",
           icon: "fa-star",
           title: "Insignias",
         },
         {
-          tag: "PxSubMenu",
+          tag: "PxGroups",
           icon: "fa-users",
           title: "Grupos",
         },
         {
-          tag: "PxEvent",
+          tag: "PxEvents",
           icon: "fa-calendar",
           title: "Eventos",
         },
@@ -64,9 +61,10 @@ export default {
     };
   },
   components: {
-    PxInsignia,
-    PxEvent,
-    PxInfoUser,
+    PxGroups,
+    PxMyProfile,
+    PxIsignias,
+    PxEvents,
   },
   methods: {
     async verifiedUser() {
@@ -169,13 +167,6 @@ export default {
         margin: 0;
       }
     }
-  }
-  .my-account__user {
-    display: grid;
-    grid-template-columns: calc(25% - 16px) 50% calc(25% - 16px);
-    grid-template-rows: auto;
-    grid-column-gap: 1rem;
-    align-items: flex-start;
   }
 }
 </style>

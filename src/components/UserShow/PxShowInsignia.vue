@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: "PxInsignia",
+  name: "PxShowInsignia",
   data() {
     return {
       insignias: [

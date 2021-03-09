@@ -37,7 +37,7 @@
 </template>
 <script>
 export default {
-  name: "PxEvent",
+  name: "PxShowEvent",
   data() {
     return {};
   },
