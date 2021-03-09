@@ -1,5 +1,5 @@
 <template>
-  <section class="comunity" id="js_comunity">
+  <section class="comunity side__bar-style" id="js_comunity">
     <div class="comunity__aside">
       <h5 class="comunity__title">Comunidades</h5>
       <router-link to="/comunidad" class="link">
@@ -66,16 +66,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .comunity {
-  background-image: linear-gradient(
-    to left bottom,
-    #b43ed5,
-    #b148db,
-    #ad52e1,
-    #aa5ae6,
-    #a662eb
-  );
-  padding: 1rem 1.8rem;
-  border-radius: 20px;
   grid-area: comunity;
   transition: var(--transition);
   margin: 0 0 3rem 0;

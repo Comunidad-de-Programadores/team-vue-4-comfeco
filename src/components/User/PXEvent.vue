@@ -1,7 +1,7 @@
 <template>
-  <div class="evento">
+  <div class="evento side__bar-style">
     <div class="evento__header">
-      <p class="evento__title">Eventos de tu Interes</p>
+      <p class="side__bar-style-title">Eventos de tu Interes</p>
       <router-link to="/events" class="evento-link">
         <i class="fas fa-eye"></i>
         Ver más
@@ -48,24 +48,8 @@ export default {
 .evento {
   height: 100%;
   overflow-y: auto;
-  padding: 1rem;
-  background-image: linear-gradient(
-    to left bottom,
-    #b43ed5,
-    #b148db,
-    #ad52e1,
-    #aa5ae6,
-    #a662eb
-  );
-  border-radius: 20px;
-  &__title {
-    color: #ffffff;
-    font-size: 24px;
-    font-family: var(--fuente-bold);
-    letter-spacing: 0.5px;
-    &-ml1 {
-      margin-left: 0.5rem;
-    }
+  .side__bar-style-title {
+    margin: 0;
   }
   &__header {
     display: flex;

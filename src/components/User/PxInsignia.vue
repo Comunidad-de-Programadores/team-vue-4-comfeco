@@ -1,7 +1,7 @@
 <template>
   <div>
-    <section class="insignias">
-      <h3 class="insignias__title">Insignias</h3>
+    <section class="insignias side__bar-style">
+      <h3 class="side__bar-style-title">Insignias</h3>
       <div class="insignias__body">
         <section
           v-for="insignia in insignias"
@@ -60,23 +60,6 @@ export default {
 
 <style scoped lang="scss">
 .insignias {
-  background-image: linear-gradient(
-    to left bottom,
-    #b43ed5,
-    #b148db,
-    #ad52e1,
-    #aa5ae6,
-    #a662eb
-  );
-  padding: 1rem;
-  border-radius: 20px;
-  &__title {
-    margin: 0 0 10px 0;
-    font-size: 24px;
-    color: var(--color-white);
-    font-family: var(--fuente-bold);
-    letter-spacing: 0.5px;
-  }
   &__body {
     display: flex;
     align-items: center;

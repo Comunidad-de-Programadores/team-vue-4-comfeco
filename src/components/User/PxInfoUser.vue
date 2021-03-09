@@ -1,5 +1,5 @@
 <template>
-  <div class="infouser">
+  <div class="infouser side__bar-style">
     <router-link to="/edit-my-account" class="infouser__edit">
       <i class="far fa-edit"></i>Editar Perfil
     </router-link>
@@ -127,16 +127,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .infouser {
-  padding: 1rem;
-  background-image: linear-gradient(
-    to left bottom,
-    #b43ed5,
-    #b148db,
-    #ad52e1,
-    #aa5ae6,
-    #a662eb
-  );
-  border-radius: 20px;
   &__pre {
     list-style: initial;
     padding: 0 10px 0 20px;
