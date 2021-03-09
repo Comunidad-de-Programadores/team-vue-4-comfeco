@@ -22,10 +22,18 @@ export default {
 
 <style lang="scss" scoped>
 .my-account__user {
-  display: grid;
-  grid-template-columns: calc(25% - 16px) 50% calc(25% - 16px);
-  grid-template-rows: auto;
-  grid-column-gap: 1rem;
-  align-items: flex-start;
+  margin: 170px 0 40px 0;
+  * {
+    margin: 0 0 20px 0;
+  }
+}
+@media screen and(min-width: 992px) {
+  .my-account__user {
+    display: grid;
+    grid-template-columns: calc(25% - 16px) 50% calc(25% - 16px);
+    grid-template-rows: auto;
+    grid-column-gap: 1rem;
+    align-items: flex-start;
+  }
 }
 </style>

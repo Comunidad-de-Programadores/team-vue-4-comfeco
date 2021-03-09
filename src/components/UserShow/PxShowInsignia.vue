@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="js_isignias_activity">
     <section class="insignias side__bar-style">
       <h3 class="side__bar-style-title">Insignias</h3>
       <div class="insignias__body">
@@ -82,7 +82,7 @@ export default {
   }
 }
 .actividades {
-  margin: 30px 0 0 0;
+  margin: 30px 0;
   &__title {
     font-size: 24px;
     margin: 0 0 10px 0;

@@ -16,9 +16,7 @@
         </button>
       </div>
     </div>
-    <div>
-      <component :is="currentTabComponent"></component>
-    </div>
+    <component :is="currentTabComponent"></component>
   </section>
 </template>
 
@@ -127,12 +125,6 @@ export default {
         background: #390f64;
         color: #fff;
       }
-    }
-  }
-  &__user {
-    margin: 170px 0 40px 0;
-    * {
-      margin: 0 0 20px 0;
     }
   }
 }
