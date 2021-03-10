@@ -135,7 +135,7 @@ class Autenticacion {
   async verifiedUser() {
     const user = firebase.auth().currentUser;
     const configuracion = {
-      url: "http://localhost:8080/",
+      url: process.env.BASE_URL,
     };
     const response = await user.sendEmailVerification(configuracion);
     return response;
