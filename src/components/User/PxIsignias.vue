@@ -29,31 +29,31 @@ export default {
       insignias: [
         {
           id: 1,
-          logo: "./assets/images/vuejslogo.jpg",
+          logo: "./assets/images/sociable.webp",
           titulo: "Sociable",
           desc: "esta insignia es por ser sociable.",
           ganarla: "para ganarla debes completar tu perfil de usuario.",
         },
         {
           id: 2,
-          logo: "./assets/images/vuejslogo.jpg",
-          titulo: "VueJS en Español",
-          desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.",
-          ganarla: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat",
+          logo: "./assets/images/colaborador.webp",
+          titulo: "Colaborador",
+          desc: "en merito por haber publicado un taller.",
+          ganarla: "para ganar esta insignia debes publicar como minimo un taller.",
         },
         {
           id: 3,
-          logo: "./assets/images/reactLogo.png",
-          titulo: "Angular español",
-          desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.",
-          ganarla: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.",
+          logo: "./assets/images/vuejslogo.jpg",
+          titulo: "VueJS en Español",
+          desc: "Lorem ipsum dolor sit amet, consectetur.",
+          ganarla: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
         },
         {
           id: 4,
           logo: "./assets/images/angularLogo.jpeg",
-          titulo: "React Js Español Latino",
-          desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.",
-          ganarla: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.",
+          titulo: "Angular español",
+          desc: "Lorem ipsum dolor sit amet, consectetur.",
+          ganarla: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
         },
       ],
     };
@@ -63,7 +63,7 @@ export default {
 
 <style scoped lang="scss">
 .insignias {
-  margin: 13rem auto 1rem;
+  margin: 13rem auto 2rem;
   &__title {
     color: #000;
     margin: 2rem auto;
