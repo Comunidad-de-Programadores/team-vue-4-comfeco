@@ -12,6 +12,7 @@
             class="insignias__img"
             :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
           ></div>
+          <h4>{{insignia.titulo}}</h4>
         </section>
       </div>
     </section>
@@ -32,29 +33,72 @@
 </template>
 
 <script>
+import Autenticacion from "@/firebase/auth/autentication.js";
+import firebase from "firebase";
+// Inicializando firestore
+const db = firebase.firestore();
 export default {
   name: "PxShowInsignia",
   data() {
-    return {
-      insignias: [
-        {
-          id: 1,
-          logo: "./assets/images/vuejslogo.jpg",
-          titulo: "VueJS en Español",
-        },
-        {
-          id: 2,
-          logo: "./assets/images/reactLogo.png",
-          titulo: "Angular español",
-        },
-        {
-          id: 3,
-          logo: "./assets/images/angularLogo.jpeg",
-          titulo: "React Js Español Latino",
-        },
-      ],
+    return {      
+      insignias: [],
     };
   },
+  methods: {
+    async authUser() {
+      const currentUser = await this.authClass.authUser();
+      const userId = currentUser.uid;
+      const docRef = db.collection("userPersonalInformation").doc(userId);
+
+      // Traer la informacion del usuario
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            var exclude_field = ["uid", "uNewPass", "uConfirmNewPass"];
+            var count_field = exclude_field.length;
+            for(const dato in data){
+              for (var i = 0; i < count_field; i++) {                
+                if (exclude_field[i] == dato) {
+                  delete data[dato];
+                }
+              }                     
+            }
+            var noInsignia = true;
+            for(const dato in data){
+              if (data[dato] == '') {
+                noInsignia = false;
+                continue;
+              }                  
+            }
+
+            if (noInsignia) {
+              var sociable = {
+                  id: 4,
+                  logo: "./assets/images/sociable.webp",
+                  titulo: "Sociable",
+                };
+              this.insignias.push(sociable);
+            }     
+          } else {
+            console.warn("No se encontro el documento!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al traer la informacion del documento:", error);
+        });
+    }
+  },
+  computed: {
+    authClass() {
+      const auth = new Autenticacion();
+      return auth;
+    }
+  },
+  mounted() {
+    this.authUser();
+  }
 };
 </script>
 
@@ -68,9 +112,10 @@ export default {
   }
   &__content {
     display: inline-block;
+    text-align: center;
   }
   &__img {
-    margin: 0 16px 6px 0;
+    margin: 0 auto 6px;
     overflow: hidden;
     border-radius: 50%;
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);

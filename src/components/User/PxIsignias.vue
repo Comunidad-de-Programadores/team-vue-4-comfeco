@@ -38,8 +38,8 @@ export default {
           id: 2,
           logo: "./assets/images/colaborador.webp",
           titulo: "Colaborador",
-          desc: "en merito por haber publicado un taller.",
-          ganarla: "para ganar esta insignia debes publicar como minimo un taller.",
+          desc: "en merito por haber participado en eventos.",
+          ganarla: "para ganar esta insignia debes participar en por lo menos dos eventos.",
         },
         {
           id: 3,
