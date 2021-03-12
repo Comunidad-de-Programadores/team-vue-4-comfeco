@@ -1,61 +1,90 @@
 <template>
-    <div class="events">
-        <h2 class="events__title">Eventos Activos</h2>
-        <div class="events__body">
-            <div class="events__card">
-                <div class="events__cardHeader">
-                    <img src="assets/images/vuejslogo.jpg" alt="evento" class="events__img">
-                </div>
-                <div class="events__cardBody">
-                    <p class="events__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!
-                    </p>
-                </div>
-                <div class="events__cardFooter">
-                    <a href="#" class="events__btn events__btn--secondary">Mas Información</a>
-                    <button class="events__btn events__btn--primary">Participar</button>
-                </div>
-            </div>
-            <div class="events__card">
-                <div class="events__cardHeader">
-                    <img src="assets/images/vuejslogo.jpg" alt="evento" class="events__img">
-                </div>
-                <div class="events__cardBody">
-                    <p class="events__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!
-                    </p>
-                </div>
-                <div class="events__cardFooter">
-                    <a href="#" class="events__btn events__btn--secondary">Mas Información</a>
-                    <button class="events__btn events__btn--primary">Participar</button>
+<div class="main">
+    <h2 class="events__title">Eventos Activos</h2>
+    <div class="body">
+        <section>
+            <div class="events">
+                <div class="events__body">
+                    <div class="events__card" v-for="evento in eventos" :key="evento.id">
+                        <div class="events__cardHeader">
+                            <img :src="evento.img" alt="evento" class="events__img">
+                        </div>
+                        <div class="events__cardBody">
+                            <p class="events__description" v-text="evento.description"></p>
+                        </div>
+                        <div class="events__cardFooter">
+                            <a href="#" class="events__btn events__btn--secondary">Mas Información</a>
+                            <button class="events__btn events__btn--primary" @click="agregarEvento(evento.name, evento.description)">Participar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="events__card">
-                <div class="events__cardHeader">
-                    <img src="assets/images/vuejslogo.jpg" alt="evento" class="events__img">
-                </div>
-                <div class="events__cardBody">
-                    <p class="events__description">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!
-                    </p>
-                </div>
-                <div class="events__cardFooter">
-                    <a href="#" class="events__btn events__btn--secondary">Mas Información</a>
-                    <button class="events__btn events__btn--primary">Participar</button>
-                </div>
-            </div>
-
-        </div>
+        </section>
+        <aside v-show="mostrar">
+            <h4>Evento a Participar</h4>
+            <h5 v-text="nombre"></h5>
+            <p v-text="descripcion"></p>
+        </aside>
     </div>
+</div>
 </template>
 <script>
 export default {
   name: "PxEvents",
+  data(){
+    return{
+        eventos:[
+            {
+                id: 1,
+                name: 'Aprendiendo Vue de 0 a experto',
+                img: 'assets/images/vuejslogo.jpg',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!',
+                participar: false,
+            },
+            {
+                id: 2,
+                name: 'Metodologia de Colaboración',
+                img: 'assets/images/colaborador.webp',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!',
+                participar: false,
+            },
+            {
+                id: 3,
+                name: 'Aprendiendo Angular avanzado',
+                img: 'assets/images/angularLogo.jpeg',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!',
+                participar: false,
+            },
+            {
+                id: 4,
+                name: 'Introducción a Svelte',
+                img: 'assets/images/svelte.png',
+                description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!',
+                participar: false,
+            }
+        ],
+        nombre: String,
+        descripcion: String,
+        mostrar: false
+    }
+  },
+  methods:{
+    agregarEvento(nombre, description){
+        this.nombre = nombre;
+        this.descripcion = description;
+        this.mostrar = true;
+        setTimeout(() => {
+            this.mostrar = false;
+        }, 5000);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
+    .main{
+        margin: 12rem auto 1rem;
+    }
     .events{
-        margin: 11rem auto 1rem;
         &__title{
             color: black;
             margin: 2rem auto;
