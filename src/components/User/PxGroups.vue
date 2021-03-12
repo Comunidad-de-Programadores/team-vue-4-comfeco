@@ -85,15 +85,15 @@
 
       <div class="content__filter-grid">
         <div class="groups__filters">
-          <div>
+          <div class="filter">
             <form action="">
               <select name="" id="js_filter">
                 <option value="0">Filtrar por</option>
-                <option value="0">Filtrar por lenguaje</option>
+                <option value="1">Filtrar por lenguaje</option>
               </select>
             </form>
           </div>
-          <div>
+          <div class="search">
             <form action="">
               <input type="text" placeholder="Buscar grupo" />
             </form>
@@ -298,12 +298,66 @@ export default {
 }
 @media screen and (min-width: 992px) {
   .groups {
+    margin: 200px 0 0;
     &__layout {
       display: flex;
       align-items: flex-start;
+      margin: 1rem 0 0 0;
     }
     &__my-group {
       margin: 0 30px 0 0;
+      width: 270px;
+    }
+    .content__filter-grid {
+      width: calc(100% - 300px);
+    }
+    &__filters {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      margin: 0 0 1rem;
+      background: var(--color-gradient);
+      border-radius: 20px;
+      padding: 0 16px;
+      .filter {
+        margin: 0 1rem 0 0;
+      }
+      .filter,
+      .search {
+        width: 45%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        form {
+          width: 100%;
+          height: 100%;
+          display: inherit;
+          align-items: inherit;
+          justify-content: inherit;
+          select,
+          input {
+            width: 100%;
+            height: 80%;
+            display: inherit;
+            align-items: inherit;
+            justify-content: inherit;
+            padding: 8px;
+            border-radius: 20px;
+            border: 1px solid var(--color-primary);
+            font-size: 15px;
+            &::placeholder {
+              color: var(--color-white);
+              font-size: 14px;
+              font-family: var(--fuente-light);
+            }
+            option {
+              font-size: 14px;
+              font-family: var(--fuente-light);
+            }
+          }
+        }
+      }
     }
     &__grid {
       grid-template-columns: repeat(4, 1fr);
