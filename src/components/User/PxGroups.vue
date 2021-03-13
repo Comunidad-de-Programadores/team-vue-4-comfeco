@@ -95,7 +95,14 @@
           </div>
           <div class="search">
             <form action="">
-              <input type="text" placeholder="Buscar grupo" />
+              <div class="search-input">
+                <input type="text" placeholder="Buscar grupo" />
+              </div>
+              <div class="search-button">
+                <button>
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
             </form>
           </div>
         </div>
@@ -288,6 +295,88 @@ export default {
       }
     }
   }
+  &__filters {
+    height: auto;
+    margin: 1rem 0;
+    background: var(--color-gradient);
+    border-radius: 20px;
+    padding: 16px;
+    .filter {
+      margin: 0 0 1rem 0;
+    }
+    .filter,
+    .search {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      form {
+        width: 100%;
+        height: 100%;
+        display: inherit;
+        align-items: inherit;
+        justify-content: inherit;
+        select,
+        input {
+          width: 100%;
+          height: 80%;
+          display: inherit;
+          align-items: inherit;
+          justify-content: inherit;
+          padding: 8px;
+          border: 1px solid var(--color-primary);
+          font-size: 15px;
+          &::placeholder {
+            color: var(--color-white);
+            font-size: 14px;
+            font-family: var(--fuente-light);
+          }
+          option {
+            font-size: 14px;
+            font-family: var(--fuente-light);
+          }
+        }
+        input {
+          border-right: 0;
+        }
+        button {
+          padding: 0;
+        }
+        .search-input {
+          width: calc(100% - 40px);
+        }
+        .search-button {
+          width: 40px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid var(--color-primary);
+          background: var(--color-primary);
+          color: var(--color-white);
+          button {
+            width: 100%;
+            height: 100%;
+            color: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            i {
+              font-size: 15px;
+            }
+            &:hover {
+              background: var(--color-white);
+              i {
+                color: var(--color-primary);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 @media screen and (min-width: 768px) {
   .groups {
@@ -298,7 +387,7 @@ export default {
 }
 @media screen and (min-width: 992px) {
   .groups {
-    margin: 200px 0 0;
+    margin: 200px 0 4rem;
     &__layout {
       display: flex;
       align-items: flex-start;
@@ -311,59 +400,44 @@ export default {
     .content__filter-grid {
       width: calc(100% - 300px);
     }
+    &__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
     &__filters {
-      display: flex;
-      align-items: center;
-      height: 48px;
-      margin: 0 0 1rem;
-      background: var(--color-gradient);
-      border-radius: 20px;
+      margin: 0 0 1rem 0;
       padding: 0 16px;
-      .filter {
-        margin: 0 1rem 0 0;
-      }
+      height: 48px;
+      display: flex;
       .filter,
       .search {
-        width: 45%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+        margin: 0;
         form {
-          width: 100%;
-          height: 100%;
-          display: inherit;
-          align-items: inherit;
-          justify-content: inherit;
-          select,
-          input {
-            width: 100%;
+          .search-input {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+          }
+          .search-button {
             height: 80%;
-            display: inherit;
-            align-items: inherit;
-            justify-content: inherit;
-            padding: 8px;
-            border-radius: 20px;
-            border: 1px solid var(--color-primary);
-            font-size: 15px;
-            &::placeholder {
-              color: var(--color-white);
-              font-size: 14px;
-              font-family: var(--fuente-light);
-            }
-            option {
-              font-size: 14px;
-              font-family: var(--fuente-light);
-            }
           }
         }
       }
+      .filter {
+        margin: 0 16px 0 0;
+      }
     }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .groups {
     &__grid {
       grid-template-columns: repeat(4, 1fr);
     }
   }
 }
+
 @media screen and (min-width: 1400px) {
   .groups {
     &__grid {
