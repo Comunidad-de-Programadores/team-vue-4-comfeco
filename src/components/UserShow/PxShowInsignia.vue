@@ -12,7 +12,7 @@
             class="insignias__img"
             :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
           ></div>
-          <h4>{{insignia.titulo}}</h4>
+          <h4>{{ insignia.titulo }}</h4>
         </section>
       </div>
     </section>
@@ -40,7 +40,7 @@ const db = firebase.firestore();
 export default {
   name: "PxShowInsignia",
   data() {
-    return {      
+    return {
       insignias: [],
     };
   },
@@ -58,29 +58,29 @@ export default {
             const data = doc.data();
             var exclude_field = ["uid", "uNewPass", "uConfirmNewPass"];
             var count_field = exclude_field.length;
-            for(const dato in data){
-              for (var i = 0; i < count_field; i++) {                
+            for (const dato in data) {
+              for (var i = 0; i < count_field; i++) {
                 if (exclude_field[i] == dato) {
                   delete data[dato];
                 }
-              }                     
+              }
             }
             var noInsignia = true;
-            for(const dato in data){
-              if (data[dato] == '') {
+            for (const dato in data) {
+              if (data[dato] == "") {
                 noInsignia = false;
                 continue;
-              }                  
+              }
             }
 
             if (noInsignia) {
               var sociable = {
-                  id: 4,
-                  logo: "./assets/images/sociable.webp",
-                  titulo: "Sociable",
-                };
+                id: 4,
+                logo: "./assets/images/sociable.webp",
+                titulo: "Sociable",
+              };
               this.insignias.push(sociable);
-            }     
+            }
           } else {
             console.warn("No se encontro el documento!");
           }
@@ -88,17 +88,17 @@ export default {
         .catch((error) => {
           console.error("Error al traer la informacion del documento:", error);
         });
-    }
+    },
   },
   computed: {
     authClass() {
       const auth = new Autenticacion();
       return auth;
-    }
+    },
   },
   mounted() {
     this.authUser();
-  }
+  },
 };
 </script>
 

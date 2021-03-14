@@ -11,14 +11,14 @@
           class="insignias__img"
           :style="{ backgroundImage: 'url(' + insignia.logo + ')' }"
         ></div>
-        <h4 class="insignias__title--insignia">{{insignia.titulo}}</h4>
-        <h5  class="insignias__title--insignia">Descripci&oacute;n</h5>
-        <p>{{insignia.desc}}</p>
-        <hr>
-        <h5  class="insignias__title--insignia">¿Como ganarla?</h5>
-        <p>{{insignia.ganarla}}</p>          
+        <h4 class="insignias__title--insignia">{{ insignia.titulo }}</h4>
+        <h5 class="insignias__title--insignia">Descripci&oacute;n</h5>
+        <p>{{ insignia.desc }}</p>
+        <hr />
+        <h5 class="insignias__title--insignia">¿Como ganarla?</h5>
+        <p>{{ insignia.ganarla }}</p>
       </section>
-    </div>    
+    </div>
   </div>
 </template>
 <script>
@@ -39,21 +39,24 @@ export default {
           logo: "./assets/images/colaborador.webp",
           titulo: "Colaborador",
           desc: "en merito por haber participado en eventos.",
-          ganarla: "para ganar esta insignia debes participar en por lo menos dos eventos.",
+          ganarla:
+            "para ganar esta insignia debes participar en por lo menos dos eventos.",
         },
         {
           id: 3,
           logo: "./assets/images/vuejslogo.jpg",
           titulo: "VueJS en Español",
           desc: "Lorem ipsum dolor sit amet, consectetur.",
-          ganarla: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+          ganarla:
+            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
         },
         {
           id: 4,
           logo: "./assets/images/angularLogo.jpeg",
           titulo: "Angular español",
           desc: "Lorem ipsum dolor sit amet, consectetur.",
-          ganarla: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+          ganarla:
+            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
         },
       ],
     };
@@ -68,7 +71,7 @@ export default {
     color: #000;
     margin: 2rem auto;
     text-align: center;
-    &--insignia{
+    &--insignia {
       margin: 1rem auto;
     }
   }
@@ -98,4 +101,4 @@ export default {
     margin: 0 auto;
   }
 }
-</style>  
+</style>
