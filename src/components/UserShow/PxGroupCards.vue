@@ -1,18 +1,25 @@
 <template>
   <div class="groups__grid">
-    <div class="groups__card">
-      <img src="@/assets/images/jsts.png" alt="" />
+    <div class="groups__card" v-for="info in inforCard" :key="info.id">
+      <div class="image-zoom-in">
+        <div
+          class="groups__card-image"
+          :style="{
+            backgroundImage: 'url(' + info.image + ')',
+          }"
+        ></div>
+      </div>
       <div class="groups__card-info">
-        <div class="groups__card-label">
-          TypeScript
+        <div class="groups__card-ribbon">
+          <span>
+            {{ info.ribbon }}
+          </span>
         </div>
         <h4 class="groups__card-title">
-          Los Crypto
+          {{ info.titleTeam }}
         </h4>
         <div class="groups__card-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-          reprehenderit ad commodi labore dignissimos corporis sed repudiandae
-          facilis
+          {{ info.body }}
         </div>
         <div class="groups__card-action">
           <button class="button button-primary">Unirme</button>
@@ -25,6 +32,18 @@
 <script>
 export default {
   name: "PxGroupCards",
+  data() {
+    return {
+      inforCard: [],
+    };
+  },
+  async created() {
+    const data = await fetch("http://localhost:3003/cards");
+    const information = await data.json();
+    for (const info of information) {
+      this.inforCard.push(info);
+    }
+  },
 };
 </script>
 
@@ -42,6 +61,39 @@ export default {
     img {
       width: 100%;
     }
+    .image-zoom-in {
+      overflow: hidden;
+      background: var(--color-black);
+    }
+    &-image {
+      width: 100%;
+      height: 220px;
+      background-position: left;
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.5;
+      transform: scale(1.3);
+      transition: var(--transition);
+      &:hover {
+        background-position: center;
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    &-ribbon {
+      padding: 6px 12px;
+      height: 20px;
+      border-radius: 12px;
+      background: #edeef2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      span {
+        font-size: 14px;
+        font-family: var(--fuente-bold);
+      }
+    }
     &-info {
       padding: 8px;
       line-height: 20px;
@@ -55,6 +107,9 @@ export default {
       font-size: 17px;
       color: var(--color-black);
       margin: 0 0 12px 0;
+      height: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     &-action {
       text-align: center;
