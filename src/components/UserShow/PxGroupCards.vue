@@ -1,6 +1,13 @@
 <template>
   <div class="groups__grid">
-    <div class="groups__card" v-for="info in inforCard" :key="info.id">
+    <div
+      class="groups__card"
+      v-for="info in inforCard"
+      :key="info.id"
+      :data-ribbon="
+        info.ribbon.charAt(0).toUpperCase() + info.ribbon.slice(1).toLowerCase()
+      "
+    >
       <div class="image-zoom-in">
         <div
           class="groups__card-image"
@@ -37,10 +44,14 @@ export default {
       inforCard: [],
     };
   },
+  computed: {},
   async created() {
-    const data = await fetch("http://localhost:3003/cards");
+    const data = await fetch(
+      "https://api-node-comfeco-cards.herokuapp.com/cards"
+    );
     const information = await data.json();
-    for (const info of information) {
+    const cards = information.cards.cards;
+    for (const info of cards) {
       this.inforCard.push(info);
     }
   },

@@ -4,7 +4,9 @@
       <form action="">
         <select name="" id="js_filter">
           <option value="0">Filtrar por</option>
-          <option value="1">Filtrar por lenguaje</option>
+          <option v-for="option in filterOptions" :key="option.id">
+            {{ option.option }}
+          </option>
         </select>
       </form>
     </div>
@@ -26,6 +28,30 @@
 <script>
 export default {
   name: "PxGroupFilter",
+  data() {
+    return {
+      filterOptions: [],
+    };
+  },
+  async created() {
+    const data = await fetch(
+      "https://api-node-comfeco-cards.herokuapp.com/cards"
+    );
+    const information = await data.json();
+    const cards = information.cards.cards;
+    for (const [index, info] of cards.entries()) {
+      const ribbon = info.ribbon;
+      const firstLetter = ribbon.charAt(0).toUpperCase();
+      const restText = ribbon.slice(1).toLowerCase();
+      const allText = `${firstLetter}${restText}`;
+      index += 1;
+      let objOption = {
+        id: index,
+        option: allText,
+      };
+      this.filterOptions.push(objOption);
+    }
+  },
 };
 </script>
 
