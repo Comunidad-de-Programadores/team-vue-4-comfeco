@@ -5,7 +5,12 @@
       v-for="info in inforCard"
       :key="info.id"
       :data-ribbon="
-        info.ribbon.charAt(0).toUpperCase() + info.ribbon.slice(1).toLowerCase()
+        info.ribbon.charAt(0).toUpperCase() +
+          info.ribbon
+            .slice(1)
+            .replace(' ', '')
+            .replace(' ', '')
+            .toLowerCase()
       "
     >
       <div class="image-zoom-in">
@@ -69,6 +74,15 @@ export default {
   &__card {
     border: 2px solid var(--color-primary);
     background: var(--color-secondary);
+    &.show {
+      display: block;
+      animation-name: scale;
+      animation-duration: 0.8s;
+      animation-timing-function: ease-in-out;
+    }
+    &.hide {
+      display: none;
+    }
     img {
       width: 100%;
     }

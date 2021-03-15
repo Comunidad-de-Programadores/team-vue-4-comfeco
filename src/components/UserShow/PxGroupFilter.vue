@@ -2,9 +2,13 @@
   <div class="groups__filters">
     <div class="filter">
       <form action="">
-        <select name="" id="js_filter">
+        <select id="js_filter" @change="filter($event)">
           <option value="0">Filtrar por</option>
-          <option v-for="option in filterOptions" :key="option.id">
+          <option
+            v-for="option in filterOptions"
+            :key="option.id"
+            :value="option.option.replace(' ', '').replace(' ', '')"
+          >
             {{ option.option }}
           </option>
         </select>
@@ -32,6 +36,33 @@ export default {
     return {
       filterOptions: [],
     };
+  },
+  methods: {
+    filter(event) {
+      const valueSelect = event.target.value;
+
+      // Ocultar productos
+      Array.from(document.querySelectorAll(".groups__card")).forEach((card) => {
+        if (valueSelect === "0") {
+          // Mostrar productos si el value es 0
+          card.classList.remove("hide");
+          card.classList.add("show");
+        } else {
+          card.classList.remove("show");
+          card.classList.add("hide");
+        }
+      });
+
+      if (valueSelect !== "0") {
+        let resultFilter = Array.from(
+          document.querySelectorAll(`.groups__card[data-ribbon=${valueSelect}]`)
+        );
+        resultFilter.forEach((card_resul) => {
+          card_resul.classList.remove("hide");
+          card_resul.classList.add("show");
+        });
+      }
+    },
   },
   async created() {
     const data = await fetch(
