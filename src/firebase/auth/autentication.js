@@ -11,19 +11,7 @@ class Autenticacion {
         .auth()
         .signInWithEmailAndPassword(email, password);
       const response = await loginEmailPass.user;
-      const nameUser = await response.displayName;
-      const emailUser = await response.email;
-      //Add name of user in DOM -- start
-      document.getElementById("js_user-name").textContent = nameUser;
-      document.getElementById("js_user-email").textContent = emailUser;
-      document
-        .getElementById("js_avatar-user")
-        .setAttribute("src", "./assets/images/userDefaultImage.png");
-      //Add name of user in DOM -- end
-      // Add class for user login succes -- start
-      document.getElementById("js_isLogedOptions").className = "isLogged";
-      document.getElementById("js_header").classList.add("bgColor");
-      // Add class for user login succes -- end
+      
       return response;
     } catch (error) {
       const message = error.message;
@@ -49,8 +37,28 @@ class Autenticacion {
   }
 
   async authUser() {
-    const user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;    
     if (user != null) {
+      const docRef = this.db.collection("userPersonalInformation").doc(user.uid);
+      var photo = "./assets/images/userDefaultImage.png";
+      // Traer la informacion del usuario
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            if (data.uPhoto != null) {
+              document.getElementById("js_avatar-user").setAttribute("src", data.uPhoto);                    
+            } else {
+              document.getElementById("js_avatar-user").setAttribute("src", photo);                    
+            }
+          } else {
+            console.warn("No se encontro el documento!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error al traer la informacion del usuario:", error);
+        });
       document.getElementById("js_isLogedOptions").className = "isLogged";
       document.getElementById("js_header").classList.add("bgColor");
       document.getElementById("js_user-name").textContent = user.displayName;
@@ -81,18 +89,7 @@ class Autenticacion {
       const provider = new firebase.auth.GoogleAuthProvider();
       const singInGoogle = await firebase.auth().signInWithPopup(provider);
       const informationUser = singInGoogle.user;
-      const nameUser = informationUser.displayName;
-      const emailUser = informationUser.email;
-      const photoUser = informationUser.photoURL;
-      //Add name of user in DOM -- start
-      document.getElementById("js_user-name").textContent = nameUser;
-      document.getElementById("js_user-email").textContent = emailUser;
-      document.getElementById("js_avatar-user").setAttribute("src", photoUser);
-      //Add name of user in DOM -- end
-      // Add class for user login succes -- start
-      document.getElementById("js_isLogedOptions").className = "isLogged";
-      document.getElementById("js_header").classList.add("bgColor");
-      // Add class for user login succes -- end
+      
       return informationUser;
     } catch (error) {
       const message = error.message;
@@ -104,19 +101,8 @@ class Autenticacion {
     try {
       const provider = new firebase.auth.FacebookAuthProvider();
       const singInFacebbok = await firebase.auth().signInWithPopup(provider);
-      const informationUser = singInFacebbok.user;
-      const nameUser = informationUser.displayName;
-      const emailUser = informationUser.email;
-      const photoUser = informationUser.photoURL;
-      //Add name of user in DOM -- start
-      document.getElementById("js_user-name").textContent = nameUser;
-      document.getElementById("js_user-email").textContent = emailUser;
-      document.getElementById("js_avatar-user").setAttribute("src", photoUser);
-      //Add name of user in DOM -- end
-      // Add class for user login succes -- start
-      document.getElementById("js_isLogedOptions").className = "isLogged";
-      document.getElementById("js_header").classList.add("bgColor");
-      // Add class for user login succes -- end
+      const informationUser = singInFacebbok.user;     
+     
       return informationUser;
     } catch (error) {
       const message = error.message;
