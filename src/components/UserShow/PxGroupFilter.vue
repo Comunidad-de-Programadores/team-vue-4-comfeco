@@ -15,9 +15,9 @@
       </form>
     </div>
     <div class="search">
-      <form action="">
+      <form @submit.prevent="filtergroup">
         <div class="search-input">
-          <input type="text" placeholder="Buscar grupo" />
+          <input type="text" v-model="searchText" placeholder="Buscar grupo" />
         </div>
         <div class="search-button">
           <button>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       filterOptions: [],
+      searchText:'',
     };
   },
   methods: {
@@ -56,6 +57,30 @@ export default {
       if (valueSelect !== "0") {
         let resultFilter = Array.from(
           document.querySelectorAll(`.groups__card[data-ribbon=${valueSelect}]`)
+        );
+        resultFilter.forEach((card_resul) => {
+          card_resul.classList.remove("hide");
+          card_resul.classList.add("show");
+        });
+      }
+      this.searchText = "";
+    },
+    filtergroup() {
+      // Ocultar productos
+      Array.from(document.querySelectorAll(".groups__card")).forEach((card) => {
+        if (this.searchText === "") {
+          // Mostrar productos si el value es 0
+          card.classList.remove("hide");
+          card.classList.add("show");
+        } else {
+          card.classList.remove("show");
+          card.classList.add("hide");
+        }
+      });
+
+      if (this.searchText !== "") {
+        let resultFilter = Array.from(
+          document.querySelectorAll(`.groups__card[data-team='${this.searchText}']`)
         );
         resultFilter.forEach((card_resul) => {
           card_resul.classList.remove("hide");

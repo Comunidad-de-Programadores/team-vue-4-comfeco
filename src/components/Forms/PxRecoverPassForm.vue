@@ -34,6 +34,7 @@
         </section>
       </form>
     </div>
+    <PxLoader />
   </div>
 </template>
 
@@ -44,6 +45,7 @@ import toastr from "toastr";
 import Autenticacion from "@/firebase/auth/autentication.js";
 // Import class validation
 import ValidationForms from "@/validations";
+import PxLoader from "@/components/Modal/PxLoader";
 
 export default {
   name: "PxRecoverPassForm",
@@ -56,18 +58,25 @@ export default {
   },
   methods: {
     async recoverPassword() {
-      if (this.validationClass.validInput('email', this.form.email)) {
+      if (this.validationClass.validInput("email", this.form.email)) {
         await this.authClass
           .recuperarContraseña(this.form.email)
           .then(() => {
-            this.$swal({
-              title: "Correo enviado satisfactoriamente! 😄",
-              icon: "success",
-              confirmButtonText: "OK",
-            });
+            const $overlayLoader = document.getElementById("js_overlay-loader");
+            const $modalLoader = document.getElementById("js_loader");
+            $overlayLoader.classList.add("active");
+            $modalLoader.classList.add("active");
+
+            setTimeout(() => {
+              this.$swal({
+                title: "Correo enviado satisfactoriamente! 😄",
+                icon: "success",
+                confirmButtonText: "OK",
+              });
+            }, 2000);
             setTimeout(() => {
               this.$router.push("/");
-            }, 1500);
+            }, 2500);
           })
           .catch((error) => {
             const message = error.message;
@@ -80,17 +89,20 @@ export default {
             });
             this.$router.push("/recover-password");
           });
-      }else{
-        alert('El correo electrónico debe ser válido.')
-      }      
+      } else {
+        toastr.error("El correo electrónico debe ser válido.");
+      }
     },
+  },
+  components: {
+    PxLoader,
   },
   computed: {
     authClass() {
       const auth = new Autenticacion();
       return auth;
     },
-     validationClass() {
+    validationClass() {
       const validation = new ValidationForms();
       return validation;
     },

@@ -56,16 +56,16 @@ export default {
         .then((doc) => {
           if (doc.exists) {
             const data = doc.data();
-            var exclude_field = ["uid", "uNewPass", "uConfirmNewPass"];
-            var count_field = exclude_field.length;
+            let exclude_field = ["uid", "uNewPass", "uConfirmNewPass"];
+            let count_field = exclude_field.length;
             for (const dato in data) {
-              for (var i = 0; i < count_field; i++) {
+              for (let i = 0; i < count_field; i++) {
                 if (exclude_field[i] == dato) {
                   delete data[dato];
                 }
               }
             }
-            var noInsignia = true;
+            let noInsignia = true;
             for (const dato in data) {
               if (data[dato] == "") {
                 noInsignia = false;
@@ -74,7 +74,7 @@ export default {
             }
 
             if (noInsignia) {
-              var sociable = {
+              let sociable = {
                 id: 4,
                 logo: "./assets/images/sociable.webp",
                 titulo: "Sociable",
