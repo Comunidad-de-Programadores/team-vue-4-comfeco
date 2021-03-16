@@ -17,7 +17,14 @@
     <div class="search">
       <form @submit.prevent="filtergroup">
         <div class="search-input">
-          <input type="text" v-model="searchText" placeholder="Buscar grupo" />
+          <input type="text" v-model="searchText" placeholder="Buscar grupo" list="teams"/>
+          <datalist id="teams">
+            <option
+              v-for="option in searchOptions"
+              :key="option.id"
+              :value="option"
+            />            
+          </datalist>
         </div>
         <div class="search-button">
           <button>
@@ -36,6 +43,7 @@ export default {
     return {
       filterOptions: [],
       searchText:'',
+      searchOptions: [],
     };
   },
   methods: {
@@ -78,7 +86,7 @@ export default {
         }
       });
 
-      if (this.searchText !== "") {
+      if (this.searchText !== "") {        
         let resultFilter = Array.from(
           document.querySelectorAll(`.groups__card[data-team='${this.searchText}']`)
         );
@@ -87,7 +95,7 @@ export default {
           card_resul.classList.add("show");
         });
       }
-    },
+    },    
   },
   async created() {
     const data = await fetch(
@@ -106,6 +114,7 @@ export default {
         option: allText,
       };
       this.filterOptions.push(objOption);
+      this.searchOptions.push(info.titleTeam);
     }
   },
 };
