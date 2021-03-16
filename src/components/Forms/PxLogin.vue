@@ -114,7 +114,6 @@ import toastr from "toastr";
 import Autenticacion from "@/firebase/auth/autentication.js";
 // Import class validation
 import ValidationForms from "@/validations";
-
 export default {
   name: "PxLogin",
   data() {
@@ -134,13 +133,13 @@ export default {
 
       if (!this.form.email) {
         this.errors.push("El correo electrónico es obligatorio.");
-      } else if (!this.validationClass.validInput('email', this.form.email)) {
+      } else if (!this.validationClass.validInput("email", this.form.email)) {
         this.errors.push("El correo electrónico debe ser válido.");
       }
 
       if (!this.form.password) {
         this.errors.push("El password es obligatorio.");
-      } else if (!this.validationClass.validInput('pass', this.form.password)) {
+      } else if (!this.validationClass.validInput("pass", this.form.password)) {
         this.errors.push(
           "La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
         );

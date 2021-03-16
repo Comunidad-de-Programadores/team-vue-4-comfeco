@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <h2 class="events__title">Eventos Activos</h2>
-    <div class="body">
+    <div :class="mostrar==true?'body body--active':'body body--inactive'">
       <section>
         <div class="events">
           <div class="events__body">
@@ -31,10 +31,10 @@
           </div>
         </div>
       </section>
-      <aside v-show="mostrar">
-        <h4>Evento a Participar</h4>
-        <h5 v-text="nombre"></h5>
-        <p v-text="descripcion"></p>
+      <aside v-show="mostrar" class="events__agregado">
+        <h4 class="events__titleheader">Evento a Participar</h4>
+        <h5 v-text="nombre" class="events__titleAdd"></h5>
+        <p v-text="descripcion" class="events_descrptionAdd"></p>
       </aside>
     </div>
   </div>
@@ -96,6 +96,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.body{
+  width: 100%;
+  display: grid;
+  &--active{
+    grid-template-columns: 85% 15%;
+    grid-template-rows: auto;
+    grid-column-gap: 1rem;
+  }
+  &--inactive{
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-column-gap: 1rem;
+  }
+}
 .main {
   margin: 12rem auto 1rem;
 }
@@ -142,6 +156,23 @@ export default {
   &__img {
     width: 100%;
     height: 25vh;
+  }
+  &__agregado{
+    width: 17vw;
+    height: 40vh;
+    padding: 1rem 0.5rem;
+    border: 1px solid lightgray;
+  }
+  &__titleAdd{
+    margin: 0.5rem 0;
+    color: gray;
+    font-weight: 800;
+  }
+  &__descriptionAdd{
+    text-align: justify;
+  }
+  &__titleheader{
+    text-align: center;
   }
 }
 </style>
