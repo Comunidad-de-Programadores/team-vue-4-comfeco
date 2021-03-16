@@ -12,6 +12,7 @@
             .replace(' ', '')
             .toLowerCase()
       "
+      :data-team="info.titleTeam"
     >
       <div class="image-zoom-in">
         <div

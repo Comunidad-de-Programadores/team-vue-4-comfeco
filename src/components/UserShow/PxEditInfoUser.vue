@@ -19,9 +19,9 @@
             :alt="'Foto de perfil del usuairo: ' + formEdit.nick"
           />
           <div class="edit__user--information-photo-change">
-            <button>
+            <div class="icon-camera">
               <i class="fas fa-camera-retro"></i>
-            </button>
+            </div>
           </div>
         </div>
 
