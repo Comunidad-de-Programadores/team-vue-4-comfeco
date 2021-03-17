@@ -7,14 +7,15 @@
           <div class="events__body">
             <div
               class="events__card"
-              v-for="evento in eventos"
-              :key="evento.id"
+              v-for="(evento,index) in itemEvents"
+              :key="index"
+              v-show="evento.publish"
             >
               <div class="events__cardHeader">
                 <img :src="evento.img" alt="evento" class="events__img" />
               </div>
               <div class="events__cardBody">
-                <p class="events__description" v-text="evento.description"></p>
+                <p class="events__description">{{evento.description}}</p>
               </div>
               <div class="events__cardFooter">
                 <a href="#" class="events__btn events__btn--secondary"
@@ -40,6 +41,8 @@
   </div>
 </template>
 <script>
+import firebase from "firebase";
+
 export default {
   name: "PxEvents",
   data() {
@@ -78,10 +81,22 @@ export default {
           participar: false,
         },
       ],
+      itemEvents: [],
       nombre: String,
       descripcion: String,
       mostrar: false,
     };
+  },
+  mounted() {
+    const db = firebase.firestore();
+    db.collection('eventos').get().then(data => {
+      const itemEvents=[];
+      data.forEach(evento => {
+        console.log(evento);
+        itemEvents.push(evento.data());
+      });
+      this.itemEvents = itemEvents;
+    });
   },
   methods: {
     agregarEvento(nombre, description) {
