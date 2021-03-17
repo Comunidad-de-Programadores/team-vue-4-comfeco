@@ -56,7 +56,7 @@ export default {
         .then((doc) => {
           if (doc.exists) {
             const data = doc.data();
-            let exclude_field = ["uid", "uNewPass", "uConfirmNewPass"];
+            let exclude_field = ["uid", "uNewPass", "uConfirmNewPass", "uPhoto"];
             let count_field = exclude_field.length;
             for (const dato in data) {
               for (let i = 0; i < count_field; i++) {
