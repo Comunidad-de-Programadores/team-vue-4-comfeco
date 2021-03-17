@@ -7,8 +7,8 @@
           <div class="events__body">
             <div
               class="events__card"
-              v-for="evento in itemEvents"
-              :key="evento.key"
+              v-for="(evento,index) in itemEvents"
+              :key="index"
               v-show="evento.publish"
             >
               <div class="events__cardHeader">
