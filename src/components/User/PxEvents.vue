@@ -23,7 +23,7 @@
                 >
                 <button
                   class="events__btn events__btn--primary"
-                  @click="agregarEvento(evento.name, evento.description)"
+                  @click="agregarEvento(evento.name, evento.description,'Lf5DjLVAFSVBCXgew1uhlEEOZG52',evento.id)"
                 >
                   Participar
                 </button>
@@ -47,40 +47,6 @@ export default {
   name: "PxEvents",
   data() {
     return {
-      eventos: [
-        {
-          id: 1,
-          name: "Aprendiendo Vue de 0 a experto",
-          img: "assets/images/vuejslogo.jpg",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!",
-          participar: false,
-        },
-        {
-          id: 2,
-          name: "Metodologia de Colaboración",
-          img: "assets/images/colaborador.webp",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!",
-          participar: false,
-        },
-        {
-          id: 3,
-          name: "Aprendiendo Angular avanzado",
-          img: "assets/images/angularLogo.jpeg",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!",
-          participar: false,
-        },
-        {
-          id: 4,
-          name: "Introducción a Svelte",
-          img: "assets/images/svelte.png",
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea sapiente blanditiis repellat at laboriosam ipsa corrupti!",
-          participar: false,
-        },
-      ],
       itemEvents: [],
       nombre: String,
       descripcion: String,
@@ -93,19 +59,36 @@ export default {
       const itemEvents=[];
       data.forEach(evento => {
         console.log(evento);
-        itemEvents.push(evento.data());
+        itemEvents.push({
+          id: evento.id,
+          name: evento.data().name,
+          description: evento.data().description,
+          img: evento.data().img,
+          publish: evento.data().publish,
+        }
+          );
       });
       this.itemEvents = itemEvents;
     });
   },
   methods: {
-    agregarEvento(nombre, description) {
+    agregarEvento(nombre, description, user_id, event_id) {
       this.nombre = nombre;
       this.descripcion = description;
       this.mostrar = true;
       setTimeout(() => {
         this.mostrar = false;
       }, 5000);
+
+      const db = firebase.firestore();
+      db.collection("userEvents")
+      .add({event_id:event_id, user_uid:user_id})
+      .then(()=>{
+        console.log('Registro de manera correcta');      
+      })
+      .catch((error)=>{
+        console.log('Error al momento de registrar: '+error);
+      })
     },
   },
 };
