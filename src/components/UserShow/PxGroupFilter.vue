@@ -20,7 +20,7 @@
           <input type="text" v-model="searchText" placeholder="Buscar grupo" list="teams"/>
           <datalist id="teams">
             <option
-              v-for="option in searchOptions"
+              v-for="option in searchFilter"
               :key="option.id"
               :value="option"
             />            
@@ -44,6 +44,7 @@ export default {
       filterOptions: [],
       searchText:'',
       searchOptions: [],
+      searchFilter: [],
     };
   },
   methods: {
@@ -116,6 +117,9 @@ export default {
       this.filterOptions.push(objOption);
       this.searchOptions.push(info.titleTeam);
     }
+    this.searchFilter = this.searchOptions.filter((valor, indice)=>{
+      return this.searchOptions.indexOf(valor) === indice;
+    });
   },
 };
 </script>
