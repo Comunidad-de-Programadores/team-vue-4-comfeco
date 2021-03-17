@@ -9,22 +9,11 @@
       <h2>
         Editar perfil
       </h2>
+      <PxAvatarUser />
       <form
         class="edit__user--information--form"
         @submit.prevent="saveInformationEditUser"
-      >
-        <div class="edit__user--information-photo">
-          <img
-            :src="formEdit.uPhoto"
-            :alt="'Foto de perfil del usuairo: ' + formEdit.nick"
-          />
-          <div class="edit__user--information-photo-change">
-            <div class="icon-camera">
-              <i class="fas fa-camera-retro"></i>
-            </div>
-          </div>
-        </div>
-
+        >
         <div class="edit__user--information-group-input two">
           <div class="edit__user--information-input">
             <label for="nick">
@@ -230,6 +219,7 @@
 </template>
 
 <script>
+import PxAvatarUser from "@/components/UserShow/PxAvatarUser";
 import firebase from "firebase";
 // Import class autentication
 import Autenticacion from "@/firebase/auth/autentication.js";
@@ -239,6 +229,9 @@ import User from "@/firebase/user/user.js";
 const db = firebase.firestore();
 export default {
   name: "PxEditInfoUser",
+  components: {
+    PxAvatarUser
+  },
   data() {
     return {
       uAreaknowledge: [
@@ -309,7 +302,10 @@ export default {
     async saveInformationEditUser() {
       const currentUser = await this.authClass.authUser();
       const userId = currentUser.uid;
-
+      let avatar_preview = document.getElementById("js_avatar-preview");
+      if(avatar_preview.dataset.src != ''){
+        this.formEdit.uPhoto = avatar_preview.dataset.src;
+      }
       // Guardar los datos actuales ingresados en el formulario
       this.userClass.saveInformationUser(userId, this.formEdit);
       this.$swal({
@@ -354,7 +350,19 @@ export default {
           this.formEdit.uEmail = data.uEmail;
           this.formEdit.uGender = data.uGender;
           this.formEdit.uNick = data.uNick;
-          this.formEdit.uPhoto = this.formEdit.uPhoto;
+          this.formEdit.uPhoto = data.uPhoto;          
+          if (
+            currentUser.providerData[0].providerId === "google.com" ||
+            currentUser.providerData[0].providerId === "facebook.com"
+          ) {      
+            document.getElementById("js_avatar-preview").setAttribute("src", currentUser.photoURL);                       
+          }else{
+            let storageRef = firebase.storage().ref();
+            let spaceRef = storageRef.child(data.uPhoto);
+            spaceRef.getDownloadURL().then(function(downloadURL) {              
+              document.getElementById("js_avatar-preview").setAttribute("src", downloadURL);                           
+            });
+          }                
           this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
           this.formEdit.uSocialMediaGitHub = data.uSocialMediaGitHub;
           this.formEdit.uSocialMediaTwitter = data.uSocialMediaTwitter;
@@ -370,19 +378,9 @@ export default {
         console.error("Error al traer la informacion del documento:", error);
       });
 
-    // LLenar campos de foto de perfil, nick y email en el formulario
-    if (
-      currentUser.providerData[0].providerId === "google.com" ||
-      currentUser.providerData[0].providerId === "facebook.com"
-    ) {
-      this.formEdit.uPhoto = currentUser.photoURL;
-      this.formEdit.uNick = currentUser.displayName;
-      this.formEdit.uEmail = currentUser.email;
-    } else {
-      this.formEdit.uPhoto = "../../assets/images/userDefaultImage.png";
-      this.formEdit.uNick = currentUser.displayName;
-      this.formEdit.uEmail = currentUser.email;
-    }
+    // LLenar campos de foto de perfil, nick y email en el formulario    
+    this.formEdit.uNick = currentUser.displayName;
+    this.formEdit.uEmail = currentUser.email;
 
     // Llenar select of country
     this.getDataCountry.then((data) => {
