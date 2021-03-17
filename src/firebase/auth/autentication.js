@@ -40,18 +40,29 @@ class Autenticacion {
     const user = firebase.auth().currentUser;    
     if (user != null) {
       const docRef = this.db.collection("userPersonalInformation").doc(user.uid);
-      var photo = "./assets/images/userDefaultImage.png";
+      let photo = "./assets/images/userDefaultImage.png";
       // Traer la informacion del usuario
       docRef
         .get()
         .then((doc) => {
           if (doc.exists) {
             const data = doc.data();
-            if (data.uPhoto != null) {
-              document.getElementById("js_avatar-user").setAttribute("src", data.uPhoto);                    
-            } else {
-              document.getElementById("js_avatar-user").setAttribute("src", photo);                    
-            }
+            if (
+              user.providerData[0].providerId === "google.com" ||
+              user.providerData[0].providerId === "facebook.com"
+            ) {      
+              document.getElementById("js_avatar-user").setAttribute("src", user.photoURL);           
+            }else{              
+              if (data.uPhoto != null) {
+                const storageRef = firebase.storage().ref();          
+                const spaceRef = storageRef.child(data.uPhoto);
+                spaceRef.getDownloadURL().then(function(downloadURL) {
+                  document.getElementById("js_avatar-user").setAttribute("src", downloadURL);
+                });              
+              } else {
+                document.getElementById("js_avatar-user").setAttribute("src", photo);                    
+              }
+            } 
           } else {
             console.warn("No se encontro el documento!");
           }

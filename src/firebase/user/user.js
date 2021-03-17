@@ -32,6 +32,18 @@ class User {
       console.error("Error al guardar la informacion: ", error);
     }
   }
+  // Guardar la nueva informacion del usuario cuando se edite sus datos
+  async updateAvatarUser(userId, avatar) {
+    try {
+      this.db
+        .collection("userPersonalInformation")
+        .doc(userId)
+        .update({uPhoto: avatar});
+      console.log("Informacion guardada");
+    } catch (error) {
+      console.error("Error al guardar la informacion: ", error);
+    }
+  }
 }
 
 export default User;

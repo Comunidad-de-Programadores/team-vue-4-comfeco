@@ -4,7 +4,7 @@
       <i class="far fa-edit"></i>Editar Perfil
     </router-link>
     <div class="infouser__details">
-      <img class="infouser__img" :src="uPhoto" alt="photo profile" />
+      <img class="infouser__img" id="js_avatar-perfil" :src="uPhoto" alt="photo profile" />
       <h5 class="infouser__name">{{ uNick }}</h5>
       <div class="information" v-if="information">
         <p class="infouser__profession">{{ uAreaknowledge }}</p>
@@ -95,7 +95,21 @@ export default {
           console.log("informacion encontrada ->", doc.data());
           this.information = true;
           this.uNick = data.uNick;
-          this.uPhoto = data.uPhoto;
+          if (
+            currentUser.providerData[0].providerId === "google.com" ||
+            currentUser.providerData[0].providerId === "facebook.com"
+          ) {      
+            document.getElementById("js_avatar-perfil").setAttribute("src", currentUser.photoURL);           
+          }else{
+            if (data.uPhoto != '') {
+              const storageRef = firebase.storage().ref();          
+              const spaceRef = storageRef.child(data.uPhoto);
+              spaceRef.getDownloadURL().then(function(downloadURL) {
+                document.getElementById("js_avatar-perfil").setAttribute("src", downloadURL);
+              });
+            }            
+          }  
+          
           this.uAreaknowledge = data.uAreaknowledge;
           this.uBiography = data.uBiography;
           this.uSocialMediaFacebook = `https://www.facebook.com/${data.uSocialMediaFacebook}`;
