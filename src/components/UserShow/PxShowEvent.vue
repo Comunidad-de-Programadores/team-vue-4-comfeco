@@ -1,13 +1,9 @@
 <template>
   <div class="evento side__bar-style">
     <div class="evento__header">
-      <p class="side__bar-style-title">Eventos de tu Interes</p>
-      <router-link to="/events" class="evento-link">
-        <i class="fas fa-eye"></i>
-        Ver más
-      </router-link>
+      <p class="side__bar-style-title">Eventos de tu interés</p>
     </div>
-    <div class="evento__body">
+    <!-- <div class="evento__body">
       <img
         class="evento__body__img"
         src="@/assets/images/Logo-comfeco-opción-1.png"
@@ -19,20 +15,7 @@
           <button class="button button-primary">Más Información</button>
         </div>
       </div>
-    </div>
-    <div class="evento__body">
-      <img
-        class="evento__body__img"
-        src="@/assets/images/Logo-comfeco-opción-1.png"
-        alt="Logo del Evento"
-      />
-      <div>
-        <h5 class="evento__title-ml1">Comunidad Fest and Code</h5>
-        <div class="center-btn">
-          <button class="button button-primary">Más Información</button>
-        </div>
-      </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>

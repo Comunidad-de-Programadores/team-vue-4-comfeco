@@ -75,6 +75,13 @@ export default {
   &__card {
     border: 2px solid var(--color-primary);
     background: var(--color-secondary);
+    &:hover {
+      .image-zoom-in .groups__card-image {
+        background-position: center;
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
     &.show {
       display: block;
       animation-name: scale;
@@ -100,11 +107,6 @@ export default {
       opacity: 0.5;
       transform: scale(1.3);
       transition: var(--transition);
-      &:hover {
-        background-position: center;
-        transform: scale(1);
-        opacity: 1;
-      }
     }
     &-ribbon {
       padding: 6px 12px;

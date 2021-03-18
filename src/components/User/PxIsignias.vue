@@ -83,7 +83,7 @@ export default {
     align-items: flex-start;
   }
   &__content {
-    background: #dab6e7;
+    background: #cca6f2;
     padding: 2rem 1rem;
     text-align: center;
     transition: var(--transition);
@@ -96,6 +96,9 @@ export default {
     &:hover {
       box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.2);
       background: #cb8ce2;
+      .insignias__img {
+        transform: rotateY(360deg);
+      }
     }
   }
   &__line {
@@ -115,6 +118,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0 auto;
+    transition: 0.5s ease-in-out all;
   }
 }
 @media screen and (min-width: 992px) {
