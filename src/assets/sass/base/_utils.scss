@@ -32,6 +32,10 @@ h2 {
 .hidden {
   display: none;
 }
+.no-visible {
+  opacity: 0;
+  pointer-events: none;
+}
 
 /* --- links --- */
 .link {
@@ -307,6 +311,7 @@ input {
   padding: 1rem;
   background-image: var(--color-gradient);
   border-radius: 20px;
+  position: relative;
   &-title {
     margin: 0 0 10px 0;
     font-size: 24px;

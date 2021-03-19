@@ -1,7 +1,7 @@
 <template>
   <div class="groups__grid">
     <div
-      class="groups__card"
+      class="groups__card no-visible"
       v-for="info in inforCard"
       :key="info.id"
       :data-ribbon="
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import PxChargeInfo from "@/components/Modal/PxChargeInfo";
+
 export default {
   name: "PxGroupCards",
   data() {
@@ -51,15 +53,26 @@ export default {
     };
   },
   computed: {},
+  components: {
+    PxChargeInfo,
+  },
   async created() {
+    setTimeout(() => {
+      document.getElementsByClassName("groups__card").forEach((element) => {
+        element.classList.remove("no-visible");
+      });
+    }, 1500);
+
     const data = await fetch(
       "https://api-node-comfeco-cards.herokuapp.com/cards"
     );
     const information = await data.json();
     const cards = information.cards.cards;
-    for (const info of cards) {
-      this.inforCard.push(info);
-    }
+    setTimeout(() => {
+      for (const info of cards) {
+        this.inforCard.push(info);
+      }
+    }, 500);
   },
 };
 </script>
@@ -71,10 +84,12 @@ export default {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-gap: 10px;
+    position: relative;
   }
   &__card {
     border: 2px solid var(--color-primary);
     background: var(--color-secondary);
+    transition: var(--transition);
     &:hover {
       .image-zoom-in .groups__card-image {
         background-position: center;
