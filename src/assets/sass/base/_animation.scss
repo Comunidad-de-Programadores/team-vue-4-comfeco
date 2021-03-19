@@ -49,3 +49,12 @@
     opacity: 1;
   }
 }
+
+@keyframes chargeImageText {
+  to {
+    background: #d9b3e6;
+  }
+  from {
+    background: #cd97df;
+  }
+}
