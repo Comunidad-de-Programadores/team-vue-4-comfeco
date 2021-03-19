@@ -23,7 +23,7 @@
                 >
                 <button
                   class="events__btn events__btn--primary"
-                  @click="agregarEvento(evento.name, evento.description, evento.id, evento.img)"
+                  @click="agregarEvento(evento.name, evento.description, evento.id, evento.name)"
                 >
                   Participar
                 </button>
@@ -59,7 +59,6 @@ export default {
     db.collection('eventos').get().then(data => {
       const itemEvents=[];
       data.forEach(evento => {
-        console.log(evento);
         itemEvents.push({
           id: evento.id,
           name: evento.data().name,
@@ -79,7 +78,7 @@ export default {
     },
   },
   methods: {
-    async agregarEvento(nombre, description, event_id, event_img) {
+    async agregarEvento(nombre, description, event_id, event_name) {
       this.nombre = nombre;
       this.descripcion = description;
       this.mostrar = true;
@@ -91,7 +90,7 @@ export default {
       const userId = currentUser.uid;
       
       db.collection("userEvents")
-      .add({event_id:event_id, user_uid:userId, event_img:event_img})
+      .add({event_id:event_id, user_uid:userId, event_name:event_name})
       .then(()=>{
         console.log(userId);
         console.log('Registro de manera correcta');      

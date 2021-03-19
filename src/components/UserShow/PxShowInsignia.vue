@@ -20,9 +20,11 @@
       <h6 class="actividades__title">Actividad reciente</h6>
       <div class="actividades__body">
         <div class="actividades__content">
-          <span class="actividades__evento"
-            >Te has unido al evento Comunity Fest and Code</span
-          >
+          <div class="actividades__evento" v-for="evento in eventos" :key="evento.idevent" v-show="evento.iduser == id_user">
+            <ul>
+              <li v-text="evento.name"></li>
+            </ul>
+          </div>
           <span class="actividades__icon"
             ><i class="far fa-calendar-check" style="font-size: 48px;"></i
           ></span>
@@ -42,12 +44,15 @@ export default {
   data() {
     return {
       insignias: [],
+      eventos: [],
+      id_user: String,
     };
   },
   methods: {
     async authUser() {
       const currentUser = await this.authClass.authUser();
       const userId = currentUser.uid;
+      this.id_user = userId;
       const docRef = db.collection("userPersonalInformation").doc(userId);
 
       // Traer la informacion del usuario
@@ -103,6 +108,17 @@ export default {
   },
   mounted() {
     this.authUser();
+    db.collection('userEvents').get().then(data => {
+      const eventos=[];
+      data.forEach(evento => {
+        eventos.push({
+          idevent: evento.data().event_id,
+          name: evento.data().event_name,
+          iduser: evento.data().user_uid,
+        });
+      });
+      this.eventos = eventos;
+    });
   },
 };
 </script>
@@ -150,8 +166,8 @@ export default {
     background: var(--color-secondary);
   }
   &__evento {
-    display: flex;
-    justify-content: flex-start;
+    /*display: flex;
+    justify-content: flex-start;*/
     padding-top: 1rem;
     font-size: 17px;
     font-family: var(--fuente-regular);
