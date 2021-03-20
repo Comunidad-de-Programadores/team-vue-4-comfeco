@@ -357,14 +357,21 @@ export default {
             document
               .getElementById("js_avatar-preview")
               .setAttribute("src", currentUser.photoURL);
-          } else {
-            let storageRef = firebase.storage().ref();
-            let spaceRef = storageRef.child(data.uPhoto);
-            spaceRef.getDownloadURL().then(function(downloadURL) {
+          } else {            
+            if (data.uPhoto != '') {
+              const storageRef = firebase.storage().ref();
+              const spaceRef = storageRef.child(data.uPhoto);
+              spaceRef.getDownloadURL().then(function(downloadURL) {
+                document
+                  .getElementById("js_avatar-preview")
+                  .setAttribute("src", downloadURL);
+              });
+            } else {
+              let photo = "./assets/images/userDefaultImage.png";
               document
                 .getElementById("js_avatar-preview")
-                .setAttribute("src", downloadURL);
-            });
+                .setAttribute("src", photo);
+            }            
           }
           this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
           this.formEdit.uSocialMediaGitHub = data.uSocialMediaGitHub;

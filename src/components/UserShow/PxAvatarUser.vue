@@ -65,7 +65,7 @@ export default {
     previewImage(event) {
       this.uploadValue = 0;
       this.picture = null;
-      this.imageData = event.target.files[0];
+      this.imageData = event.target.files[0];      
     },
     onUpload() {
       this.picture = null;
@@ -88,7 +88,7 @@ export default {
             this.picture = url;
             document
               .getElementById("js_avatar-preview")
-              .setAttribute("data-src", this.imageData.name);
+              .setAttribute("data-src", this.picture);
             this.saveAvatarUser();
           });
         }
@@ -105,6 +105,10 @@ export default {
         icon: "success",
         confirmButtonText: "OK",
       });
+      const updateDataUser = await this.authClass.authUser();
+      setTimeout(() => {
+        this.imageData = null;
+      }, 1000);
     },
   },
   computed: {
@@ -119,12 +123,13 @@ export default {
   },
   async created() {
     this.currentUser = await this.authClass.authUser();
+
     if (
       this.currentUser.providerData[0].providerId === "google.com" ||
       this.currentUser.providerData[0].providerId === "facebook.com"
     ) {
-      this.editavatar = false;
-    }
+      this.editavatar = false;      
+    }    
   },
 };
 </script>

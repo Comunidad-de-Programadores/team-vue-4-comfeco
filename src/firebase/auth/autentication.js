@@ -57,7 +57,7 @@ class Autenticacion {
                 .getElementById("js_avatar-user")
                 .setAttribute("src", user.photoURL);
             } else {
-              if (data.uPhoto != null) {
+              if (data.uPhoto != '') {
                 const storageRef = firebase.storage().ref();
                 const spaceRef = storageRef.child(data.uPhoto);
                 spaceRef.getDownloadURL().then(function(downloadURL) {
@@ -137,9 +137,11 @@ class Autenticacion {
 
   async verifiedUser() {
     const user = firebase.auth().currentUser;
+    console.log('process.env.BASE_URL=>' + process.env.BASE_URL);
     const configuracion = {
       url: "http://localhost:8080/" || process.env.BASE_URL,
     };
+    console.log('configuracion.url=>' + configuracion.url);
     const response = await user.sendEmailVerification(configuracion);
     return response;
   }
