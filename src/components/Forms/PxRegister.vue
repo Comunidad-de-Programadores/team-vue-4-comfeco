@@ -1,7 +1,13 @@
 <template>
   <div class="register bg-primary">
     <div class="form-container glass-container">
-      <form action method="post" autocomplete="on" @submit.prevent="registrar">
+      <form
+        action
+        method="post"
+        autocomplete="on"
+        @keyup.enter="registrar"
+        @submit.prevent="registrar"
+      >
         <h2 class="title">Regístrate</h2>
         <section class="error__content" v-if="errors.length">
           <b class="error__content-message">
@@ -182,13 +188,15 @@ export default {
 
         if (!this.form.email) {
           this.errors.push("El correo electrónico es obligatorio.");
-        } else if (!this.validationClass.validInput('email', this.form.email)) {
+        } else if (!this.validationClass.validInput("email", this.form.email)) {
           this.errors.push("El correo electrónico debe ser válido.");
         }
 
         if (!this.form.password) {
           this.errors.push("El password es obligatorio.");
-        } else if (!this.validationClass.validInput('pass', this.form.password)) {
+        } else if (
+          !this.validationClass.validInput("pass", this.form.password)
+        ) {
           this.errors.push(
             "La contraseña debe tener al menos 8 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula. Puede tener otros símbolos."
           );

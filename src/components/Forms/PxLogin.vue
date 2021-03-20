@@ -5,6 +5,7 @@
         action
         method="post"
         autocomplete="off"
+        @keyup.enter="loginWithEamil"
         @submit.prevent="loginWithEamil"
         novalidate="true"
       >
