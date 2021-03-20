@@ -314,6 +314,14 @@ export default {
         confirmButtonText: "OK",
       });
     },
+    avatarPreview(myavatar){
+      if (myavatar == '') {
+        myavatar = "./assets/images/userDefaultImage.png";
+      }
+      document
+        .getElementById("js_avatar-preview")
+        .setAttribute("src", myavatar);
+    },
   },
   computed: {
     async getDataCountry() {
@@ -354,23 +362,16 @@ export default {
             currentUser.providerData[0].providerId === "google.com" ||
             currentUser.providerData[0].providerId === "facebook.com"
           ) {
-            document
-              .getElementById("js_avatar-preview")
-              .setAttribute("src", currentUser.photoURL);
+            this.avatarPreview(currentUser.photoURL);            
           } else {            
             if (data.uPhoto != '') {
               const storageRef = firebase.storage().ref();
               const spaceRef = storageRef.child(data.uPhoto);
               spaceRef.getDownloadURL().then(function(downloadURL) {
-                document
-                  .getElementById("js_avatar-preview")
-                  .setAttribute("src", downloadURL);
+                this.avatarPreview(downloadURL);
               });
             } else {
-              let photo = "./assets/images/userDefaultImage.png";
-              document
-                .getElementById("js_avatar-preview")
-                .setAttribute("src", photo);
+              this.avatarPreview('');
             }            
           }
           this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
@@ -380,6 +381,8 @@ export default {
           this.formEdit.uid = data.uid;
           this.formEdit.uNewPass = data.uNewPass;
           this.formEdit.uConfirmNewPass = data.uConfirmNewPass;
+        }else{
+          this.avatarPreview('');          
         }
       })
       .catch((error) => {
