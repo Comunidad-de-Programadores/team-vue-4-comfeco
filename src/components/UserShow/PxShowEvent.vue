@@ -1,33 +1,17 @@
 <template>
   <div class="evento side__bar-style">
     <div class="evento__header">
-      <p class="side__bar-style-title">Eventos de tu Interes</p>
-      <router-link to="/events" class="evento-link">
-        <i class="fas fa-eye"></i>
-        Ver más
-      </router-link>
+      <p class="side__bar-style-title">Eventos de tu interés</p>
     </div>
-    <div class="evento__body">
-      <img
-        class="evento__body__img"
-        src="@/assets/images/Logo-comfeco-opción-1.png"
-        alt="Logo del Evento"
-      />
+    <div
+      class="evento__body"
+      v-for="item in itemEvents"
+      :key="item.id"
+      v-show="item.publish"
+    >
+      <img :src="item.img" alt="logo" class="evento__body__img" />
       <div>
-        <h5 class="evento__title-ml1">Comunidad Fest and Code</h5>
-        <div class="center-btn">
-          <button class="button button-primary">Más Información</button>
-        </div>
-      </div>
-    </div>
-    <div class="evento__body">
-      <img
-        class="evento__body__img"
-        src="@/assets/images/Logo-comfeco-opción-1.png"
-        alt="Logo del Evento"
-      />
-      <div>
-        <h5 class="evento__title-ml1">Comunidad Fest and Code</h5>
+        <h5 class="evento__title-ml1" v-text="item.name"></h5>
         <div class="center-btn">
           <button class="button button-primary">Más Información</button>
         </div>
@@ -36,10 +20,32 @@
   </div>
 </template>
 <script>
+import firebase from "firebase";
+const db = firebase.firestore();
+
 export default {
   name: "PxShowEvent",
   data() {
-    return {};
+    return {
+      itemEvents: [],
+    };
+  },
+  mounted() {
+    db.collection("eventos")
+      .get()
+      .then((data) => {
+        const itemEvents = [];
+        data.forEach((evento) => {
+          itemEvents.push({
+            id: evento.id,
+            item: evento.data().item,
+            name: evento.data().name,
+            img: evento.data().img,
+            publish: evento.data().publish,
+          });
+        });
+        this.itemEvents = itemEvents;
+      });
   },
   methods: {},
 };
@@ -83,7 +89,8 @@ export default {
     border-bottom: 2px solid var(--color-primary);
     padding: 0 0 12px 0;
     &__img {
-      width: 150px;
+      width: 100%;
+      height: 7rem;
       margin: 0 10px 0 0;
     }
     > div {

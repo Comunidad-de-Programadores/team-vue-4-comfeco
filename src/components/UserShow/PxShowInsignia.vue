@@ -19,10 +19,17 @@
     <section class="actividades">
       <h6 class="actividades__title">Actividad reciente</h6>
       <div class="actividades__body">
-        <div class="actividades__content">
-          <span class="actividades__evento"
-            >Te has unido al evento Comunity Fest and Code</span
-          >
+        <div
+          class="actividades__content"
+          v-for="evento in eventos"
+          :key="evento.idevent"
+          v-show="evento.iduser == id_user"
+        >
+          <div class="actividades__evento">
+            <ul>
+              <li v-text="evento.name"></li>
+            </ul>
+          </div>
           <span class="actividades__icon"
             ><i class="far fa-calendar-check" style="font-size: 48px;"></i
           ></span>
@@ -42,12 +49,15 @@ export default {
   data() {
     return {
       insignias: [],
+      eventos: [],
+      id_user: String,
     };
   },
   methods: {
     async authUser() {
       const currentUser = await this.authClass.authUser();
       const userId = currentUser.uid;
+      this.id_user = userId;
       const docRef = db.collection("userPersonalInformation").doc(userId);
 
       // Traer la informacion del usuario
@@ -56,7 +66,12 @@ export default {
         .then((doc) => {
           if (doc.exists) {
             const data = doc.data();
-            let exclude_field = ["uid", "uNewPass", "uConfirmNewPass", "uPhoto"];
+            let exclude_field = [
+              "uid",
+              "uNewPass",
+              "uConfirmNewPass",
+              "uPhoto",
+            ];
             let count_field = exclude_field.length;
             for (const dato in data) {
               for (let i = 0; i < count_field; i++) {
@@ -98,6 +113,19 @@ export default {
   },
   mounted() {
     this.authUser();
+    db.collection("userEvents")
+      .get()
+      .then((data) => {
+        const eventos = [];
+        data.forEach((evento) => {
+          eventos.push({
+            idevent: evento.data().event_id,
+            name: evento.data().event_name,
+            iduser: evento.data().user_uid,
+          });
+        });
+        this.eventos = eventos;
+      });
   },
 };
 </script>
@@ -128,6 +156,10 @@ export default {
 }
 .actividades {
   margin: 30px 0;
+  &__body {
+    max-height: 800px;
+    overflow-y: auto;
+  }
   &__title {
     font-size: 24px;
     margin: 0 0 10px 0;
@@ -143,6 +175,7 @@ export default {
     border: 1px solid #222222;
     padding: 1rem;
     background: var(--color-secondary);
+    margin: 0 0 16px;
   }
   &__evento {
     display: flex;

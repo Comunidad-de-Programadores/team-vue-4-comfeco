@@ -1,5 +1,6 @@
 <template>
   <div class="groups__grid">
+    <PxLoader />
     <div
       class="groups__card"
       v-for="info in inforCard"
@@ -43,6 +44,8 @@
 </template>
 
 <script>
+import PxLoader from "@/components/Modal/PxLoader";
+
 export default {
   name: "PxGroupCards",
   data() {
@@ -51,128 +54,33 @@ export default {
     };
   },
   computed: {},
+  components: {
+    PxLoader,
+  },
   async created() {
+    setTimeout(() => {
+      document.getElementById("js_overlay-loader").classList.add("active");
+      document.getElementById("js_loader").classList.add("active");
+    }, 100);
+
+    setTimeout(() => {
+      document.getElementById("js_overlay-loader").classList.remove("active");
+      document.getElementById("js_loader").classList.remove("active");
+    }, 800);
     const data = await fetch(
       "https://api-node-comfeco-cards.herokuapp.com/cards"
     );
     const information = await data.json();
     const cards = information.cards.cards;
-    for (const info of cards) {
-      this.inforCard.push(info);
-    }
+    setTimeout(() => {
+      for (const info of cards) {
+        this.inforCard.push(info);
+      }
+    }, 500);
   },
 };
 </script>
 
 <style scoped lang="scss">
-.groups {
-  &__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-gap: 10px;
-  }
-  &__card {
-    border: 2px solid var(--color-primary);
-    background: var(--color-secondary);
-    &.show {
-      display: block;
-      animation-name: scale;
-      animation-duration: 0.8s;
-      animation-timing-function: ease-in-out;
-    }
-    &.hide {
-      display: none;
-    }
-    img {
-      width: 100%;
-    }
-    .image-zoom-in {
-      overflow: hidden;
-      background: var(--color-black);
-    }
-    &-image {
-      width: 100%;
-      height: 220px;
-      background-position: left;
-      background-repeat: no-repeat;
-      background-size: cover;
-      opacity: 0.5;
-      transform: scale(1.3);
-      transition: var(--transition);
-      &:hover {
-        background-position: center;
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-    &-ribbon {
-      padding: 6px 12px;
-      height: 20px;
-      border-radius: 12px;
-      background: #edeef2;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: auto;
-      span {
-        font-size: 14px;
-        font-family: var(--fuente-bold);
-      }
-    }
-    &-info {
-      padding: 8px;
-      line-height: 20px;
-    }
-    &-title {
-      margin: 1.2rem 0 10px;
-      font-size: 22px;
-      font-family: var(--fuente-bold);
-    }
-    &-text {
-      font-size: 17px;
-      color: var(--color-black);
-      margin: 0 0 12px 0;
-      height: 200px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    &-action {
-      text-align: center;
-      .button {
-        width: 60%;
-      }
-    }
-  }
-}
-@media screen and (min-width: 768px) {
-  .groups {
-    &__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-}
-@media screen and (min-width: 992px) {
-  .groups {
-    &__grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .groups {
-    &__grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  .groups {
-    &__grid {
-      grid-template-columns: repeat(5, 1fr);
-    }
-  }
-}
+@import "../../assets/sass/components/_group-cards.scss";
 </style>

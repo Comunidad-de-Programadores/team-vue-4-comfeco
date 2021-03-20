@@ -14,7 +14,7 @@
         <h4 class="insignias__title--insignia">{{ insignia.titulo }}</h4>
         <h5 class="insignias__title--insignia">Descripci&oacute;n</h5>
         <p>{{ insignia.desc }}</p>
-        <hr />
+        <span class="insignias__line"></span>
         <h5 class="insignias__title--insignia">¿Como ganarla?</h5>
         <p>{{ insignia.ganarla }}</p>
       </section>
@@ -77,16 +77,35 @@ export default {
   }
   &__body {
     display: grid;
-    grid-template-columns: 24% 24% 24% 24%;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-    grid-column-gap: 1rem;
+    grid-gap: 16px;
     align-items: flex-start;
   }
   &__content {
-    background: #dab6e7;
-    margin-right: 5%;
-    padding: 3rem 2rem 2rem;
+    background: #cca6f2;
+    padding: 2rem 1rem;
     text-align: center;
+    transition: var(--transition);
+    > p {
+      height: 70px;
+      overflow: hidden;
+      letter-spacing: 0.5px;
+      line-height: 18px;
+    }
+    &:hover {
+      box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.2);
+      background: #cb8ce2;
+      .insignias__img {
+        transform: rotateY(360deg);
+      }
+    }
+  }
+  &__line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--color-white);
   }
   &__img {
     margin: 0 16px 6px 0;
@@ -99,6 +118,14 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0 auto;
+    transition: 0.5s ease-in-out all;
+  }
+}
+@media screen and (min-width: 992px) {
+  .insignias {
+    &__body {
+      grid-template-columns: 24% 24% 24% 24%;
+    }
   }
 }
 </style>

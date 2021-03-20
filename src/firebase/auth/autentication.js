@@ -11,7 +11,7 @@ class Autenticacion {
         .auth()
         .signInWithEmailAndPassword(email, password);
       const response = await loginEmailPass.user;
-      
+
       return response;
     } catch (error) {
       const message = error.message;
@@ -37,9 +37,11 @@ class Autenticacion {
   }
 
   async authUser() {
-    const user = firebase.auth().currentUser;    
+    const user = firebase.auth().currentUser;
     if (user != null) {
-      const docRef = this.db.collection("userPersonalInformation").doc(user.uid);
+      const docRef = this.db
+        .collection("userPersonalInformation")
+        .doc(user.uid);
       let photo = "./assets/images/userDefaultImage.png";
       // Traer la informacion del usuario
       docRef
@@ -50,19 +52,25 @@ class Autenticacion {
             if (
               user.providerData[0].providerId === "google.com" ||
               user.providerData[0].providerId === "facebook.com"
-            ) {      
-              document.getElementById("js_avatar-user").setAttribute("src", user.photoURL);           
-            }else{              
+            ) {
+              document
+                .getElementById("js_avatar-user")
+                .setAttribute("src", user.photoURL);
+            } else {
               if (data.uPhoto != null) {
-                const storageRef = firebase.storage().ref();          
+                const storageRef = firebase.storage().ref();
                 const spaceRef = storageRef.child(data.uPhoto);
                 spaceRef.getDownloadURL().then(function(downloadURL) {
-                  document.getElementById("js_avatar-user").setAttribute("src", downloadURL);
-                });              
+                  document
+                    .getElementById("js_avatar-user")
+                    .setAttribute("src", downloadURL);
+                });
               } else {
-                document.getElementById("js_avatar-user").setAttribute("src", photo);                    
+                document
+                  .getElementById("js_avatar-user")
+                  .setAttribute("src", photo);
               }
-            } 
+            }
           } else {
             console.warn("No se encontro el documento!");
           }
@@ -100,7 +108,7 @@ class Autenticacion {
       const provider = new firebase.auth.GoogleAuthProvider();
       const singInGoogle = await firebase.auth().signInWithPopup(provider);
       const informationUser = singInGoogle.user;
-      
+
       return informationUser;
     } catch (error) {
       const message = error.message;
@@ -112,8 +120,8 @@ class Autenticacion {
     try {
       const provider = new firebase.auth.FacebookAuthProvider();
       const singInFacebbok = await firebase.auth().signInWithPopup(provider);
-      const informationUser = singInFacebbok.user;     
-     
+      const informationUser = singInFacebbok.user;
+
       return informationUser;
     } catch (error) {
       const message = error.message;

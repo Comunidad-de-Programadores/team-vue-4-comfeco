@@ -17,7 +17,16 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "register" */ "../views/SignIn.vue"),
     meta: { isPublc: true },
-  },  
+  },
+  {
+    path: "/my-account",
+    name: "MyAccount",
+    component: () =>
+      import(/* webpackChunkName: "MyAccount" */ "../views/MyAccount.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
   {
     path: "/recover-password",
     name: "RecoverPass",
@@ -26,19 +35,12 @@ const routes = [
     meta: { isPublc: true },
   },
   {
-    path: "/my-account",
-    name: "Perfil",
-    component: () =>
-      import(/* webpackChunkName: "Perfil" */ "../views/MyAccount.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: "/edit-my-account",
     name: "EditUserAccount",
     component: () =>
-      import(/* webpackChunkName: "edit" */ "../views/EditUserAccount.vue"),
+      import(
+        /* webpackChunkName: "editUserAccount" */ "../views/EditUserAccount.vue"
+      ),
     meta: {
       requiresAuth: true,
     },
@@ -61,18 +63,10 @@ const routes = [
     },
   },
   {
-    path: "/events",
-    name: "Eventos",
-    component: () => import(/* webpackChunkName: "Eventos"*/ "../views/Events"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: "/:catchAll(.*)",
     name: "Error",
     component: () =>
-      import(/* webpackChunkName: "Error" */ "../views/404NotFount.vue"),
+      import(/* webpackChunkName: "error" */ "../views/404NotFount.vue"),
     meta: { isPublc: true },
   },
 ];
@@ -93,9 +87,14 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
   if (requiresAuth) {
     firebase.auth().onAuthStateChanged((user) => {
-      if (!user) next("/");
-      else next();
+      if (!user) {
+        next("/");
+        return;
+      } else {
+        next();
+      }
     });
   } else next();
 });
+
 export default router;
