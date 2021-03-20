@@ -13,7 +13,6 @@ class User {
         .doc(docrefId);
       const data = await docRef.get();
       const response = data.data();
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -38,7 +37,7 @@ class User {
       this.db
         .collection("userPersonalInformation")
         .doc(userId)
-        .update({uPhoto: avatar});
+        .update({ uPhoto: avatar });
       console.log("Informacion guardada");
     } catch (error) {
       console.error("Error al guardar la informacion: ", error);

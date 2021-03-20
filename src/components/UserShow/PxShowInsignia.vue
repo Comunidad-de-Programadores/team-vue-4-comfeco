@@ -19,8 +19,13 @@
     <section class="actividades">
       <h6 class="actividades__title">Actividad reciente</h6>
       <div class="actividades__body">
-        <div class="actividades__content">
-          <div class="actividades__evento" v-for="evento in eventos" :key="evento.idevent" v-show="evento.iduser == id_user">
+        <div
+          class="actividades__content"
+          v-for="evento in eventos"
+          :key="evento.idevent"
+          v-show="evento.iduser == id_user"
+        >
+          <div class="actividades__evento">
             <ul>
               <li v-text="evento.name"></li>
             </ul>
@@ -108,17 +113,19 @@ export default {
   },
   mounted() {
     this.authUser();
-    db.collection('userEvents').get().then(data => {
-      const eventos=[];
-      data.forEach(evento => {
-        eventos.push({
-          idevent: evento.data().event_id,
-          name: evento.data().event_name,
-          iduser: evento.data().user_uid,
+    db.collection("userEvents")
+      .get()
+      .then((data) => {
+        const eventos = [];
+        data.forEach((evento) => {
+          eventos.push({
+            idevent: evento.data().event_id,
+            name: evento.data().event_name,
+            iduser: evento.data().user_uid,
+          });
         });
+        this.eventos = eventos;
       });
-      this.eventos = eventos;
-    });
   },
 };
 </script>
@@ -149,6 +156,10 @@ export default {
 }
 .actividades {
   margin: 30px 0;
+  &__body {
+    max-height: 800px;
+    overflow-y: auto;
+  }
   &__title {
     font-size: 24px;
     margin: 0 0 10px 0;
@@ -164,10 +175,11 @@ export default {
     border: 1px solid #222222;
     padding: 1rem;
     background: var(--color-secondary);
+    margin: 0 0 16px;
   }
   &__evento {
-    /*display: flex;
-    justify-content: flex-start;*/
+    display: flex;
+    justify-content: flex-start;
     padding-top: 1rem;
     font-size: 17px;
     font-family: var(--fuente-regular);

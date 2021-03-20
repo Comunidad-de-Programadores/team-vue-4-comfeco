@@ -8,6 +8,10 @@
     display: block;
   }
   &--close-button {
+    a {
+      color: var(--color-black);
+      text-decoration: none;
+    }
     i {
       font-size: 1.5rem;
     }

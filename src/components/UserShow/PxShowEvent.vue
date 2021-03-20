@@ -3,19 +3,20 @@
     <div class="evento__header">
       <p class="side__bar-style-title">Eventos de tu interés</p>
     </div>
-    <div class="evento__body" v-for="item in itemEvents" :key="item.id" v-show="item.publish">
-      <img
-        :src="item.img"
-        alt="logo"
-        class="evento__body__img"
-      />
+    <div
+      class="evento__body"
+      v-for="item in itemEvents"
+      :key="item.id"
+      v-show="item.publish"
+    >
+      <img :src="item.img" alt="logo" class="evento__body__img" />
       <div>
         <h5 class="evento__title-ml1" v-text="item.name"></h5>
         <div class="center-btn">
           <button class="button button-primary">Más Información</button>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 </template>
 <script>
@@ -30,19 +31,21 @@ export default {
     };
   },
   mounted() {
-    db.collection('eventos').get().then(data => {
-      const itemEvents=[];
-      data.forEach(evento => {
-        itemEvents.push({
-          id: evento.id,
-          item: evento.data().item,
-          name: evento.data().name,
-          img: evento.data().img,
-          publish: evento.data().publish,
+    db.collection("eventos")
+      .get()
+      .then((data) => {
+        const itemEvents = [];
+        data.forEach((evento) => {
+          itemEvents.push({
+            id: evento.id,
+            item: evento.data().item,
+            name: evento.data().name,
+            img: evento.data().img,
+            publish: evento.data().publish,
+          });
         });
+        this.itemEvents = itemEvents;
       });
-      this.itemEvents = itemEvents;
-    });
   },
   methods: {},
 };

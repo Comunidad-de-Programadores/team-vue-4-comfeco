@@ -2,7 +2,9 @@
   <h2 class="margin">Mas Comunidades</h2>
 </template>
 <script>
-export default {};
+export default {
+  name: "Comunidad",
+};
 </script>
 <style lang="scss" scoped>
 .margin {
