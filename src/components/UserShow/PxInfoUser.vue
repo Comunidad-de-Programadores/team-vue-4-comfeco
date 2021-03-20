@@ -110,27 +110,24 @@ export default {
           let data = doc.data();
 
           if (doc.exists) {
+            //console.log("informacion encontrada ->", doc.data());
             this.information = true;
             this.uNick = data.uNick;
             if (
               currentUser.providerData[0].providerId === "google.com" ||
               currentUser.providerData[0].providerId === "facebook.com"
-            ) {
-              document
-                .getElementById("js_avatar-perfil")
-                .setAttribute("src", currentUser.photoURL);
-            } else {
-              if (data.uPhoto != "") {
-                const storageRef = firebase.storage().ref();
+            ) {      
+              document.getElementById("js_avatar-perfil").setAttribute("src", currentUser.photoURL);           
+            }else{
+              if (data.uPhoto != '') {
+                const storageRef = firebase.storage().ref();          
                 const spaceRef = storageRef.child(data.uPhoto);
                 spaceRef.getDownloadURL().then(function(downloadURL) {
-                  document
-                    .getElementById("js_avatar-perfil")
-                    .setAttribute("src", downloadURL);
+                  document.getElementById("js_avatar-perfil").setAttribute("src", downloadURL);
                 });
-              }
-            }
-
+              }            
+            }  
+            
             this.uAreaknowledge = data.uAreaknowledge;
             this.uBiography = data.uBiography;
             this.uSocialMediaFacebook = `https://www.facebook.com/${data.uSocialMediaFacebook}`;
@@ -140,6 +137,7 @@ export default {
           } else {
             console.log("No se encontro el documento!");
           }
+
 
           if (doc.exists) {
             if (
