@@ -10,12 +10,18 @@ import VueSweetalert2 from "vue-sweetalert2";
 //Inicializando nuestro app con firebase
 firebase.initializeApp(firebaseConfig);
 
-const app = createApp(App);
+let app = null;
 
-// Use router
-app.use(router);
+firebase.auth().onAuthStateChanged(() => {
+  if (!app) {
+    app = createApp(App);
 
-// Use Sweetalert
-app.use(VueSweetalert2);
+    // Use router
+    app.use(router);
 
-app.mount("#app");
+    // Use Sweetalert
+    app.use(VueSweetalert2);
+
+    app.mount("#app");
+  }
+});

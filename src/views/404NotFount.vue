@@ -1,6 +1,6 @@
 <template>
   <div class="notfound">
-    <h1>Página no encontrada <i class="far fa-sad-cry"></i></h1>
+    <h1>Página no encontrada</h1>
     <!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In  -->
     <svg
       version="1.1"

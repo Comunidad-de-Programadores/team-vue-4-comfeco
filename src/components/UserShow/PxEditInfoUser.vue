@@ -13,7 +13,7 @@
       <form
         class="edit__user--information--form"
         @submit.prevent="saveInformationEditUser"
-        >
+      >
         <div class="edit__user--information-group-input two">
           <div class="edit__user--information-input">
             <label for="nick">
@@ -230,7 +230,7 @@ const db = firebase.firestore();
 export default {
   name: "PxEditInfoUser",
   components: {
-    PxAvatarUser
+    PxAvatarUser,
   },
   data() {
     return {
@@ -303,7 +303,7 @@ export default {
       const currentUser = await this.authClass.authUser();
       const userId = currentUser.uid;
       let avatar_preview = document.getElementById("js_avatar-preview");
-      if(avatar_preview.dataset.src != ''){
+      if (avatar_preview.dataset.src != "") {
         this.formEdit.uPhoto = avatar_preview.dataset.src;
       }
       // Guardar los datos actuales ingresados en el formulario
@@ -341,7 +341,6 @@ export default {
       .get()
       .then((doc) => {
         if (doc.exists) {
-          console.log("informacion encontrada ->", doc.data());
           const data = doc.data();
           this.formEdit.uAreaknowledge = data.uAreaknowledge;
           this.formEdit.uBiography = data.uBiography;
@@ -350,19 +349,23 @@ export default {
           this.formEdit.uEmail = data.uEmail;
           this.formEdit.uGender = data.uGender;
           this.formEdit.uNick = data.uNick;
-          this.formEdit.uPhoto = data.uPhoto;          
+          this.formEdit.uPhoto = data.uPhoto;
           if (
             currentUser.providerData[0].providerId === "google.com" ||
             currentUser.providerData[0].providerId === "facebook.com"
-          ) {      
-            document.getElementById("js_avatar-preview").setAttribute("src", currentUser.photoURL);                       
-          }else{
+          ) {
+            document
+              .getElementById("js_avatar-preview")
+              .setAttribute("src", currentUser.photoURL);
+          } else {
             let storageRef = firebase.storage().ref();
             let spaceRef = storageRef.child(data.uPhoto);
-            spaceRef.getDownloadURL().then(function(downloadURL) {              
-              document.getElementById("js_avatar-preview").setAttribute("src", downloadURL);                           
+            spaceRef.getDownloadURL().then(function(downloadURL) {
+              document
+                .getElementById("js_avatar-preview")
+                .setAttribute("src", downloadURL);
             });
-          }                
+          }
           this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
           this.formEdit.uSocialMediaGitHub = data.uSocialMediaGitHub;
           this.formEdit.uSocialMediaTwitter = data.uSocialMediaTwitter;
@@ -370,15 +373,13 @@ export default {
           this.formEdit.uid = data.uid;
           this.formEdit.uNewPass = data.uNewPass;
           this.formEdit.uConfirmNewPass = data.uConfirmNewPass;
-        } else {
-          console.warn("No se encontro el documento!");
         }
       })
       .catch((error) => {
         console.error("Error al traer la informacion del documento:", error);
       });
 
-    // LLenar campos de foto de perfil, nick y email en el formulario    
+    // LLenar campos de foto de perfil, nick y email en el formulario
     this.formEdit.uNick = currentUser.displayName;
     this.formEdit.uEmail = currentUser.email;
 

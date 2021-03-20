@@ -96,8 +96,6 @@ export default {
               };
               this.insignias.push(sociable);
             }
-          } else {
-            console.warn("No se encontro el documento!");
           }
         })
         .catch((error) => {

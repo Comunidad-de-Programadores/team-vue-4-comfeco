@@ -116,28 +116,29 @@ export default {
             if (
               currentUser.providerData[0].providerId === "google.com" ||
               currentUser.providerData[0].providerId === "facebook.com"
-            ) {      
-              document.getElementById("js_avatar-perfil").setAttribute("src", currentUser.photoURL);           
-            }else{
-              if (data.uPhoto != '') {
-                const storageRef = firebase.storage().ref();          
+            ) {
+              document
+                .getElementById("js_avatar-perfil")
+                .setAttribute("src", currentUser.photoURL);
+            } else {
+              if (data.uPhoto != "") {
+                const storageRef = firebase.storage().ref();
                 const spaceRef = storageRef.child(data.uPhoto);
                 spaceRef.getDownloadURL().then(function(downloadURL) {
-                  document.getElementById("js_avatar-perfil").setAttribute("src", downloadURL);
+                  document
+                    .getElementById("js_avatar-perfil")
+                    .setAttribute("src", downloadURL);
                 });
-              }            
-            }  
-            
+              }
+            }
+
             this.uAreaknowledge = data.uAreaknowledge;
             this.uBiography = data.uBiography;
             this.uSocialMediaFacebook = `https://www.facebook.com/${data.uSocialMediaFacebook}`;
             this.uSocialMediaGitHub = `https://github.com/${data.uSocialMediaGitHub}`;
             this.uSocialMediaLinkedin = `https://www.linkedin.com/in/${data.uSocialMediaLinkedin}`;
             this.uSocialMediaTwitter = `https://twitter.com/${data.uSocialMediaTwitter}`;
-          } else {
-            console.log("No se encontro el documento!");
           }
-
 
           if (doc.exists) {
             if (

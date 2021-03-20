@@ -71,8 +71,6 @@ class Autenticacion {
                   .setAttribute("src", photo);
               }
             }
-          } else {
-            console.warn("No se encontro el documento!");
           }
         })
         .catch((error) => {

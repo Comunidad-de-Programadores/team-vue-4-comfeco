@@ -152,7 +152,7 @@ export default {
           this.form.password
         );
         if (auhEmailPass.emailVerified) {
-          if (!remember) {
+          if (!this.remember) {
             const authRemember = await this.authClass.autRemember(
               this.form.email,
               this.form.password
@@ -170,7 +170,6 @@ export default {
     async loginAccountWithFacebook() {
       try {
         const accountFacebookMehotd = await this.authClass.authCuentaFacebook();
-        console.log(accountFacebookMehotd);
         if (accountFacebookMehotd.emailVerified) {
           toastr.success(`Bienvenido ${accountFacebookMehotd.displayName}`);
           this.$router.push("/my-account");
