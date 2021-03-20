@@ -92,7 +92,7 @@ export default {
         let data = doc.data();
 
         if (doc.exists) {
-          console.log("informacion encontrada ->", doc.data());
+          //console.log("informacion encontrada ->", doc.data());
           this.information = true;
           this.uNick = data.uNick;
           if (

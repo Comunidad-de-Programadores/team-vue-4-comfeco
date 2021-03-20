@@ -17,6 +17,13 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "register" */ "../views/SignIn.vue"),
     meta: { isPublc: true },
+  },  
+  {
+    path: "/recover-password",
+    name: "RecoverPass",
+    component: () =>
+      import(/* webpackChunkName: "recoverPass" */ "../views/RecoverPass.vue"),
+    meta: { isPublc: true },
   },
   {
     path: "/my-account",
@@ -26,13 +33,6 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
-  },
-  {
-    path: "/recover-password",
-    name: "RecoverPass",
-    component: () =>
-      import(/* webpackChunkName: "recoverPass" */ "../views/RecoverPass.vue"),
-    meta: { isPublc: true },
   },
   {
     path: "/edit-my-account",
@@ -56,15 +56,6 @@ const routes = [
     name: "Comunidad",
     component: () =>
       import(/* webpackChunkName: "comunidad" */ "../views/Comunidad.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: "/my-account",
-    name: "Perfil",
-    component: () =>
-      import(/* webpackChunkName: "Perfil" */ "../views/MyAccount.vue"),
     meta: {
       requiresAuth: true,
     },
