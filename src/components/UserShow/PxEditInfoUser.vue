@@ -1,5 +1,6 @@
 <template>
   <section class="edit__user">
+    <PxLoader />
     <section class="edit__user--information">
       <button class="edit__user--close-button">
         <router-link to="/my-account">
@@ -220,6 +221,8 @@
 
 <script>
 import PxAvatarUser from "@/components/UserShow/PxAvatarUser";
+import PxLoader from "@/components/Modal/PxLoader";
+
 import firebase from "firebase";
 // Import class autentication
 import Autenticacion from "@/firebase/auth/autentication.js";
@@ -230,6 +233,7 @@ const db = firebase.firestore();
 export default {
   name: "PxEditInfoUser",
   components: {
+    PxLoader,
     PxAvatarUser,
   },
   data() {
@@ -314,21 +318,17 @@ export default {
         confirmButtonText: "OK",
       });
     },
-    avatarPreview(myavatar){
-      if (myavatar == '') {
-        myavatar = "./assets/images/userDefaultImage.png";
-      }
-      document
-        .getElementById("js_avatar-preview")
-        .setAttribute("src", myavatar);
-    },
   },
   computed: {
     async getDataCountry() {
-      const API_COUNTRY = "https://restcountries.eu/rest/v2/all";
-      const data = await fetch(API_COUNTRY);
-      const response = await data.json();
-      return response;
+      try {
+        const API_COUNTRY = "https://restcountries.eu/rest/v2/all";
+        const data = await fetch(API_COUNTRY);
+        const response = await data.json();
+        return response;
+      } catch (error) {
+        console.error(error);
+      }
     },
     authClass() {
       const auth = new Autenticacion();
@@ -340,6 +340,16 @@ export default {
     },
   },
   async created() {
+    setTimeout(() => {
+      document.getElementById("js_overlay-loader").classList.add("active");
+      document.getElementById("js_loader").classList.add("active");
+    }, 100);
+
+    setTimeout(() => {
+      document.getElementById("js_overlay-loader").classList.remove("active");
+      document.getElementById("js_loader").classList.remove("active");
+    }, 3000);
+
     const currentUser = await this.authClass.authUser();
     const userId = currentUser.uid;
     const docRef = db.collection("userPersonalInformation").doc(userId);
@@ -362,17 +372,23 @@ export default {
             currentUser.providerData[0].providerId === "google.com" ||
             currentUser.providerData[0].providerId === "facebook.com"
           ) {
-            this.avatarPreview(currentUser.photoURL);            
-          } else {            
-            if (data.uPhoto != '') {
+            document
+              .getElementById("js_avatar-preview")
+              .setAttribute("src", currentUser.photoURL);
+          } else {
+            if (data.uPhoto != "") {
               const storageRef = firebase.storage().ref();
               const spaceRef = storageRef.child(data.uPhoto);
               spaceRef.getDownloadURL().then(function(downloadURL) {
-                this.avatarPreview(downloadURL);
+                document
+                  .getElementById("js_avatar-preview")
+                  .setAttribute("src", downloadURL);
               });
             } else {
-              this.avatarPreview('');
-            }            
+              document
+                .getElementById("js_avatar-preview")
+                .setAttribute("src", "./assets/images/userDefaultImage.png");
+            }
           }
           this.formEdit.uSocialMediaFacebook = data.uSocialMediaFacebook;
           this.formEdit.uSocialMediaGitHub = data.uSocialMediaGitHub;
@@ -381,8 +397,8 @@ export default {
           this.formEdit.uid = data.uid;
           this.formEdit.uNewPass = data.uNewPass;
           this.formEdit.uConfirmNewPass = data.uConfirmNewPass;
-        }else{
-          this.avatarPreview('');          
+        } else {
+          this.avatarPreview("");
         }
       })
       .catch((error) => {

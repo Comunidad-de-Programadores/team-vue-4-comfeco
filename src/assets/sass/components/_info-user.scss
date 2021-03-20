@@ -52,6 +52,7 @@
     height: 100%;
     background: hsl(0, 1, 90);
     border-radius: 50%;
+    object-fit: cover;
     box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.5);
   }
   &__name {
@@ -89,6 +90,7 @@
       border-radius: 50%;
       border: 1px solid #ffffff;
       width: 40px;
+      transition: var(--transition);
       a {
         display: flex;
         align-items: center;
@@ -101,6 +103,27 @@
         i {
           font-size: 20px;
           color: var(--color-black);
+        }
+      }
+      .facebook {
+        &:hover {
+          i {
+            color: #3b5998;
+          }
+        }
+      }
+      .linkedin {
+        &:hover {
+          i {
+            color: #0077b5;
+          }
+        }
+      }
+      .twitter {
+        &:hover {
+          i {
+            color: #006ed4;
+          }
         }
       }
       &:hover {

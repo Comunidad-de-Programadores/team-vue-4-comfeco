@@ -32,6 +32,7 @@ export default {
   }
 }
 .loader {
+  z-index: 999;
   padding: 0 1rem;
   position: fixed;
   left: 0;
