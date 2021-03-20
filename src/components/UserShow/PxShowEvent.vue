@@ -9,7 +9,9 @@
       :key="item.id"
       v-show="item.publish"
     >
-      <img :src="item.img" alt="logo" class="evento__body__img" />
+      <div class="evento__image">
+        <img :src="item.img" alt="logo" class="evento__body__img" />
+      </div>
       <div>
         <h5 class="evento__title-ml1" v-text="item.name"></h5>
         <div class="center-btn">
@@ -78,6 +80,9 @@ export default {
       color: var(--color-primary);
     }
   }
+  &__image {
+    height: 200px;
+  }
   &__body {
     max-width: 420px;
     margin: 0 auto 1rem;
@@ -90,8 +95,9 @@ export default {
     padding: 0 0 12px 0;
     &__img {
       width: 100%;
-      height: 7rem;
-      margin: 0 10px 0 0;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
     > div {
       .evento__title-ml1 {

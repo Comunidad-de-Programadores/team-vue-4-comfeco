@@ -31,21 +31,21 @@ export default {
           id: 1,
           logo: "./assets/images/sociable.webp",
           titulo: "Sociable",
-          desc: "esta insignia es por ser sociable.",
-          ganarla: "para ganarla debes completar tu perfil de usuario.",
+          desc: "Esta insignia es por ser sociable.",
+          ganarla: "Para ganarla debes completar tu informacion personal.",
         },
         {
           id: 2,
           logo: "./assets/images/colaborador.webp",
           titulo: "Colaborador",
-          desc: "en merito por haber participado en eventos.",
+          desc: "En mérito por haber participado en eventos.",
           ganarla:
-            "para ganar esta insignia debes participar en por lo menos dos eventos.",
+            "Para ganar esta insignia debes participar en por lo menos en dos eventos.",
         },
         {
           id: 3,
           logo: "./assets/images/vuejslogo.jpg",
-          titulo: "VueJS en Español",
+          titulo: "Vue JS",
           desc: "Lorem ipsum dolor sit amet, consectetur.",
           ganarla:
             "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
@@ -53,7 +53,15 @@ export default {
         {
           id: 4,
           logo: "./assets/images/angularLogo.jpeg",
-          titulo: "Angular español",
+          titulo: "Angular",
+          desc: "Lorem ipsum dolor sit amet, consectetur.",
+          ganarla:
+            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+        },
+        {
+          id: 5,
+          logo: "./assets/images/reactLogo.png",
+          titulo: "React JS",
           desc: "Lorem ipsum dolor sit amet, consectetur.",
           ganarla:
             "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",

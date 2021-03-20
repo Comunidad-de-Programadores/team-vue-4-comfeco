@@ -9,14 +9,14 @@ const routes = [
     name: "Login",
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/SingInUp.vue"),
-    meta: { isPublc: true },
+    meta: { requiresAuth: false },
   },
   {
     path: "/register",
     name: "Register",
     component: () =>
       import(/* webpackChunkName: "register" */ "../views/SignIn.vue"),
-    meta: { isPublc: true },
+    meta: { requiresAuth: false },
   },
   {
     path: "/my-account",
@@ -32,7 +32,7 @@ const routes = [
     name: "RecoverPass",
     component: () =>
       import(/* webpackChunkName: "recoverPass" */ "../views/RecoverPass.vue"),
-    meta: { isPublc: true },
+    meta: { requiresAuth: false },
   },
   {
     path: "/edit-my-account",
@@ -67,7 +67,7 @@ const routes = [
     name: "Error",
     component: () =>
       import(/* webpackChunkName: "error" */ "../views/404NotFount.vue"),
-    meta: { isPublc: true },
+    meta: { requiresAuth: false },
   },
 ];
 
@@ -85,16 +85,12 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
-  if (requiresAuth) {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
-        next("/");
-        return;
-      } else {
-        next();
-      }
-    });
-  } else next();
+  const user = firebase.auth().currentUser;
+  if (requiresAuth && user === null) {
+    next("/");
+  } else {
+    next();
+  }
 });
 
 export default router;

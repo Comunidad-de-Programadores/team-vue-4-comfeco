@@ -63,22 +63,22 @@
             </router-link>
           </li>
           <li class="menu-item">
-            <router-link to="/comunity" class="menu-link">
+            <router-link to="/*" class="menu-link">
               <i class="fas fa-users"></i>
               Comunidades
             </router-link>
           </li>
           <li class="menu-item">
-            <a href="#" class="menu-link">
+            <router-link to="/*" class="menu-link">
               <i class="fas fa-pencil-ruler"></i>
               Talleres
-            </a>
+            </router-link>
           </li>
           <li class="menu-item">
-            <a href="#" class="menu-link">
+            <router-link to="/*" class="menu-link">
               <i class="fas fa-bullhorn"></i>
               Creadores de contenido
-            </a>
+            </router-link>
           </li>
         </ul>
         <section class="user__options" id="js_user-options">

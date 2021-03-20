@@ -543,4 +543,12 @@ svg {
     transform: scaleY(1);
   }
 }
+
+@media screen and(min-width:992px) {
+  .notfound {
+    h1 {
+      margin: 120px 0 20px 0;
+    }
+  }
+}
 </style>
