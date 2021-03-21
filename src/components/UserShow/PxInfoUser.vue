@@ -19,22 +19,22 @@
         <p class="infouser__description">{{ uBiography }}</p>
         <div class="infouser__footer">
           <div class="infouser__footer-social-media">
-            <a :href="uSocialMediaFacebook" target="_blank">
+            <a :href="uSocialMediaFacebook" class="facebook" target="_blank">
               <i class="fab fa-facebook-square"></i>
             </a>
           </div>
           <div class="infouser__footer-social-media">
-            <a :href="uSocialMediaGitHub" target="_blank">
+            <a :href="uSocialMediaGitHub" class="github" target="_blank">
               <i class="fab fa-github-square"></i>
             </a>
           </div>
           <div class="infouser__footer-social-media">
-            <a :href="uSocialMediaLinkedin" target="_blank">
+            <a :href="uSocialMediaLinkedin" class="linkedin" target="_blank">
               <i class="fab fa-linkedin"></i>
             </a>
           </div>
           <div class="infouser__footer-social-media">
-            <a :href="uSocialMediaTwitter" target="_blank">
+            <a :href="uSocialMediaTwitter" class="twitter" target="_blank">
               <i class="fab fa-twitter-square"></i>
             </a>
           </div>
@@ -102,34 +102,36 @@ export default {
         .classList.remove("no-visible");
       document.getElementById("js_spin-circle").classList.add("hidden");
     }, 1500);
+
     // Traer la informacion del usuario con un tiempo de 1.5 segundos
     setTimeout(() => {
       docRef
         .get()
         .then((doc) => {
           let data = doc.data();
+          // Validamos si el proveedor con el que viene el usuario es de google o facebook
+          if (
+            currentUser.providerData[0].providerId === "google.com" ||
+            currentUser.providerData[0].providerId === "facebook.com"
+          ) {
+            document
+              .getElementById("js_avatar-perfil")
+              .setAttribute("src", currentUser.photoURL);
+          }
 
           if (doc.exists) {
             //console.log("informacion encontrada ->", doc.data());
             this.information = true;
             this.uNick = data.uNick;
-            if (
-              currentUser.providerData[0].providerId === "google.com" ||
-              currentUser.providerData[0].providerId === "facebook.com"
-            ) {
-              document
-                .getElementById("js_avatar-perfil")
-                .setAttribute("src", currentUser.photoURL);
-            } else {
-              if (data.uPhoto != "") {
-                const storageRef = firebase.storage().ref();
-                const spaceRef = storageRef.child(data.uPhoto);
-                spaceRef.getDownloadURL().then(function(downloadURL) {
-                  document
-                    .getElementById("js_avatar-perfil")
-                    .setAttribute("src", downloadURL);
-                });
-              }
+
+            if (data.uPhoto != "") {
+              const storageRef = firebase.storage().ref();
+              const spaceRef = storageRef.child(data.uPhoto);
+              spaceRef.getDownloadURL().then(function(downloadURL) {
+                document
+                  .getElementById("js_avatar-perfil")
+                  .setAttribute("src", downloadURL);
+              });
             }
 
             this.uAreaknowledge = data.uAreaknowledge;
@@ -154,6 +156,11 @@ export default {
           }
         })
         .catch((error) => {
+          /**
+           *  Saltara error cuando el usuario no actualice su informacion, cuando el usuario le de click al boton de
+           *  Actualizar informacion, este error se controla gracias al catch! :)
+           * */
+
           console.error("Error al traer la informacion del documento:", error);
         });
     }, 500);
