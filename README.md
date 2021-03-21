@@ -2,6 +2,17 @@
 
 ## Url of project
 
+```
+https://team4vue.herokuapp.com/
+```
+
+## User of test app
+
+```
+USER: comfecofirebase@gmail.com
+PASSWORD: 12aaSS$d
+```
+
 ## Project setup
 
 ```
